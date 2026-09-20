@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Star, Heart, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, X, ShoppingBag, Sparkles, Truck, RotateCcw, Shield, Award, Gift, Gem, Quote, Camera } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Banner images
 import b1 from '../../assets/banners/b1.webp';
@@ -688,6 +688,8 @@ export default function Home() {
   const necklaceRef = useRef(null);
   const ringRef = useRef(null);
 
+  const navigate = useNavigate()
+
   // Prevent background scroll when reel modal is open
   useEffect(() => {
     if (activeReelIndex !== null) {
@@ -780,6 +782,7 @@ export default function Home() {
   // ────────────── PRODUCT CARD ──────────────
   const ProductCard = ({ product }) => (
     <div
+    onClick={()=>navigate("/product/"+product.name)}
       style={{
         minWidth: '220px',
         maxWidth: '220px',

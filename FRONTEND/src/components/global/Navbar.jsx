@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, Heart, ShoppingCart, User } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
+
   const { isAuthenticated } = useAuth();
+
+  const navigate = useNavigate()
 
   return (
     <header
@@ -118,6 +121,7 @@ const Navbar = () => {
               <Heart size={20} />
             </button>
             <button
+             onClick={()=>navigate("/cart")}
               aria-label="Cart"
               style={{
                 background: 'none',

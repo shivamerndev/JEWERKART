@@ -1,8 +1,13 @@
 import { Star, Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
+
+  const navigate = useNavigate()
+
   return (
     <div
+    onClick={()=>alert("hey")}
       className="bg-theme-card"
       style={{
         borderRadius: '4px',
@@ -23,6 +28,7 @@ const ProductCard = ({ product }) => {
     >
       {/* Image Area */}
       <div
+      
         style={{
           width: '100%',
           height: '180px',
