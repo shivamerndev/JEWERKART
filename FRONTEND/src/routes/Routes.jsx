@@ -9,60 +9,60 @@ import ResetPassword from "../pages/auth/ResetPassword";
 
 // Catalog & Shopping Pages
 import Home from "../pages/global/Home";
-import Shop from "../pages/global/Shop";
-import Category from "../pages/global/Category";
-import Collection from "../pages/global/Collection";
-import Collections from "../pages/global/Collections";
-import ProductDetail from "../pages/global/ProductDetail";
+import Shop from "../pages/orders/Shop";
+import Category from "../pages/products/Category";
+import Collection from "../pages/products/Collection";
+import Collections from "../pages/products/Collections";
+import ProductDetail from "../pages/products/ProductDetail";
 import Search from "../pages/global/Search";
-import Wishlist from "../pages/global/Wishlist";
-import Cart from "../pages/global/Cart";
+import Wishlist from "../pages/products/Wishlist";
+import Cart from "../pages/orders/Cart";
 
 // Checkout & Payment Suite
-import Checkout from "../pages/global/Checkout";
-import CheckoutAddress from "../pages/global/CheckoutAddress";
-import CheckoutPayment from "../pages/global/CheckoutPayment";
-import Payment from "../pages/global/Payment";
-import OrderSuccess from "../pages/global/OrderSuccess";
+import Checkout from "../pages/orders/Checkout";
+import CheckoutAddress from "../pages/orders/CheckoutAddress";
+import CheckoutPayment from "../pages/orders/CheckoutPayment";
+import Payment from "../pages/orders/Payment";
+import OrderSuccess from "../pages/orders/OrderSuccess";
 
 // Account & Order Management Pages
-import Account from "../pages/global/Account";
-import Profile from "../pages/global/Profile";
-import Addresses from "../pages/global/Addresses";
-import MyOrders from "../pages/global/MyOrders";
-import OrderDetail from "../pages/global/OrderDetail";
-import CancelOrder from "../pages/global/CancelOrder";
-import ReturnOrder from "../pages/global/ReturnOrder";
-import ExchangeOrder from "../pages/global/ExchangeOrder";
-import TrackOrder from "../pages/global/TrackOrder";
-import TrackOrderDetail from "../pages/global/TrackOrderDetail";
+import Account from "../pages/customer/Account";
+import Profile from "../pages/customer/Profile";
+import Addresses from "../pages/customer/Addresses";
+import MyOrders from "../pages/orders/MyOrders";
+import OrderDetail from "../pages/orders/OrderDetail";
+import CancelOrder from "../pages/orders/CancelOrder";
+import ReturnOrder from "../pages/orders/ReturnOrder";
+import ExchangeOrder from "../pages/orders/ExchangeOrder";
+import TrackOrder from "../pages/orders/TrackOrder";
+import TrackOrderDetail from "../pages/orders/TrackOrderDetail";
 
 // Curated Collection Pages
-import NewArrivals from "../pages/global/NewArrivals";
-import BestSellers from "../pages/global/BestSellers";
-import Trending from "../pages/global/Trending";
-import Offers from "../pages/global/Offers";
+import NewArrivals from "../pages/products/NewArrivals";
+import BestSellers from "../pages/products/BestSellers";
+import Trending from "../pages/products/Trending";
+import Offers from "../pages/offers/Offers";
 import Sale from "../pages/global/Sale";
 
 // Guides, Care & Policies
-import SizeGuide from "../pages/global/SizeGuide";
-import JewelleryCare from "../pages/global/JewelleryCare";
-import ShippingInformation from "../pages/global/ShippingInformation";
-import ReturnPolicy from "../pages/global/ReturnPolicy";
-import ExchangePolicy from "../pages/global/ExchangePolicy";
-import About from "../pages/global/About";
-import Contact from "../pages/global/Contact";
-import FAQs from "../pages/global/FAQs";
-import PrivacyPolicy from "../pages/global/PrivacyPolicy";
-import TermsAndConditions from "../pages/global/TermsAndConditions";
-import ShippingPolicy from "../pages/global/ShippingPolicy";
-import ReturnRefundPolicy from "../pages/global/ReturnRefundPolicy";
-import CancellationPolicy from "../pages/global/CancellationPolicy";
+import SizeGuide from "../pages/others/SizeGuide";
+import JewelleryCare from "../pages/others/JewelleryCare";
+import ShippingInformation from "../pages/orders/ShippingInformation";
+import ReturnPolicy from "../pages/orders/ReturnPolicy";
+import ExchangePolicy from "../pages/others/ExchangePolicy";
+import About from "../pages/others/About";
+import Contact from "../pages/others/Contact";
+import FAQs from "../pages/others/FAQs";
+import PrivacyPolicy from "../pages/others/PrivacyPolicy";
+import TermsAndConditions from "../pages/others/TermsAndConditions";
+import ShippingPolicy from "../pages/others/ShippingPolicy";
+import ReturnRefundPolicy from "../pages/orders/ReturnRefundPolicy";
+import CancellationPolicy from "../pages/others/CancellationPolicy";
 
 // Gifting Suite
-import Gifts from "../pages/global/Gifts";
-import GiftCards from "../pages/global/GiftCards";
-import GiftCardDetail from "../pages/global/GiftCardDetail";
+import Gifts from "../pages/offers/Gifts";
+import GiftCards from "../pages/offers/GiftCards";
+import GiftCardDetail from "../pages/offers/GiftCardDetail";
 
 const routes = createBrowserRouter([
     {
