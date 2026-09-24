@@ -92,10 +92,15 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['Collections', 'New Arrivals', 'Best Sellers', 'Sale'].map((item) => (
-                <li key={item} style={{ marginBottom: '0.75rem' }}>
+              {[
+                { name: 'Collections', path: '/search' },
+                { name: 'New Arrivals', path: '/search' },
+                { name: 'Saved Wishlist', path: '/wishlist' },
+                { name: 'My Account', path: '/account' },
+              ].map((item) => (
+                <li key={item.name} style={{ marginBottom: '0.75rem' }}>
                   <Link
-                    to="#"
+                    to={item.path}
                     className="text-theme-secondary"
                     style={{
                       textDecoration: 'none',
@@ -105,7 +110,7 @@ const Footer = () => {
                     onMouseEnter={(e) => (e.target.style.color = 'var(--text-gold)')}
                     onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -128,25 +133,28 @@ const Footer = () => {
               Customer Care
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['FAQs', 'Shipping & Delivery', 'Returns & Exchanges', 'Contact Us'].map(
-                (item) => (
-                  <li key={item} style={{ marginBottom: '0.75rem' }}>
-                    <Link
-                      to="#"
-                      className="text-theme-secondary"
-                      style={{
-                        textDecoration: 'none',
-                        fontSize: '0.875rem',
-                        transition: 'color 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => (e.target.style.color = 'var(--text-gold)')}
-                      onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                )
-              )}
+              {[
+                { name: 'Frequently Asked Questions', path: '/faqs' },
+                { name: 'Track Order Live', path: '/track-order' },
+                { name: 'Shipping & Delivery Policy', path: '/faqs' },
+                { name: 'Contact Atelier Concierge', path: '/contact' },
+              ].map((item) => (
+                <li key={item.name} style={{ marginBottom: '0.75rem' }}>
+                  <Link
+                    to={item.path}
+                    className="text-theme-secondary"
+                    style={{
+                      textDecoration: 'none',
+                      fontSize: '0.875rem',
+                      transition: 'color 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.color = 'var(--text-gold)')}
+                    onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Trash2, Plus, Minus } from 'lucide-react';
 
 // Sample initial cart data
@@ -90,6 +91,7 @@ const CartSummary = ({ subtotal, taxRate = 0.18 }) => {
 };
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(INITIAL_CART);
 
   const handleUpdateQuantity = (itemId, newQuantity) => {
@@ -112,18 +114,18 @@ const Cart = () => {
     <main className="cart-container">
       <div className="cart-header">
         <h1>Your cart</h1>
-        <a href="/shop" className="link">
+        <Link to="/" className="link">
           Continue shopping
-        </a>
+        </Link>
       </div>
 
       {isEmpty ? (
         <div className="cart-empty">
           <h2>Your cart is empty</h2>
           <p>Add some items to get started.</p>
-          <a href="/shop" className="btn btn-primary">
+          <Link to="/" className="btn btn-primary">
             Continue shopping
-          </a>
+          </Link>
         </div>
       ) : (
         <div className="cart-content">
@@ -140,15 +142,18 @@ const Cart = () => {
 
           <aside className="cart-sidebar">
             <CartSummary subtotal={subtotal} />
-            <button className="btn btn-primary btn-checkout">
+            <button 
+              onClick={() => navigate('/payment')}
+              className="btn btn-primary btn-checkout"
+            >
               Check out
             </button>
             <div className="cart-info">
               <p>
                 Have an account?{' '}
-                <a href="/login" className="link">
+                <Link to="/login" className="link">
                   Log in
-                </a>{' '}
+                </Link>{' '}
                 to check out faster.
               </p>
             </div>

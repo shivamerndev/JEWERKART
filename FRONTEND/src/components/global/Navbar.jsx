@@ -91,6 +91,7 @@ const Navbar = () => {
             }}
           >
             <button
+              onClick={() => navigate('/search')}
               aria-label="Search"
               style={{
                 background: 'none',
@@ -106,6 +107,7 @@ const Navbar = () => {
               <Search size={20} />
             </button>
             <button
+              onClick={() => navigate('/wishlist')}
               aria-label="Wishlist"
               style={{
                 background: 'none',
@@ -137,7 +139,7 @@ const Navbar = () => {
               <ShoppingCart size={20} />
             </button>
             <Link
-              to={isAuthenticated ? '#' : '/login'}
+              to={isAuthenticated ? '/account' : '/login'}
               aria-label="Account"
               style={{
                 color: 'var(--text-primary)',
