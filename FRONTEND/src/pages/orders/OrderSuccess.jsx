@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useLocation, Link, useNavigate, useParams } from 'react-router-dom';
 import { 
   CheckCircle2, 
   Package, 
@@ -17,15 +17,17 @@ import {
 } from 'lucide-react';
 
 const OrderSuccess = () => {
+  const { orderId: paramOrderId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   // Fallback mock order if navigated directly
-  const order = location.state?.order || {
-    orderId: 'JK-2026-894215',
-    date: new Date().toLocaleDateString('en-IN', {
+  const order = {
+    ...(location.state?.order || {}),
+    orderId: paramOrderId || location.state?.order?.orderId || 'JK-2026-894215',
+    date: location.state?.order?.date || new Date().toLocaleDateString('en-IN', {
       day: 'numeric',
       month: 'short',
       year: 'numeric',

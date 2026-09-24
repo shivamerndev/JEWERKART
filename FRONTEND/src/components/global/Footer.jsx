@@ -93,10 +93,10 @@ const Footer = () => {
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {[
-                { name: 'Collections', path: '/search' },
-                { name: 'New Arrivals', path: '/search' },
-                { name: 'Saved Wishlist', path: '/wishlist' },
-                { name: 'My Account', path: '/account' },
+                { name: 'Collections', path: '/collections' },
+                { name: 'New Arrivals', path: '/new-arrivals' },
+                { name: 'Best Sellers', path: '/best-sellers' },
+                { name: 'Gifts Boutique', path: '/gifts' },
               ].map((item) => (
                 <li key={item.name} style={{ marginBottom: '0.75rem' }}>
                   <Link
@@ -136,8 +136,10 @@ const Footer = () => {
               {[
                 { name: 'Frequently Asked Questions', path: '/faqs' },
                 { name: 'Track Order Live', path: '/track-order' },
-                { name: 'Shipping & Delivery Policy', path: '/faqs' },
-                { name: 'Contact Atelier Concierge', path: '/contact' },
+                { name: 'Shipping & Armored Delivery', path: '/shipping-information' },
+                { name: '15-Day Return Policy', path: '/return-policy' },
+                { name: 'Jewellery Sizing Guide', path: '/size-guide' },
+                { name: 'Jewellery Care Guide', path: '/jewellery-care' },
               ].map((item) => (
                 <li key={item.name} style={{ marginBottom: '0.75rem' }}>
                   <Link
@@ -210,10 +212,14 @@ const Footer = () => {
               gap: '1.5rem',
             }}
           >
-            {['Privacy Policy', 'Terms of Service'].map((item) => (
+            {[
+              { name: 'About Atelier', path: '/about' },
+              { name: 'Privacy Policy', path: '/privacy-policy' },
+              { name: 'Terms & Conditions', path: '/terms-and-conditions' },
+            ].map((item) => (
               <Link
-                key={item}
-                to="#"
+                key={item.name}
+                to={item.path}
                 className="text-theme-secondary"
                 style={{
                   textDecoration: 'none',
@@ -223,7 +229,7 @@ const Footer = () => {
                 onMouseEnter={(e) => (e.target.style.color = 'var(--text-gold)')}
                 onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
               >
-                {item}
+                {item.name}
               </Link>
             ))}
           </div>
