@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../app/App";
 
 // Auth Pages
@@ -13,7 +13,7 @@ import Shop from "../pages/orders/Shop";
 import Category from "../pages/products/Category";
 import Collection from "../pages/products/Collection";
 import Collections from "../pages/products/Collections";
-import ProductDetail from "../pages/products/ProductDetail";
+import ProductDetailStorefront from "../pages/products/ProductDetail";
 import Search from "../pages/global/Search";
 import Wishlist from "../pages/products/Wishlist";
 import Cart from "../pages/orders/Cart";
@@ -64,7 +64,82 @@ import Gifts from "../pages/offers/Gifts";
 import GiftCards from "../pages/offers/GiftCards";
 import GiftCardDetail from "../pages/offers/GiftCardDetail";
 
+// Global Errors Suite
+import NotFound from "../pages/errors/NotFound";
+import Forbidden from "../pages/errors/Forbidden";
+import Unauthorized from "../pages/errors/Unauthorized";
+import ServerError from "../pages/errors/ServerError";
+import NetworkError from "../pages/errors/NetworkError";
+import PaymentFailed from "../pages/errors/PaymentFailed";
+import OrderFailed from "../pages/errors/OrderFailed";
+
+// ERP Back-Office Admin Suite
+import AdminLayout from "../admin/components/AdminLayout";
+import AdminLogin from "../admin/pages/auth/AdminLogin";
+import Dashboard from "../admin/pages/Dashboard";
+
+// Admin - Products
+import ProductList from "../admin/pages/products/ProductList";
+import ProductCreate from "../admin/pages/products/ProductCreate";
+import ProductDetail from "../admin/pages/products/ProductDetail";
+import ProductEdit from "../admin/pages/products/ProductEdit";
+
+// Admin - Categories
+import CategoryList from "../admin/pages/categories/CategoryList";
+import CategoryCreate from "../admin/pages/categories/CategoryCreate";
+import CategoryEdit from "../admin/pages/categories/CategoryEdit";
+
+// Admin - Collections
+import CollectionList from "../admin/pages/collections/CollectionList";
+import CollectionCreate from "../admin/pages/collections/CollectionCreate";
+import CollectionEdit from "../admin/pages/collections/CollectionEdit";
+
+// Admin - Orders
+import OrderList from "../admin/pages/orders/OrderList";
+import AdminOrderDetail from "../admin/pages/orders/AdminOrderDetail";
+
+// Admin - Customers
+import CustomerList from "../admin/pages/customers/CustomerList";
+import CustomerDetail from "../admin/pages/customers/CustomerDetail";
+
+// Admin - Marketing & Promotions
+import ReviewList from "../admin/pages/marketing/ReviewList";
+import CouponList from "../admin/pages/marketing/CouponList";
+import DiscountList from "../admin/pages/marketing/DiscountList";
+
+// Admin - Inventory & Supply
+import InventoryList from "../admin/pages/inventory/InventoryList";
+import LowStockList from "../admin/pages/inventory/LowStockList";
+
+// Admin - Finance & Billing
+import PaymentList from "../admin/pages/finance/PaymentList";
+import RefundList from "../admin/pages/finance/RefundList";
+
+// Admin - Logistics
+import ShippingList from "../admin/pages/logistics/ShippingList";
+import DeliveryList from "../admin/pages/logistics/DeliveryList";
+
+// Admin - Storefront CMS
+import BannerList from "../admin/pages/cms/BannerList";
+import HeroSectionList from "../admin/pages/cms/HeroSectionList";
+import ContentList from "../admin/pages/cms/ContentList";
+import FaqList from "../admin/pages/cms/FaqList";
+
+// Admin - Settings
+import AdminSettings from "../admin/pages/settings/AdminSettings";
+import GeneralSettings from "../admin/pages/settings/GeneralSettings";
+import PaymentSettings from "../admin/pages/settings/PaymentSettings";
+import ShippingSettings from "../admin/pages/settings/ShippingSettings";
+import NotificationSettings from "../admin/pages/settings/NotificationSettings";
+
+// Admin - Reports & Analytics
+import ReportsHub from "../admin/pages/reports/ReportsHub";
+import SalesReport from "../admin/pages/reports/SalesReport";
+import ProductReport from "../admin/pages/reports/ProductReport";
+import CustomerReport from "../admin/pages/reports/CustomerReport";
+
 const routes = createBrowserRouter([
+    // Storefront Client Experience
     {
         element: <App />,
         children: [
@@ -103,7 +178,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/product/:slug",
-                element: <ProductDetail />
+                element: <ProductDetailStorefront />
             },
             {
                 path: "/search",
@@ -279,8 +354,236 @@ const routes = createBrowserRouter([
             {
                 path: "/gift-card/:id",
                 element: <GiftCardDetail />
+            },
+
+            // Global Error & Transaction Fallback Routes
+            {
+                path: "/401",
+                element: <Unauthorized />
+            },
+            {
+                path: "/403",
+                element: <Forbidden />
+            },
+            {
+                path: "/404",
+                element: <NotFound />
+            },
+            {
+                path: "/500",
+                element: <ServerError />
+            },
+            {
+                path: "/network-error",
+                element: <NetworkError />
+            },
+            {
+                path: "/payment/failed",
+                element: <PaymentFailed />
+            },
+            {
+                path: "/order/failed",
+                element: <OrderFailed />
             }
         ]
+    },
+
+    // Dedicated Standalone Admin Authentication
+    {
+        path: "/admin/login",
+        element: <AdminLogin />
+    },
+
+    // ERP Back-Office Admin Portal
+    {
+        path: "/admin",
+        element: <AdminLayout />,
+        children: [
+            {
+                index: true,
+                element: <Navigate to="/admin/dashboard" replace />
+            },
+            {
+                path: "dashboard",
+                element: <Dashboard />
+            },
+
+            // Products
+            {
+                path: "products",
+                element: <ProductList />
+            },
+            {
+                path: "products/new",
+                element: <ProductCreate />
+            },
+            {
+                path: "products/:id",
+                element: <ProductDetail />
+            },
+            {
+                path: "products/:id/edit",
+                element: <ProductEdit />
+            },
+
+            // Categories
+            {
+                path: "categories",
+                element: <CategoryList />
+            },
+            {
+                path: "categories/new",
+                element: <CategoryCreate />
+            },
+            {
+                path: "categories/:id/edit",
+                element: <CategoryEdit />
+            },
+
+            // Collections
+            {
+                path: "collections",
+                element: <CollectionList />
+            },
+            {
+                path: "collections/new",
+                element: <CollectionCreate />
+            },
+            {
+                path: "collections/:id/edit",
+                element: <CollectionEdit />
+            },
+
+            // Orders
+            {
+                path: "orders",
+                element: <OrderList />
+            },
+            {
+                path: "orders/:id",
+                element: <AdminOrderDetail />
+            },
+
+            // Customers
+            {
+                path: "customers",
+                element: <CustomerList />
+            },
+            {
+                path: "customers/:id",
+                element: <CustomerDetail />
+            },
+
+            // Reviews & Coupons & Discounts
+            {
+                path: "reviews",
+                element: <ReviewList />
+            },
+            {
+                path: "coupons",
+                element: <CouponList />
+            },
+            {
+                path: "discounts",
+                element: <DiscountList />
+            },
+
+            // Inventory & Low Stock
+            {
+                path: "inventory",
+                element: <InventoryList />
+            },
+            {
+                path: "inventory/low-stock",
+                element: <LowStockList />
+            },
+
+            // Payments & Refunds
+            {
+                path: "payments",
+                element: <PaymentList />
+            },
+            {
+                path: "refunds",
+                element: <RefundList />
+            },
+
+            // Shipping & Delivery
+            {
+                path: "shipping",
+                element: <ShippingList />
+            },
+            {
+                path: "delivery",
+                element: <DeliveryList />
+            },
+
+            // Banners & Hero Sections
+            {
+                path: "banners",
+                element: <BannerList />
+            },
+            {
+                path: "hero-sections",
+                element: <HeroSectionList />
+            },
+
+            // Content & FAQs
+            {
+                path: "content",
+                element: <ContentList />
+            },
+            {
+                path: "faqs",
+                element: <FaqList />
+            },
+
+            // Settings
+            {
+                path: "settings",
+                element: <AdminSettings />
+            },
+            {
+                path: "settings/general",
+                element: <GeneralSettings />
+            },
+            {
+                path: "settings/payment",
+                element: <PaymentSettings />
+            },
+            {
+                path: "settings/shipping",
+                element: <ShippingSettings />
+            },
+            {
+                path: "settings/notifications",
+                element: <NotificationSettings />
+            },
+
+            // Reports
+            {
+                path: "reports",
+                element: <ReportsHub />
+            },
+            {
+                path: "reports/sales",
+                element: <SalesReport />
+            },
+            {
+                path: "reports/products",
+                element: <ProductReport />
+            },
+            {
+                path: "reports/customers",
+                element: <CustomerReport />
+            }
+        ]
+    },
+
+    // Catch-All 404 Route
+    {
+        path: "*",
+        element: <NotFound />
     }
 ]);
 
