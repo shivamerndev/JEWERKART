@@ -1,12 +1,20 @@
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/global/Navbar'
 import Footer from '../components/global/Footer'
 import Marquee from '../components/global/Marquee'
+import useAuth from '../hooks/useAuth'
 
 const App = () => {
+  const { handleCheckAuth } = useAuth()
+
+  useEffect(() => {
+    handleCheckAuth()
+  }, [])
+
   return (
     <div className="min-h-screen w-full flex flex-col bg-theme-secondary">
-      <Marquee/>
+      <Marquee />
       <Navbar />
       <div className="flex-1">
         <Outlet />

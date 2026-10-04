@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Lock, Eye, EyeOff, CheckCircle2, ShieldCheck } from 'lucide-react';
+import useAuth from '../../hooks/useAuth';
 
 const ResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
+  const { handleResetPassword, loading } = useAuth();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -25,14 +26,15 @@ const ResetPassword = () => {
       return;
     }
 
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await handleResetPassword(token, password);
       setSuccess(true);
       setTimeout(() => {
         navigate('/login');
-      }, 2500);
-    }, 800);
+      }, 2000);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to reset password. The link may have expired or is invalid.');
+    }
   };
 
   return (

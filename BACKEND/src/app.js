@@ -3,6 +3,7 @@ import express from "express";
 import morgan from "morgan";
 import path from "path";
 import productRoutes from "./modules/products/product.routes.js";
+import authRoutes from "./modules/auth/auth.routes.js";
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.get("/api/health", (req, res) => {
 });
 
 // Mount Module Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/v1/products", productRoutes);
 

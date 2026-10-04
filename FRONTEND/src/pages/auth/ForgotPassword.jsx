@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, ArrowLeft, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Mail, ArrowLeft, CheckCircle2, ShieldCheck, KeyRound } from 'lucide-react';
+import useAuth from '../../hooks/useAuth';
 
 const ForgotPassword = () => {
+  const { handleForgotPassword, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [resetToken, setResetToken] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) return;
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setError('');
+
+    try {
+      const res = await handleForgotPassword(email);
       setSubmitted(true);
-    }, 800);
+      if (res?.data?.resetToken) {
+        setResetToken(res.data.resetToken);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to dispatch recovery instructions. Please try again.');
+    }
   };
 
   return (
@@ -62,6 +71,23 @@ const ForgotPassword = () => {
           </p>
         </div>
 
+        {error && (
+          <div
+            style={{
+              background: 'rgba(239, 68, 68, 0.08)',
+              border: '1px solid rgba(239, 68, 68, 0.2)',
+              borderRadius: '4px',
+              padding: '0.75rem 1rem',
+              marginBottom: '1.25rem',
+              color: '#DC2626',
+              fontSize: '0.825rem',
+              fontFamily: 'var(--font-sans)',
+            }}
+          >
+            {error}
+          </div>
+        )}
+
         {submitted ? (
           <div style={{ textAlign: 'center', padding: '1rem 0' }}>
             <div
@@ -84,9 +110,34 @@ const ForgotPassword = () => {
               Reset Link Dispatched
             </h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '1.75rem' }}>
-              We have dispatched a confidential password reset link to <strong style={{ color: 'var(--text-primary)' }}>{email}</strong>.
-              Please check your inbox or spam folder.
+              We have processed your request for <strong style={{ color: 'var(--text-primary)' }}>{email}</strong>.
+              Please check your inbox or proceed to update your password with the recovery session below.
             </p>
+
+            {resetToken && (
+              <div style={{ marginBottom: '1.5rem' }}>
+                <Link
+                  to={`/reset-password/${resetToken}`}
+                  className="btn-gold"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    width: '100%',
+                    padding: '0.875rem',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '0.9rem',
+                    marginBottom: '0.75rem',
+                  }}
+                >
+                  <KeyRound size={16} /> Proceed to Reset Password
+                </Link>
+              </div>
+            )}
+
             <Link
               to="/login"
               className="btn-slate"
