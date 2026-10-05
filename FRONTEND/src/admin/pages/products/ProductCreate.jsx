@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Save, Sparkles, UploadCloud, Info, Plus, Trash2 } from 'lucide-react';
+import {
+  ArrowLeft,
+  Save,
+  Sparkles,
+  RefreshCw,
+  AlertCircle,
+} from 'lucide-react';
 import AdminPageHeader from '../../components/AdminPageHeader';
+import { useProduct } from '../../../hooks/useProduct';
 
 const ProductCreate = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const { handleCreateProduct, loading } = useProduct();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [formData, setFormData] = useState(() => ({
     title: '',
-    sku: 'JW-' + Math.floor(1000 + Math.random() * 9000),
+    sku: 'JW-RNG-' + Math.floor(1000 + Math.random() * 9000),
     category: 'Rings',
     collection: 'Bridal Opulence',
-    metalType: '18K Yellow Gold',
-    grossWeight: '',
-    netGoldWeight: '',
-    diamondCarat: '',
+    metalType: '18K Yellow Gold (750)',
+    grossWeight: '5.20g',
+    netGoldWeight: '4.80g',
+    diamondCarat: '1.25 ct (Solitaire)',
     gemstones: 'Natural Diamonds',
     hallmarkCertified: true,
     hsnCode: '71131910',
@@ -26,23 +37,45 @@ const ProductCreate = () => {
     lowStockThreshold: '3',
     shortDescription: '',
     description: '',
-    metaTitle: '',
-    metaDescription: '',
-    status: 'Active'
-  });
+    image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop',
+    status: 'Active',
+  }));
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simulate save and redirect
-    navigate('/admin/products');
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
+    setErrorMessage('');
+
+    if (!formData.title || !formData.title.trim()) {
+      setErrorMessage('Please enter the jewelry piece title.');
+      return;
+    }
+
+    if (!formData.sellingPrice || Number(formData.sellingPrice) <= 0) {
+      setErrorMessage('Please enter a valid retail MRP price.');
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      await handleCreateProduct({
+        ...formData,
+        price: Number(formData.sellingPrice),
+        stock: Number(formData.stockQuantity) || 10,
+      });
+      navigate('/admin/products');
+    } catch (err) {
+      setErrorMessage(err.message || 'Failed to publish new product');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -65,14 +98,26 @@ const ProductCreate = () => {
             </Link>
             <button
               onClick={handleSubmit}
-              className="flex items-center space-x-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold rounded-lg text-xs transition-colors shadow-xs"
+              disabled={isSubmitting || loading}
+              className="flex items-center space-x-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold rounded-lg text-xs transition-colors shadow-xs disabled:opacity-50"
             >
-              <Save className="w-3.5 h-3.5" />
-              <span>Publish Product SKU</span>
+              {isSubmitting || loading ? (
+                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+              ) : (
+                <Save className="w-3.5 h-3.5" />
+              )}
+              <span>{isSubmitting ? 'Publishing...' : 'Publish Product SKU'}</span>
             </button>
           </>
         }
       />
+
+      {errorMessage && (
+        <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center space-x-2 text-rose-800 text-xs">
+          <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+          <span>{errorMessage}</span>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs">
         {/* Left 2 Cols: Product Details, ERP Metal Specs, Pricing */}
@@ -323,12 +368,33 @@ const ProductCreate = () => {
 
           {/* Media Assets */}
           <div className="bg-white border border-stone-200 rounded-xl p-5 shadow-xs space-y-3">
-            <h3 className="text-sm font-bold text-stone-900">Product Visuals & 360°</h3>
-            <div className="border-2 border-dashed border-stone-300 hover:border-amber-500 rounded-xl p-6 text-center transition-colors cursor-pointer bg-stone-50">
-              <UploadCloud className="w-8 h-8 text-stone-400 mx-auto mb-2" />
-              <p className="font-semibold text-stone-700">Drop high-res imagery</p>
-              <p className="text-[10px] text-stone-400 mt-1">PNG, JPG, WEBP up to 10MB</p>
+            <h3 className="text-sm font-bold text-stone-900">Product Visuals & Imagery</h3>
+            <div>
+              <label className="block text-stone-700 font-semibold mb-1">Image URL</label>
+              <input
+                type="text"
+                name="image"
+                value={formData.image}
+                onChange={handleChange}
+                placeholder="https://..."
+                className="w-full px-3 py-1.5 border border-stone-300 rounded-lg focus:outline-hidden text-xs"
+              />
             </div>
+            {formData.image && (
+              <div className="relative rounded-lg overflow-hidden border border-stone-200 aspect-video bg-stone-100 flex items-center justify-center">
+                <img
+                  src={formData.image}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop';
+                  }}
+                />
+                <span className="absolute bottom-1 right-2 bg-stone-900/70 text-white text-[10px] px-2 py-0.5 rounded">
+                  Live Preview
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Vault Inventory Allocation */}

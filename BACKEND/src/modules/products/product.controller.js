@@ -59,6 +59,24 @@ export const getFilterOptions = async (req, res) => {
   }
 };
 
+export const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await productService.handleGetProductById(id);
+    return res.status(200).json({
+      success: true,
+      message: "Product fetched successfully",
+      data,
+    });
+  } catch (error) {
+    const statusCode = error.statusCode || 500;
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message || "Failed to fetch product",
+    });
+  }
+};
+
 export const createProduct = async (req, res) => {
   try {
     const data = await productService.handleCreateProduct(req.body);
@@ -75,9 +93,48 @@ export const createProduct = async (req, res) => {
   }
 };
 
+export const updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await productService.handleUpdateProduct(id, req.body);
+    return res.status(200).json({
+      success: true,
+      message: "Product updated successfully",
+      data,
+    });
+  } catch (error) {
+    const statusCode = error.statusCode || 400;
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message || "Failed to update product",
+    });
+  }
+};
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await productService.handleDeleteProduct(id);
+    return res.status(200).json({
+      success: true,
+      message: "Product deleted successfully",
+      data,
+    });
+  } catch (error) {
+    const statusCode = error.statusCode || 400;
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message || "Failed to delete product",
+    });
+  }
+};
+
 export default {
   getProducts,
   getProductBySlug,
+  getProductById,
   getFilterOptions,
   createProduct,
+  updateProduct,
+  deleteProduct,
 };

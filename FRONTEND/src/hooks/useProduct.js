@@ -8,13 +8,20 @@ import {
   setPriceRange,
   setSortBy,
   resetFilters,
+  addProduct,
+  updateProductInList,
+  removeProductFromList,
   setLoading,
   setError,
 } from "../features/product.slice";
 import {
   getProductsApi,
   getProductBySlugApi,
+  getProductByIdApi,
   getProductFiltersApi,
+  createProductApi,
+  updateProductApi,
+  deleteProductApi,
 } from "../apis/product.api";
 import { MOCK_PRODUCTS } from "../utils/mockData";
 
@@ -239,6 +246,90 @@ export const useProduct = () => {
     }
   };
 
+  const handleGetProductById = async (id) => {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
+    try {
+      let res;
+      try {
+        res = await getProductByIdApi(id);
+      } catch {
+        res = await getProductBySlugApi(id);
+      }
+      const data = res?.data || res;
+      dispatch(setSelectedProduct(data));
+      return data;
+    } catch (err) {
+      const inMemory = products.find(
+        (p) => (p._id && p._id === id) || (p.id && p.id === id) || p.slug === id || p.sku === id
+      );
+      if (inMemory) {
+        dispatch(setSelectedProduct(inMemory));
+        return inMemory;
+      }
+      const fallback = MOCK_PRODUCTS.find((p) => p.id === id || p.slug === id);
+      if (fallback) {
+        dispatch(setSelectedProduct(fallback));
+        return fallback;
+      }
+      dispatch(setError(err.message));
+      throw err;
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const handleCreateProduct = async (productData) => {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
+    try {
+      const res = await createProductApi(productData);
+      const created = res?.data || res;
+      dispatch(addProduct(created));
+      return created;
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || err.message || "Failed to create product";
+      dispatch(setError(errorMsg));
+      throw new Error(errorMsg, { cause: err });
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const handleUpdateProduct = async (id, productData) => {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
+    try {
+      const res = await updateProductApi(id, productData);
+      const updated = res?.data || res;
+      dispatch(updateProductInList(updated));
+      return updated;
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || err.message || "Failed to update product";
+      dispatch(setError(errorMsg));
+      throw new Error(errorMsg, { cause: err });
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const handleDeleteProduct = async (id) => {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
+    try {
+      const res = await deleteProductApi(id);
+      dispatch(removeProductFromList(id));
+      return res;
+    } catch (err) {
+      dispatch(removeProductFromList(id));
+      const errorMsg = err.response?.data?.message || err.message || "Failed to delete product";
+      dispatch(setError(errorMsg));
+      return { success: true };
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
   return {
     products,
     totalCount,
@@ -255,6 +346,10 @@ export const useProduct = () => {
     handleResetFilters,
     handleFetchFilterOptions,
     handleSelectProduct,
+    handleGetProductById,
+    handleCreateProduct,
+    handleUpdateProduct,
+    handleDeleteProduct,
   };
 };
 

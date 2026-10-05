@@ -53,7 +53,7 @@ import ExchangePolicy from "../pages/others/ExchangePolicy";
 import About from "../pages/others/About";
 import Contact from "../pages/others/Contact";
 import FAQs from "../pages/others/FAQs";
-import PrivacyPolicy from "../pages/others/PrivacyPolicy";
+import PrivacyPolicy from "../pages/others/LegalPrivacy";
 import TermsAndConditions from "../pages/others/TermsAndConditions";
 import ShippingPolicy from "../pages/others/ShippingPolicy";
 import ReturnRefundPolicy from "../pages/orders/ReturnRefundPolicy";

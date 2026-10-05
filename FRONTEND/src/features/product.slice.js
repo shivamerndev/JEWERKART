@@ -79,6 +79,33 @@ const productSlice = createSlice({
     resetFilters: (state) => {
       state.filters = { ...initialFilterState };
     },
+    addProduct: (state, action) => {
+      state.products.unshift(action.payload);
+      state.totalCount += 1;
+    },
+    updateProductInList: (state, action) => {
+      const updated = action.payload;
+      const id = updated._id || updated.id;
+      const index = state.products.findIndex(
+        (p) => (p._id && p._id === id) || (p.id && p.id === id)
+      );
+      if (index !== -1) {
+        state.products[index] = { ...state.products[index], ...updated };
+      }
+      if (state.selectedProduct && (state.selectedProduct._id === id || state.selectedProduct.id === id)) {
+        state.selectedProduct = { ...state.selectedProduct, ...updated };
+      }
+    },
+    removeProductFromList: (state, action) => {
+      const id = action.payload;
+      state.products = state.products.filter(
+        (p) => p._id !== id && p.id !== id
+      );
+      state.totalCount = Math.max(0, state.totalCount - 1);
+      if (state.selectedProduct && (state.selectedProduct._id === id || state.selectedProduct.id === id)) {
+        state.selectedProduct = null;
+      }
+    },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
@@ -96,6 +123,9 @@ export const {
   setPriceRange,
   setSortBy,
   resetFilters,
+  addProduct,
+  updateProductInList,
+  removeProductFromList,
   setLoading,
   setError,
 } = productSlice.actions;

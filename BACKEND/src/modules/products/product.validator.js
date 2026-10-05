@@ -58,25 +58,49 @@ export const validateGetProductBySlug = (req, res, next) => {
   next();
 };
 
-export const validateCreateProduct = (req, res, next) => {
-  const { name, price, description, productType, shopFor, color, metal, stone, style } = req.body;
-
-  if (!name || typeof name !== "string") {
-    return res.status(400).json({ success: false, message: "Product name is required" });
-  }
-
-  if (price === undefined || isNaN(Number(price)) || Number(price) < 0) {
-    return res.status(400).json({ success: false, message: "Valid product price is required" });
-  }
-
-  if (!description) {
-    return res.status(400).json({ success: false, message: "Product description is required" });
-  }
-
-  if (!productType || !shopFor || !color || !metal || !stone || !style) {
+export const validateProductId = (req, res, next) => {
+  const { id } = req.params;
+  if (!id || typeof id !== "string" || !id.trim()) {
     return res.status(400).json({
       success: false,
-      message: "Required filter attributes (productType, shopFor, color, metal, stone, style) must be provided",
+      message: "A valid product ID or slug is required",
+    });
+  }
+  next();
+};
+
+export const validateCreateProduct = (req, res, next) => {
+  const { name, title, price, sellingPrice } = req.body;
+
+  const resolvedName = name || title;
+  const resolvedPrice = price !== undefined ? price : sellingPrice;
+
+  if (!resolvedName || typeof resolvedName !== "string" || !resolvedName.trim()) {
+    return res.status(400).json({ success: false, message: "Product name or title is required" });
+  }
+
+  if (resolvedPrice === undefined || isNaN(Number(resolvedPrice)) || Number(resolvedPrice) < 0) {
+    return res.status(400).json({ success: false, message: "Valid positive product price is required" });
+  }
+
+  next();
+};
+
+export const validateUpdateProduct = (req, res, next) => {
+  const { id } = req.params;
+  if (!id || typeof id !== "string" || !id.trim()) {
+    return res.status(400).json({
+      success: false,
+      message: "A valid product ID is required",
+    });
+  }
+
+  const { price, sellingPrice } = req.body;
+  const resolvedPrice = price !== undefined ? price : sellingPrice;
+  if (resolvedPrice !== undefined && (isNaN(Number(resolvedPrice)) || Number(resolvedPrice) < 0)) {
+    return res.status(400).json({
+      success: false,
+      message: "If provided, price must be a valid positive number",
     });
   }
 
@@ -86,5 +110,7 @@ export const validateCreateProduct = (req, res, next) => {
 export default {
   validateGetProducts,
   validateGetProductBySlug,
+  validateProductId,
   validateCreateProduct,
+  validateUpdateProduct,
 };

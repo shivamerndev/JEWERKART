@@ -37,18 +37,24 @@ const productSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      required: [true, "Primary product image is required"],
+      default: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop",
     },
     images: {
       type: [String],
       default: [],
     },
+    sku: {
+      type: String,
+      trim: true,
+      index: true,
+    },
     productType: {
       type: String,
       required: true,
-      enum: ["necklace", "rings", "earrings", "bracelets", "bangles", "pendants", "other"],
+      enum: ["necklace", "rings", "earrings", "bracelets", "bangles", "pendants", "other", "silver"],
       lowercase: true,
       index: true,
+      default: "rings",
     },
     shopFor: {
       type: String,
@@ -56,19 +62,22 @@ const productSchema = new mongoose.Schema(
       enum: ["men", "women", "kids", "couples", "unisex"],
       lowercase: true,
       index: true,
+      default: "women",
     },
     color: {
       type: String,
       required: true,
-      enum: ["gold", "oxidised silver", "silver", "rose gold"],
+      enum: ["gold", "oxidised silver", "silver", "rose gold", "white gold"],
       lowercase: true,
       index: true,
+      default: "gold",
     },
     metal: {
       type: String,
       required: true,
-      enum: ["750", "800", "925"],
+      enum: ["750", "800", "925", "916", "999", "585"],
       index: true,
+      default: "750",
     },
     stone: {
       type: String,
@@ -76,13 +85,15 @@ const productSchema = new mongoose.Schema(
       enum: ["colored stone", "colored zircon", "zircon", "pearl", "none", "diamond"],
       lowercase: true,
       index: true,
+      default: "none",
     },
     style: {
       type: String,
       required: true,
-      enum: ["everyday", "office", "party", "traditional", "wedding"],
+      enum: ["everyday", "office", "party", "traditional", "wedding", "festive"],
       lowercase: true,
       index: true,
+      default: "everyday",
     },
     collectionSlug: {
       type: String,
@@ -119,6 +130,82 @@ const productSchema = new mongoose.Schema(
     badge: {
       type: String,
       default: "BIS 925 HALLMARK",
+    },
+    purity: {
+      type: String,
+      trim: true,
+      default: "18K Gold (750)",
+    },
+    grossWeight: {
+      type: String,
+      trim: true,
+      default: "4.5g",
+    },
+    netWeight: {
+      type: String,
+      trim: true,
+      default: "4.2g",
+    },
+    diamondWeight: {
+      type: String,
+      trim: true,
+    },
+    diamondClarity: {
+      type: String,
+      trim: true,
+      default: "VVS1 / Colour E",
+    },
+    gemstones: {
+      type: String,
+      trim: true,
+      default: "Natural Certified Gemstones",
+    },
+    hallmarkCertified: {
+      type: Boolean,
+      default: true,
+    },
+    hallmarkNo: {
+      type: String,
+      trim: true,
+      default: "BIS-916-MUM-84920",
+    },
+    hsnCode: {
+      type: String,
+      trim: true,
+      default: "71131910",
+    },
+    baseGoldRatePerGram: {
+      type: Number,
+      default: 7420,
+    },
+    makingChargesType: {
+      type: String,
+      default: "percentage",
+    },
+    makingChargesValue: {
+      type: Number,
+      default: 12,
+    },
+    wastagePercent: {
+      type: Number,
+      default: 2,
+    },
+    warehouse: {
+      type: String,
+      default: "Mumbai Vault B-12",
+    },
+    status: {
+      type: String,
+      enum: ["Active", "Low Stock", "Out of Stock", "Draft", "Archived"],
+      default: "Active",
+    },
+    lowStockThreshold: {
+      type: Number,
+      default: 3,
+    },
+    featured: {
+      type: Boolean,
+      default: false,
     },
   },
   {

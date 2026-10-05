@@ -26,6 +26,22 @@ export const findProductById = async (id) => {
   return Product.findById(id).lean();
 };
 
+export const findProductByIdOrSlug = async (identifier) => {
+  if (!identifier) return null;
+  const isObjectId = /^[0-9a-fA-F]{24}$/.test(identifier);
+  if (isObjectId) {
+    const product = await Product.findById(identifier).lean();
+    if (product) return product;
+  }
+  return Product.findOne({
+    $or: [
+      { slug: identifier.toLowerCase() },
+      { sku: identifier },
+      { sku: identifier.toUpperCase() },
+    ],
+  }).lean();
+};
+
 export const createProduct = async (data) => {
   return Product.create(data);
 };
@@ -63,6 +79,7 @@ export default {
   countProducts,
   findProductBySlug,
   findProductById,
+  findProductByIdOrSlug,
   createProduct,
   updateProductById,
   deleteProductById,
