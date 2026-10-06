@@ -17,134 +17,91 @@ const CancelOrder = () => {
 
   return (
     <main
+      className="min-h-screen pt-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '680px', margin: '0 auto' }}>
+      <div className="max-w-[680px] mx-auto">
         
         {/* Breadcrumb */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.85rem' }}>
-          <Link to="/account/orders" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Orders</Link>
+        <div className="flex items-center gap-2 mb-8 text-[0.85rem]">
+          <Link to="/account/orders" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Orders</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <Link to={`/order/${orderId}`} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{orderId}</Link>
+          <Link to={`/order/${orderId}`} className="no-underline" style={{ color: 'var(--text-secondary)' }}>{orderId}</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>Cancel Consignment</span>
+          <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>Cancel Consignment</span>
         </div>
 
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               ORDER MODIFICATION
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2"
             style={{
               fontSize: 'clamp(1.8rem, 3.5vw, 2.3rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             Cancel Order #{orderId}
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0 }}>
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Full 100% refund is immediately credited to your original payment mode for pre-dispatch cancellations.
           </p>
         </div>
 
         {/* Card */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl p-10"
           style={{
-            borderRadius: '16px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem',
             boxShadow: 'var(--shadow-sm)',
           }}
         >
           {confirmed ? (
-            <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-              <div
-                style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '50%',
-                  backgroundColor: '#FEF2F2',
-                  color: '#DC2626',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 1.25rem',
-                  border: '1px solid #FECACA',
-                }}
-              >
+            <div className="text-center py-4">
+              <div className="w-16 h-16 rounded-full bg-[#FEF2F2] text-[#DC2626] flex items-center justify-center mx-auto mb-5 border border-[#FECACA]">
                 <XCircle size={32} />
               </div>
-              <h3 className="font-serif" style={{ fontSize: '1.45rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              <h3 className="font-serif text-[1.45rem] mb-2" style={{ color: 'var(--text-primary)' }}>
                 Order #{orderId} Cancelled
               </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '1.75rem' }}>
+              <p className="text-[0.92rem] leading-[1.6] mb-7" style={{ color: 'var(--text-secondary)' }}>
                 Your order has been retracted from the atelier queue. Your refund of ₹17,998 has been initiated and will reflect in your bank account / UPI within 24-48 hours.
               </p>
               <Link
                 to="/account/orders"
-                className="btn-slate"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '0.8rem 1.75rem',
-                  borderRadius: '6px',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                }}
+                className="btn-slate inline-flex items-center gap-2 py-3 px-7 rounded-md no-underline font-semibold"
               >
                 <ArrowLeft size={16} /> Return to Orders
               </Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div
-                style={{
-                  backgroundColor: '#FFFBEB',
-                  border: '1px solid #FDE68A',
-                  borderRadius: '8px',
-                  padding: '1rem',
-                  color: '#92400E',
-                  fontSize: '0.85rem',
-                  marginBottom: '1.75rem',
-                  display: 'flex',
-                  gap: '10px',
-                }}
-              >
-                <AlertCircle size={20} style={{ flexShrink: 0 }} />
+              <div className="bg-[#FFFBEB] border border-[#FDE68A] rounded-lg p-4 text-[#92400E] text-[0.85rem] mb-7 flex gap-2.5">
+                <AlertCircle size={20} className="shrink-0" />
                 <span>
                   Please note: Once cancelled, reserved handcrafted pieces are returned to our public vault. If you only wish to change your delivery address or ring size, consider an exchange.
                 </span>
               </div>
 
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              <div className="mb-6">
+                <label className="block text-[0.85rem] font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
                   Please Select Reason for Cancellation *
                 </label>
                 <select
                   required
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
+                  className="w-full p-3 rounded-md text-[0.9rem] outline-none"
                   style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '6px',
                     border: '1px solid var(--border-light)',
                     backgroundColor: 'var(--bg-card-warm)',
                     color: 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    outline: 'none',
                   }}
                 >
                   <option value="">-- Choose a reason --</option>
@@ -156,8 +113,8 @@ const CancelOrder = () => {
                 </select>
               </div>
 
-              <div style={{ marginBottom: '2rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              <div className="mb-8">
+                <label className="block text-[0.85rem] font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
                   Additional Notes (Optional)
                 </label>
                 <textarea
@@ -165,45 +122,25 @@ const CancelOrder = () => {
                   value={comments}
                   onChange={(e) => setComments(e.target.value)}
                   placeholder="Share feedback to help our atelier improve..."
+                  className="w-full p-3 rounded-md text-[0.9rem] outline-none box-border"
                   style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '6px',
                     border: '1px solid var(--border-light)',
                     backgroundColor: 'var(--bg-card-warm)',
                     color: 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    boxSizing: 'border-box',
                   }}
                 />
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+              <div className="flex gap-4 justify-end">
                 <Link
                   to={`/order/${orderId}`}
-                  className="btn-outline-dark"
-                  style={{
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '6px',
-                    textDecoration: 'none',
-                    fontSize: '0.9rem',
-                  }}
+                  className="btn-outline-dark py-3 px-6 rounded-md no-underline text-[0.9rem]"
                 >
                   Keep Consignment
                 </Link>
                 <button
                   type="submit"
-                  style={{
-                    backgroundColor: '#DC2626',
-                    color: '#FFF',
-                    border: 'none',
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '6px',
-                    fontSize: '0.9rem',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                  }}
+                  className="bg-[#DC2626] text-white border-none py-3 px-6 rounded-md text-[0.9rem] font-semibold cursor-pointer hover:bg-red-700 transition-colors"
                 >
                   Confirm Cancellation
                 </button>

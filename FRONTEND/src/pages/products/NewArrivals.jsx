@@ -24,41 +24,30 @@ const NewArrivals = () => {
 
   return (
     <main
-      style={{
-        minHeight: '100vh',
-        backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
-      }}
+      className="min-h-screen px-6 pt-10 pb-20"
+      style={{ backgroundColor: 'var(--bg-secondary)' }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        
+      <div className="max-w-[1280px] mx-auto">
+
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-12">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               FRESH FROM THE ATELIER
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold m-0 mb-2 tracking-[1px]"
             style={{
               fontSize: 'clamp(2.2rem, 4vw, 3rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
-              letterSpacing: '1px',
             }}
           >
-            New Arrivals & Haute Drops
+            New Arrivals &amp; Haute Drops
           </h1>
           <p
-            className="font-garamond"
-            style={{
-              color: 'var(--text-secondary)',
-              fontSize: '1.2rem',
-              maxWidth: '620px',
-              margin: '0 auto',
-            }}
+            className="font-garamond text-[1.2rem] max-w-[620px] mx-auto m-0"
+            style={{ color: 'var(--text-secondary)' }}
           >
             Be the first to wear our latest seasonal silhouettes, forged in hallmarked 925 sterling silver and 22K gold vermeil.
           </p>
@@ -66,34 +55,23 @@ const NewArrivals = () => {
 
         {/* Toolbar */}
         <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '2rem',
-            paddingBottom: '1rem',
-            borderBottom: '1px solid var(--border-light)',
-            flexWrap: 'wrap',
-            gap: '1rem',
-          }}
+          className="flex justify-between items-center mb-8 pb-4 flex-wrap gap-4"
+          style={{ borderBottom: '1px solid var(--border-light)' }}
         >
-          <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+          <div className="text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
             Presenting <strong>{newProducts.length}</strong> new creations
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Sort By:</span>
+          <div className="flex items-center gap-3">
+            <span className="text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>Sort By:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
+              className="rounded-[6px] px-4 py-2 text-[0.85rem] outline-none"
               style={{
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-light)',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
                 color: 'var(--text-primary)',
-                fontSize: '0.85rem',
-                outline: 'none',
               }}
             >
               <option value="featured">Featured First</option>
@@ -105,30 +83,20 @@ const NewArrivals = () => {
 
         {/* Products Grid */}
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-            gap: '1.75rem',
-          }}
+          className="grid gap-7"
+          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}
         >
           {newProducts.map((product) => (
             <Link
               key={product.id}
               to={`/product/${product.slug}`}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              className="no-underline text-inherit"
             >
               <div
-                className="bg-theme-card"
+                className="bg-theme-card rounded-lg overflow-hidden relative flex flex-col h-full transition-[transform,box-shadow] duration-300"
                 style={{
-                  borderRadius: '8px',
-                  overflow: 'hidden',
                   border: '1px solid var(--border-light)',
                   boxShadow: 'var(--shadow-sm)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -140,36 +108,20 @@ const NewArrivals = () => {
                 }}
               >
                 <div
-                  style={{
-                    height: '240px',
-                    backgroundColor: 'var(--bg-circle-item)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
+                  className="h-[240px] relative overflow-hidden"
+                  style={{ backgroundColor: 'var(--bg-circle-item)' }}
                 >
-                  <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
-                    <span className="badge-925" style={{ fontSize: '9px' }}>
+                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  <div className="absolute top-[10px] left-[10px]">
+                    <span className="badge-925 text-[9px]">
                       NEW DROP
                     </span>
                   </div>
                   <button
                     onClick={(e) => toggleWishlist(product.id, e)}
                     aria-label="Wishlist"
-                    style={{
-                      position: 'absolute',
-                      top: '10px',
-                      right: '10px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: '32px',
-                      height: '32px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                    }}
+                    className="absolute top-[10px] right-[10px] border-none rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}
                   >
                     <Heart
                       size={16}
@@ -181,27 +133,30 @@ const NewArrivals = () => {
                   </button>
                 </div>
 
-                <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                <div className="p-5 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-[0.35rem]">
+                    <span className="text-[0.75rem] uppercase" style={{ color: 'var(--text-secondary)' }}>
                       {product.categoryName}
                     </span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    <div className="flex items-center gap-[3px]">
                       <Star size={12} style={{ color: 'var(--theme-gold)', fill: 'var(--theme-gold)' }} />
-                      <span style={{ fontSize: '0.75rem', fontWeight: '600' }}>{product.rating}</span>
+                      <span className="text-[0.75rem] font-semibold">{product.rating}</span>
                     </div>
                   </div>
 
-                  <h3 className="font-serif" style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-primary)', margin: '0 0 0.5rem' }}>
+                  <h3
+                    className="font-serif text-base font-semibold m-0 mb-2"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
                     {product.name}
                   </h3>
 
-                  <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                    <span style={{ fontSize: '1.15rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                  <div className="mt-auto flex items-baseline gap-2">
+                    <span className="text-[1.15rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                       ₹{product.price.toLocaleString('en-IN')}
                     </span>
                     {product.originalPrice && (
-                      <span style={{ fontSize: '0.85rem', color: '#9CA3AF', textDecoration: 'line-through' }}>
+                      <span className="text-[0.85rem] line-through text-[#9CA3AF]">
                         ₹{product.originalPrice.toLocaleString('en-IN')}
                       </span>
                     )}

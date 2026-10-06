@@ -7,40 +7,33 @@ const JewelleryCare = () => {
 
   return (
     <main
+      className="min-h-screen pt-12 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '3rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <div className="max-w-[1000px] mx-auto">
         
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-14">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               TIMELESS LUSTRE
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2 tracking-[1px]"
             style={{
               fontSize: 'clamp(2.2rem, 4vw, 3rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
-              letterSpacing: '1px',
             }}
           >
             Fine Jewellery Care Guide
           </h1>
           <p
-            className="font-garamond"
+            className="font-garamond text-[1.2rem] max-w-[620px] mx-auto"
             style={{
               color: 'var(--text-secondary)',
-              fontSize: '1.2rem',
-              maxWidth: '620px',
-              margin: '0 auto',
             }}
           >
             How to preserve the radiant shine, gemstone clarity, and 22K vermeil brilliance of your Jewerkart heirlooms for generations.
@@ -48,7 +41,7 @@ const JewelleryCare = () => {
         </div>
 
         {/* 4 Golden Rules Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginBottom: '3.5rem' }}>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-6 mb-14">
           {[
             {
               icon: Droplets,
@@ -73,35 +66,27 @@ const JewelleryCare = () => {
           ].map((rule, idx) => (
             <div
               key={idx}
-              className="bg-theme-card"
+              className="bg-theme-card rounded-xl py-7 px-5 text-center"
               style={{
-                borderRadius: '12px',
                 border: '1px solid var(--border-light)',
-                padding: '1.75rem 1.25rem',
-                textAlign: 'center',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
               <div
+                className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
                 style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
                   backgroundColor: 'var(--theme-champagne)',
                   color: 'var(--theme-gold)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 1rem',
                   border: '1px solid var(--border-light)',
                 }}
               >
                 <rule.icon size={22} />
               </div>
-              <h3 className="font-serif" style={{ fontSize: '1.1rem', margin: '0 0 0.5rem', color: 'var(--text-primary)' }}>
+
+              <h3 className="font-serif text-[1.1rem] m-0 mb-2" style={{ color: 'var(--text-primary)' }}>
                 {rule.title}
               </h3>
-              <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
+              <p className="m-0 text-[0.85rem] leading-[1.6]" style={{ color: 'var(--text-secondary)' }}>
                 {rule.desc}
               </p>
             </div>
@@ -110,54 +95,69 @@ const JewelleryCare = () => {
 
         {/* Detailed Cleaning Ritual */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl p-10 mb-12"
           style={{
-            borderRadius: '16px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem',
             boxShadow: 'var(--shadow-sm)',
-            marginBottom: '3rem',
           }}
         >
-          <h2 className="font-serif" style={{ fontSize: '1.6rem', margin: '0 0 1rem', color: 'var(--text-primary)' }}>
+          <h2 className="font-serif text-[1.6rem] m-0 mb-4" style={{ color: 'var(--text-primary)' }}>
             The Gentle Home Cleaning Ritual
           </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.7', marginBottom: '1.75rem' }}>
+          <p className="text-[0.92rem] leading-[1.7] mb-7" style={{ color: 'var(--text-secondary)' }}>
             Follow this safe ritual every few months to restore the natural fire in your 925 sterling silver and zircon stones:
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'var(--theme-champagne)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', fontSize: '0.85rem', flexShrink: 0 }}>
+          <div className="flex flex-col gap-5">
+            <div className="flex gap-4 items-start">
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0"
+                style={{
+                  backgroundColor: 'var(--theme-champagne)',
+                  color: 'var(--text-primary)',
+                }}
+              >
                 1
               </div>
               <div>
-                <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}>Tepid Water & Mild Soap:</strong>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: '4px 0 0', lineHeight: '1.5' }}>
+                <strong className="text-[0.95rem]" style={{ color: 'var(--text-primary)' }}>Tepid Water & Mild Soap:</strong>
+                <p className="text-[0.88rem] mt-1 mb-0 leading-[1.5]" style={{ color: 'var(--text-secondary)' }}>
                   Prepare a small ceramic bowl with lukewarm water and 2 drops of gentle phosphate-free liquid soap. Never use boiling water or harsh detergent bleach.
                 </p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'var(--theme-champagne)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', fontSize: '0.85rem', flexShrink: 0 }}>
+            <div className="flex gap-4 items-start">
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0"
+                style={{
+                  backgroundColor: 'var(--theme-champagne)',
+                  color: 'var(--text-primary)',
+                }}
+              >
                 2
               </div>
               <div>
-                <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}>Delicate Bristle Brush:</strong>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: '4px 0 0', lineHeight: '1.5' }}>
+                <strong className="text-[0.95rem]" style={{ color: 'var(--text-primary)' }}>Delicate Bristle Brush:</strong>
+                <p className="text-[0.88rem] mt-1 mb-0 leading-[1.5]" style={{ color: 'var(--text-secondary)' }}>
                   Use an ultra-soft baby toothbrush to gently dislodge micro-dust from prong baskets and behind gemstones. Avoid vigorous rubbing on Kundan meenakari backs.
                 </p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'var(--theme-champagne)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', fontSize: '0.85rem', flexShrink: 0 }}>
+            <div className="flex gap-4 items-start">
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center font-bold text-[0.85rem] shrink-0"
+                style={{
+                  backgroundColor: 'var(--theme-champagne)',
+                  color: 'var(--text-primary)',
+                }}
+              >
                 3
               </div>
               <div>
-                <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}>Rinse & Pat Dry:</strong>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: '4px 0 0', lineHeight: '1.5' }}>
+                <strong className="text-[0.95rem]" style={{ color: 'var(--text-primary)' }}>Rinse & Pat Dry:</strong>
+                <p className="text-[0.88rem] mt-1 mb-0 leading-[1.5]" style={{ color: 'var(--text-secondary)' }}>
                   Rinse in pure filtered water and pat dry using a lint-free cloth. Allow the piece to air-dry completely before sealing inside your anti-tarnish pouch.
                 </p>
               </div>
@@ -167,47 +167,33 @@ const JewelleryCare = () => {
 
         {/* Complimentary Annual Spa Request Banner */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl p-10 flex items-center justify-between flex-wrap gap-6"
           style={{
-            borderRadius: '16px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem',
             boxShadow: 'var(--shadow-md)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1.5rem',
           }}
         >
-          <div style={{ maxWidth: '600px' }}>
-            <div className="divider-ornament" style={{ justifyContent: 'flex-start', marginBottom: '0.5rem' }}>
-              <span className="badge-925" style={{ fontSize: '9px' }}>COMPLIMENTARY PATRON BENEFIT</span>
+          <div className="max-w-[600px]">
+            <div className="divider-ornament justify-start mb-2">
+              <span className="badge-925 text-[9px]">COMPLIMENTARY PATRON BENEFIT</span>
             </div>
-            <h3 className="font-serif" style={{ fontSize: '1.5rem', margin: '0 0 0.5rem', color: 'var(--text-primary)' }}>
+            <h3 className="font-serif text-[1.5rem] m-0 mb-2" style={{ color: 'var(--text-primary)' }}>
               Complimentary Lifetime Atelier Spa
             </h3>
-            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
+            <p className="m-0 text-[0.9rem] leading-[1.6]" style={{ color: 'var(--text-secondary)' }}>
               Each year, send your Jewerkart jewellery to our master craftsmen for ultrasonic cleaning, prong tightening, and rhodium re-dipping at zero artisan charge.
             </p>
           </div>
 
           <div>
             {spaRequested ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#065F46', fontWeight: '600', fontSize: '0.9rem' }}>
+              <div className="flex items-center gap-2 text-[#065F46] font-semibold text-[0.9rem]">
                 <CheckCircle2 size={18} /> Spa Kit Dispatched to Address
               </div>
             ) : (
               <button
                 onClick={() => setSpaRequested(true)}
-                className="btn-slate"
-                style={{
-                  padding: '0.85rem 1.75rem',
-                  borderRadius: '6px',
-                  fontWeight: '600',
-                  fontSize: '0.95rem',
-                  cursor: 'pointer',
-                }}
+                className="btn-slate py-3.5 px-7 rounded-md font-semibold text-[0.95rem] cursor-pointer"
               >
                 Request Free Spa Kit
               </button>

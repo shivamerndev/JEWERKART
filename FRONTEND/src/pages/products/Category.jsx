@@ -49,101 +49,67 @@ const Category = () => {
 
   return (
     <main
-      style={{
-        minHeight: '100vh',
-        backgroundColor: 'var(--bg-secondary)',
-        padding: '2rem 1.5rem 5rem',
-      }}
+      className="min-h-screen px-6 pt-8 pb-20"
+      style={{ backgroundColor: 'var(--bg-secondary)' }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        
+      <div className="max-w-[1280px] mx-auto">
+
         {/* Breadcrumb Navigation */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', fontSize: '0.85rem' }}>
-          <Link to="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Home</Link>
+        <div className="flex items-center gap-2 mb-6 text-[0.85rem]">
+          <Link to="/" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Home</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <Link to="/shop" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Shop</Link>
+          <Link to="/shop" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Shop</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{categoryInfo.name}</span>
+          <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{categoryInfo.name}</span>
         </div>
 
         {/* Hero Category Banner */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl overflow-hidden mb-12 relative"
           style={{
-            borderRadius: '16px',
             border: '1px solid var(--border-light)',
-            overflow: 'hidden',
-            marginBottom: '3rem',
             boxShadow: 'var(--shadow-md)',
-            position: 'relative',
           }}
         >
-          <div
-            style={{
-              padding: '3.5rem 2.5rem',
-              maxWidth: '650px',
-              position: 'relative',
-              zIndex: 2,
-            }}
-          >
-            <div className="divider-ornament" style={{ justifyContent: 'flex-start', marginBottom: '0.75rem' }}>
-              <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+          <div className="px-10 py-14 max-w-[650px] relative z-[2]">
+            <div className="divider-ornament mb-3 justify-start">
+              <span className="badge-925 text-[9px] tracking-[2px]">
                 GENUINE 925 HALLMARK
               </span>
             </div>
             <h1
-              className="font-serif"
+              className="font-serif font-semibold m-0 mb-4 tracking-[1px]"
               style={{
                 fontSize: 'clamp(2.2rem, 4vw, 3rem)',
-                fontWeight: '600',
                 color: 'var(--text-primary)',
-                margin: '0 0 1rem',
-                letterSpacing: '1px',
               }}
             >
               {categoryInfo.name}
             </h1>
             <p
-              className="font-garamond"
-              style={{
-                color: 'var(--text-secondary)',
-                fontSize: '1.2rem',
-                lineHeight: '1.6',
-                margin: '0 0 1.5rem',
-              }}
+              className="font-garamond text-[1.2rem] leading-[1.6] m-0 mb-6"
+              style={{ color: 'var(--text-secondary)' }}
             >
               {categoryInfo.description}
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>
+            <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-[6px] text-[0.85rem]" style={{ color: 'var(--text-primary)' }}>
                 <ShieldCheck size={16} style={{ color: 'var(--theme-gold)' }} />
                 <span>BIS Hallmarked Purity</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', color: 'var(--text-primary)' }}>
+              <div className="flex items-center gap-[6px] text-[0.85rem]" style={{ color: 'var(--text-primary)' }}>
                 <Sparkles size={16} style={{ color: 'var(--theme-gold)' }} />
                 <span>Complimentary Lifetime Polish</span>
               </div>
             </div>
           </div>
 
-          <div
-            className="hidden md:block"
-            style={{
-              position: 'absolute',
-              right: 0,
-              top: 0,
-              bottom: 0,
-              width: '45%',
-              overflow: 'hidden',
-            }}
-          >
+          <div className="hidden md:block absolute right-0 top-0 bottom-0 w-[45%] overflow-hidden">
             <img
               src={categoryInfo.image}
               alt={categoryInfo.name}
+              className="w-full h-full object-cover"
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
                 maskImage: 'linear-gradient(to right, transparent, black 30%)',
                 WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%)',
               }}
@@ -153,35 +119,23 @@ const Category = () => {
 
         {/* Toolbar */}
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1rem',
-            marginBottom: '2rem',
-            borderBottom: '1px solid var(--border-light)',
-            paddingBottom: '1.25rem',
-          }}
+          className="flex items-center justify-between flex-wrap gap-4 mb-8 pb-5"
+          style={{ borderBottom: '1px solid var(--border-light)' }}
         >
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: 0 }}>
+          <p className="text-[0.95rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Showing <strong>{categoryProducts.length}</strong> creations in <strong>{categoryInfo.name}</strong>
           </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Sort By:</span>
+          <div className="flex items-center gap-3">
+            <span className="text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>Sort By:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
+              className="rounded-[6px] px-4 py-2 text-[0.85rem] outline-none cursor-pointer"
               style={{
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-light)',
-                borderRadius: '6px',
-                padding: '0.5rem 1rem',
                 color: 'var(--text-primary)',
-                fontSize: '0.85rem',
-                outline: 'none',
-                cursor: 'pointer',
               }}
             >
               <option value="featured">Featured Curations</option>
@@ -194,30 +148,20 @@ const Category = () => {
 
         {/* Product Cards Grid */}
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-            gap: '1.75rem',
-          }}
+          className="grid gap-7"
+          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))' }}
         >
           {categoryProducts.map((product) => (
             <Link
               key={product.id}
               to={`/product/${product.slug}`}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              className="no-underline text-inherit"
             >
               <div
-                className="bg-theme-card"
+                className="bg-theme-card rounded-lg overflow-hidden relative flex flex-col h-full transition-[transform,box-shadow] duration-300"
                 style={{
-                  borderRadius: '8px',
-                  overflow: 'hidden',
                   border: '1px solid var(--border-light)',
                   boxShadow: 'var(--shadow-sm)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -229,26 +173,17 @@ const Category = () => {
                 }}
               >
                 <div
-                  style={{
-                    height: '240px',
-                    backgroundColor: 'var(--bg-circle-item)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
+                  className="h-[240px] relative overflow-hidden"
+                  style={{ backgroundColor: 'var(--bg-circle-item)' }}
                 >
                   <img
                     src={product.image}
                     alt={product.name}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform 0.5s ease',
-                    }}
+                    className="w-full h-full object-cover transition-transform duration-500"
                   />
-                  <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
+                  <div className="absolute top-[10px] left-[10px]">
                     {product.badge && (
-                      <span className="badge-925" style={{ fontSize: '9px' }}>
+                      <span className="badge-925 text-[9px]">
                         {product.badge}
                       </span>
                     )}
@@ -256,20 +191,8 @@ const Category = () => {
                   <button
                     onClick={(e) => toggleWishlist(product.id, e)}
                     aria-label="Add to Wishlist"
-                    style={{
-                      position: 'absolute',
-                      top: '10px',
-                      right: '10px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: '32px',
-                      height: '32px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                    }}
+                    className="absolute top-[10px] right-[10px] border-none rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+                    style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}
                   >
                     <Heart
                       size={16}
@@ -281,38 +204,32 @@ const Category = () => {
                   </button>
                 </div>
 
-                <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <div className="p-5 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-[0.35rem]">
+                    <span className="text-[0.75rem] uppercase tracking-[0.5px]" style={{ color: 'var(--text-secondary)' }}>
                       {product.metalName}
                     </span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    <div className="flex items-center gap-[3px]">
                       <Star size={12} style={{ color: 'var(--theme-gold)', fill: 'var(--theme-gold)' }} />
-                      <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                      <span className="text-[0.75rem] font-semibold" style={{ color: 'var(--text-primary)' }}>
                         {product.rating}
                       </span>
                     </div>
                   </div>
 
                   <h3
-                    className="font-serif"
-                    style={{
-                      fontSize: '1rem',
-                      fontWeight: '600',
-                      color: 'var(--text-primary)',
-                      margin: '0 0 0.5rem',
-                      lineHeight: '1.35',
-                    }}
+                    className="font-serif text-base font-semibold m-0 mb-2 leading-[1.35]"
+                    style={{ color: 'var(--text-primary)' }}
                   >
                     {product.name}
                   </h3>
 
-                  <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                    <span style={{ fontSize: '1.15rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                  <div className="mt-auto flex items-baseline gap-2">
+                    <span className="text-[1.15rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                       ₹{product.price.toLocaleString('en-IN')}
                     </span>
                     {product.originalPrice && (
-                      <span style={{ fontSize: '0.85rem', color: '#9CA3AF', textDecoration: 'line-through' }}>
+                      <span className="text-[0.85rem] line-through text-[#9CA3AF]">
                         ₹{product.originalPrice.toLocaleString('en-IN')}
                       </span>
                     )}

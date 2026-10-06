@@ -8,12 +8,11 @@ const Marquee = () => {
     <div
       role="region"
       aria-label="Announcement Bar"
-      className="relative w-full overflow-hidden select-none"
+      className="relative w-full overflow-hidden select-none z-[40]"
       style={{
         backgroundColor: '#1C140E',
         borderBottom: '1px solid rgba(197, 145, 74, 0.25)',
         color: '#FEF0E0',
-        zIndex: 40,
       }}
     >
       <div className="py-2 flex items-center overflow-hidden">

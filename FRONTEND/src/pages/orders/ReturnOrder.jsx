@@ -19,144 +19,115 @@ const ReturnOrder = () => {
 
   return (
     <main
+      className="min-h-screen pt-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+      <div className="max-w-[720px] mx-auto">
         
         {/* Breadcrumb */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.85rem' }}>
-          <Link to="/account/orders" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Orders</Link>
+        <div className="flex items-center gap-2 mb-8 text-[0.85rem]">
+          <Link to="/account/orders" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Orders</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <Link to={`/order/${orderId}`} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{orderId}</Link>
+          <Link to={`/order/${orderId}`} className="no-underline" style={{ color: 'var(--text-secondary)' }}>{orderId}</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>15-Day Return</span>
+          <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>15-Day Return</span>
         </div>
 
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               DOORSTEP COURTESY
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2"
             style={{
               fontSize: 'clamp(1.8rem, 3.5vw, 2.3rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             Initiate Return for #{orderId}
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0 }}>
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Enjoy our complimentary 15-day doorstep armored pickup and hassle-free refund guarantee.
           </p>
         </div>
 
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl p-10"
           style={{
-            borderRadius: '16px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem',
             boxShadow: 'var(--shadow-sm)',
           }}
         >
           {submitted ? (
-            <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+            <div className="text-center py-4">
               <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
                 style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '50%',
                   backgroundColor: 'var(--theme-champagne)',
                   color: 'var(--theme-gold)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 1.25rem',
                   border: '1px solid var(--border-light)',
                 }}
               >
                 <CheckCircle2 size={32} />
               </div>
-              <h3 className="font-serif" style={{ fontSize: '1.45rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              <h3 className="font-serif text-[1.45rem] mb-2" style={{ color: 'var(--text-primary)' }}>
                 Pickup Scheduled Successfully
               </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '1.75rem' }}>
+              <p className="text-[0.92rem] leading-[1.6] mb-7" style={{ color: 'var(--text-secondary)' }}>
                 Our armored courier partner (Sequel Logistics) will arrive at your address within 24-48 business hours. Please ensure the jewellery is placed in its original velvet box with the hallmark tag intact.
               </p>
               <Link
                 to="/account/orders"
-                className="btn-slate"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '0.8rem 1.75rem',
-                  borderRadius: '6px',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                }}
+                className="btn-slate inline-flex items-center gap-2 py-3 px-7 rounded-md no-underline font-semibold"
               >
                 <ArrowLeft size={16} /> Return to Orders
               </Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+              <div className="mb-6">
+                <label className="block text-[0.85rem] font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
                   Select Item to Return
                 </label>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div className="flex flex-col gap-3">
                   {order.items.map((item) => (
                     <div
                       key={item.id}
                       onClick={() => setSelectedItem(item.id)}
+                      className="flex items-center gap-3 p-4 rounded-lg cursor-pointer"
                       style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '1rem',
-                        borderRadius: '8px',
                         border: selectedItem === item.id ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
                         backgroundColor: selectedItem === item.id ? 'var(--theme-champagne)' : 'var(--bg-card-warm)',
-                        cursor: 'pointer',
                       }}
                     >
-                      <img src={item.image} alt={item.name} style={{ width: '48px', height: '48px', borderRadius: '4px', objectFit: 'cover' }} />
-                      <div style={{ flexGrow: 1 }}>
-                        <div style={{ fontWeight: '600', fontSize: '0.95rem', color: 'var(--text-primary)' }}>{item.name}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>₹{item.price.toLocaleString('en-IN')}</div>
+                      <img src={item.image} alt={item.name} className="w-12 h-12 rounded object-cover" />
+                      <div className="grow">
+                        <div className="font-semibold text-[0.95rem]" style={{ color: 'var(--text-primary)' }}>{item.name}</div>
+                        <div className="text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>₹{item.price.toLocaleString('en-IN')}</div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              <div className="mb-6">
+                <label className="block text-[0.85rem] font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
                   Reason for Return *
                 </label>
                 <select
                   required
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
+                  className="w-full p-3 rounded-md text-[0.9rem] outline-none"
                   style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    borderRadius: '6px',
                     border: '1px solid var(--border-light)',
                     backgroundColor: 'var(--bg-card-warm)',
                     color: 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    outline: 'none',
                   }}
                 >
                   <option value="">-- Choose a reason --</option>
@@ -169,28 +140,26 @@ const ReturnOrder = () => {
               </div>
 
               <div
+                className="rounded-lg p-4 mb-8"
                 style={{
                   backgroundColor: 'var(--theme-champagne-light)',
                   border: '1px solid var(--border-light)',
-                  borderRadius: '8px',
-                  padding: '1rem',
-                  marginBottom: '2rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.35rem' }}>
+                <div className="flex items-center gap-2 mb-1.5">
                   <Truck size={16} style={{ color: 'var(--theme-gold)' }} />
-                  <strong style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>Doorstep Pickup Destination</strong>
+                  <strong className="text-[0.85rem]" style={{ color: 'var(--text-primary)' }}>Doorstep Pickup Destination</strong>
                 </div>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                <p className="m-0 text-[0.82rem]" style={{ color: 'var(--text-secondary)' }}>
                   {order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.pincode}
                 </p>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
-                <Link to={`/order/${orderId}`} className="btn-outline-dark" style={{ padding: '0.75rem 1.5rem', borderRadius: '6px', textDecoration: 'none' }}>
+              <div className="flex justify-end gap-4">
+                <Link to={`/order/${orderId}`} className="btn-outline-dark py-3 px-6 rounded-md no-underline">
                   Cancel
                 </Link>
-                <button type="submit" className="btn-slate" style={{ padding: '0.75rem 1.5rem', borderRadius: '6px', cursor: 'pointer' }}>
+                <button type="submit" className="btn-slate py-3 px-6 rounded-md cursor-pointer">
                   Request Armored Pickup
                 </button>
               </div>

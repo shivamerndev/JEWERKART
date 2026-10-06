@@ -77,8 +77,7 @@ const Location = () => {
   return (
     <div
       ref={containerRef}
-      style={{ position: 'relative' }}
-      className="inline-block"
+      className="relative inline-block"
     >
       {/* Location Trigger Button */}
       <button
@@ -86,18 +85,11 @@ const Location = () => {
         onClick={handleToggleOpen}
         aria-expanded={isOpen}
         aria-label={`Delivery location: ${location || 'Select City'}`}
+        className="flex items-center gap-[0.55rem] px-3 py-[0.4rem] rounded-lg cursor-pointer transition-all duration-[250ms] outline-none"
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.55rem',
-          padding: '0.4rem 0.75rem',
           backgroundColor: isOpen ? 'var(--theme-champagne-light)' : 'transparent',
           border: '1px solid',
           borderColor: isOpen ? 'var(--border-gold)' : 'var(--border-light)',
-          borderRadius: '8px',
-          cursor: 'pointer',
-          transition: 'all 0.25s ease',
-          outline: 'none',
           boxShadow: isOpen ? 'var(--shadow-sm)' : 'none',
         }}
         onMouseEnter={(e) => {
@@ -113,54 +105,26 @@ const Location = () => {
       >
         {/* Subtle Pin Icon in warm champagne badge */}
         <div
+          className="w-[26px] h-[26px] rounded-full flex items-center justify-center shrink-0 transition-transform duration-200"
           style={{
-            width: '26px',
-            height: '26px',
-            borderRadius: '50%',
             backgroundColor: 'var(--theme-champagne)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             color: 'var(--text-gold)',
-            flexShrink: 0,
-            transition: 'transform 0.2s ease',
           }}
         >
           <MapPin size={14} strokeWidth={2.2} />
         </div>
 
         {/* Text Container */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            textAlign: 'left',
-            lineHeight: 1.15,
-          }}
-        >
+        <div className="flex flex-col items-start text-left leading-[1.15]">
           <span
-            style={{
-              fontSize: '9px',
-              fontWeight: '600',
-              letterSpacing: '1px',
-              textTransform: 'uppercase',
-              color: 'var(--text-secondary)',
-            }}
+            className="text-[9px] font-semibold tracking-[1px] uppercase"
+            style={{ color: 'var(--text-secondary)' }}
           >
             Deliver To
           </span>
           <span
-            style={{
-              fontSize: '12.5px',
-              fontWeight: '600',
-              color: 'var(--text-primary)',
-              maxWidth: '120px',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              marginTop: '1px',
-            }}
+            className="text-[12.5px] font-semibold max-w-[120px] whitespace-nowrap overflow-hidden text-ellipsis mt-[1px]"
+            style={{ color: 'var(--text-primary)' }}
             title={location}
           >
             {displayCity}
@@ -170,12 +134,11 @@ const Location = () => {
         {/* Rotatable Gold Chevron */}
         <ChevronDown
           size={13}
+          className="ml-[0.15rem] shrink-0"
           style={{
             color: 'var(--text-gold)',
             transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
             transition: 'transform 0.25s ease',
-            marginLeft: '0.15rem',
-            flexShrink: 0,
           }}
         />
       </button>
@@ -185,61 +148,34 @@ const Location = () => {
         <div
           role="dialog"
           aria-label="Select Delivery Location"
+          className="absolute top-[calc(100%+8px)] left-0 w-[350px] max-w-[calc(100vw-2rem)] bg-white rounded-xl overflow-hidden z-[100]"
           style={{
-            position: 'absolute',
-            top: 'calc(100% + 8px)',
-            left: 0,
-            width: '350px',
-            maxWidth: 'calc(100vw - 2rem)',
-            backgroundColor: '#FFFFFF',
             border: '1px solid var(--border-light)',
-            borderRadius: '12px',
             boxShadow: 'var(--shadow-lg)',
-            zIndex: 100,
-            overflow: 'hidden',
             animation: 'fadeInSlide 0.2s ease-out',
           }}
         >
           {/* Header */}
           <div
+            className="px-[1.15rem] pt-4 pb-[0.85rem] flex items-start justify-between gap-2"
             style={{
-              padding: '1rem 1.15rem 0.85rem',
               borderBottom: '1px solid var(--border-light)',
               backgroundColor: 'var(--theme-champagne-light)',
-              display: 'flex',
-              alignItems: 'flex-start',
-              justifyContent: 'space-between',
-              gap: '0.5rem',
             }}
           >
             <div>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                }}
-              >
+              <div className="flex items-center gap-[0.4rem]">
                 <Sparkles size={14} color="var(--text-gold)" />
                 <h3
-                  className="font-serif"
-                  style={{
-                    fontSize: '1rem',
-                    fontWeight: '700',
-                    color: 'var(--text-primary)',
-                    letterSpacing: '0.5px',
-                    margin: 0,
-                  }}
+                  className="font-serif text-base font-bold tracking-[0.5px] m-0"
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Delivery Destination
                 </h3>
               </div>
               <p
-                style={{
-                  fontSize: '11px',
-                  color: 'var(--text-secondary)',
-                  margin: '3px 0 0 0',
-                }}
+                className="text-[11px] mt-[3px] mb-0"
+                style={{ color: 'var(--text-secondary)' }}
               >
                 Select your city to check shipping timelines & availability
               </p>
@@ -249,18 +185,8 @@ const Location = () => {
               type="button"
               onClick={handleClose}
               aria-label="Close location selector"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text-secondary)',
-                padding: '4px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'background-color 0.2s ease, color 0.2s ease',
-              }}
+              className="bg-transparent border-none cursor-pointer p-1 rounded-full flex items-center justify-center transition-[background-color,color] duration-200"
+              style={{ color: 'var(--text-secondary)' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--theme-champagne)';
                 e.currentTarget.style.color = 'var(--text-primary)';
@@ -275,33 +201,17 @@ const Location = () => {
           </div>
 
           {/* Modal Body */}
-          <div
-            style={{
-              padding: '1rem 1.15rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.85rem',
-              maxHeight: '440px',
-              overflowY: 'auto',
-            }}
-          >
+          <div className="px-[1.15rem] py-4 flex flex-col gap-[0.85rem] max-h-[440px] overflow-y-auto">
             {/* Auto-detect Location CTA Button */}
             <button
               type="button"
               onClick={handleDetectLocation}
               disabled={isDetecting}
+              className="w-full flex items-center justify-between px-[0.85rem] py-[0.7rem] rounded-lg text-left transition-all duration-200"
               style={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0.7rem 0.85rem',
                 backgroundColor: 'var(--theme-champagne-light)',
                 border: '1px dashed var(--border-gold)',
-                borderRadius: '8px',
                 cursor: isDetecting ? 'wait' : 'pointer',
-                transition: 'all 0.2s ease',
-                textAlign: 'left',
               }}
               onMouseEnter={(e) => {
                 if (!isDetecting) {
@@ -314,19 +224,12 @@ const Location = () => {
                 }
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+              <div className="flex items-center gap-[0.65rem]">
                 <div
+                  className="w-[30px] h-[30px] rounded-[6px] bg-white flex items-center justify-center shrink-0"
                   style={{
-                    width: '30px',
-                    height: '30px',
-                    borderRadius: '6px',
-                    backgroundColor: '#FFFFFF',
                     border: '1px solid var(--border-light)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     color: 'var(--text-gold)',
-                    flexShrink: 0,
                   }}
                 >
                   {isDetecting ? (
@@ -336,64 +239,28 @@ const Location = () => {
                   )}
                 </div>
                 <div>
-                  <div
-                    style={{
-                      fontSize: '12.5px',
-                      fontWeight: '600',
-                      color: 'var(--text-primary)',
-                    }}
-                  >
+                  <div className="text-[12.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>
                     {isDetecting ? 'Detecting current city...' : 'Use Current Location'}
                   </div>
-                  <div
-                    style={{
-                      fontSize: '10px',
-                      color: 'var(--text-secondary)',
-                      marginTop: '1px',
-                    }}
-                  >
+                  <div className="text-[10px] mt-[1px]" style={{ color: 'var(--text-secondary)' }}>
                     {isDetecting ? 'Querying GPS satellites...' : 'Via browser geolocation'}
                   </div>
                 </div>
               </div>
 
-              <span
-                style={{
-                  fontSize: '11px',
-                  fontWeight: '600',
-                  color: 'var(--text-gold)',
-                }}
-              >
+              <span className="text-[11px] font-semibold" style={{ color: 'var(--text-gold)' }}>
                 {isDetecting ? '...' : 'Auto Detect →'}
               </span>
             </button>
 
             {/* Error Message Alert */}
             {detectError && (
-              <div
-                style={{
-                  fontSize: '11px',
-                  color: '#991B1B',
-                  backgroundColor: '#FEF2F2',
-                  border: '1px solid #FCA5A5',
-                  borderRadius: '6px',
-                  padding: '6px 10px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
+              <div className="text-[11px] text-[#991B1B] bg-[#FEF2F2] border border-[#FCA5A5] rounded-[6px] px-[10px] py-[6px] flex items-center justify-between">
                 <span>{detectError}</span>
                 <button
                   type="button"
                   onClick={handleClearError}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    color: '#991B1B',
-                    padding: '2px',
-                  }}
+                  className="bg-transparent border-none cursor-pointer text-[#991B1B] p-[2px]"
                 >
                   <X size={12} />
                 </button>
@@ -401,43 +268,20 @@ const Location = () => {
             )}
 
             {/* Subtle Divider */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                margin: '0.1rem 0',
-              }}
-            >
-              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-light)' }} />
+            <div className="flex items-center gap-2 my-[0.1rem]">
+              <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border-light)' }} />
               <span
-                style={{
-                  fontSize: '9.5px',
-                  fontWeight: '600',
-                  letterSpacing: '1px',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-secondary)',
-                }}
+                className="text-[9.5px] font-semibold tracking-[1px] uppercase"
+                style={{ color: 'var(--text-secondary)' }}
               >
                 Or Search City
               </span>
-              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-light)' }} />
+              <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border-light)' }} />
             </div>
 
             {/* Search Input Box */}
-            <div style={{ position: 'relative' }}>
-              <div
-                style={{
-                  position: 'absolute',
-                  left: '10px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'var(--text-secondary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  pointerEvents: 'none',
-                }}
-              >
+            <div className="relative">
+              <div className="absolute left-[10px] top-1/2 -translate-y-1/2 flex items-center pointer-events-none" style={{ color: 'var(--text-secondary)' }}>
                 {isSearching ? (
                   <Loader2 size={15} className="animate-spin" color="var(--text-gold)" />
                 ) : (
@@ -451,17 +295,10 @@ const Location = () => {
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder="Type city or pincode (e.g. Mumbai, 110001)..."
+                className="w-full box-border py-[0.55rem] pr-8 pl-[2.1rem] text-[12px] bg-white rounded-[6px] outline-none transition-[border-color,box-shadow] duration-200"
                 style={{
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  padding: '0.55rem 2rem 0.55rem 2.1rem',
-                  fontSize: '12px',
-                  backgroundColor: '#FFFFFF',
                   color: 'var(--text-primary)',
                   border: '1px solid var(--border-light)',
-                  borderRadius: '6px',
-                  outline: 'none',
-                  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
                   fontFamily: 'var(--font-sans)',
                 }}
                 onFocus={(e) => {
@@ -479,19 +316,8 @@ const Location = () => {
                   type="button"
                   onClick={handleClearSearch}
                   aria-label="Clear search"
-                  style={{
-                    position: 'absolute',
-                    right: '8px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    color: 'var(--text-secondary)',
-                    padding: '2px',
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer p-[2px] flex items-center"
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   <X size={14} />
                 </button>
@@ -500,16 +326,11 @@ const Location = () => {
               {/* Suggestions Results List */}
               {searchResults.length > 0 && (
                 <ul
+                  className="mt-[6px] py-1 list-none bg-white rounded-lg max-h-[160px] overflow-y-auto"
                   style={{
                     margin: '6px 0 0 0',
-                    padding: '4px 0',
-                    listStyle: 'none',
-                    backgroundColor: '#FFFFFF',
                     border: '1px solid var(--border-light)',
-                    borderRadius: '8px',
                     boxShadow: 'var(--shadow-md)',
-                    maxHeight: '160px',
-                    overflowY: 'auto',
                   }}
                 >
                   {searchResults.map((item, idx) => {
@@ -524,16 +345,8 @@ const Location = () => {
                       <li
                         key={item.place_id || idx}
                         onClick={() => handleSelectCity(fullLabel)}
-                        style={{
-                          padding: '7px 12px',
-                          fontSize: '12px',
-                          color: 'var(--text-primary)',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                          transition: 'background-color 0.15s ease',
-                        }}
+                        className="px-3 py-[7px] text-[12px] cursor-pointer flex items-center gap-2 transition-colors duration-[150ms]"
+                        style={{ color: 'var(--text-primary)' }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)';
                         }}
@@ -541,14 +354,8 @@ const Location = () => {
                           e.currentTarget.style.backgroundColor = 'transparent';
                         }}
                       >
-                        <MapPin size={13} color="var(--text-gold)" style={{ flexShrink: 0 }} />
-                        <span
-                          style={{
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                          }}
-                        >
+                        <MapPin size={13} color="var(--text-gold)" className="shrink-0" />
+                        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
                           {item.display_name}
                         </span>
                       </li>
@@ -561,25 +368,13 @@ const Location = () => {
             {/* Popular Cities Section */}
             <div>
               <div
-                style={{
-                  fontSize: '10px',
-                  fontWeight: '700',
-                  letterSpacing: '1px',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-gold)',
-                  marginBottom: '0.45rem',
-                }}
+                className="text-[10px] font-bold tracking-[1px] uppercase mb-[0.45rem]"
+                style={{ color: 'var(--text-gold)' }}
               >
                 Popular Delivery Hubs
               </div>
 
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.4rem',
-                }}
-              >
+              <div className="flex flex-wrap gap-[0.4rem]">
                 {popularCities.map((city) => {
                   const isSelected =
                     location &&
@@ -590,26 +385,13 @@ const Location = () => {
                       key={city}
                       type="button"
                       onClick={() => handleSelectCity(`${city}, India`)}
+                      className="px-[10px] py-1 text-[11.5px] rounded-[20px] cursor-pointer transition-all duration-200 flex items-center gap-[0.3rem]"
                       style={{
-                        padding: '4px 10px',
-                        fontSize: '11.5px',
                         fontWeight: isSelected ? '600' : '500',
-                        backgroundColor: isSelected
-                          ? 'var(--theme-champagne)'
-                          : 'var(--theme-champagne-light)',
+                        backgroundColor: isSelected ? 'var(--theme-champagne)' : 'var(--theme-champagne-light)',
                         border: '1px solid',
-                        borderColor: isSelected
-                          ? 'var(--theme-gold)'
-                          : 'var(--border-light)',
-                        borderRadius: '20px',
-                        color: isSelected
-                          ? 'var(--text-primary)'
-                          : 'var(--text-primary)',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.3rem',
+                        borderColor: isSelected ? 'var(--theme-gold)' : 'var(--border-light)',
+                        color: 'var(--text-primary)',
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-champagne)';
@@ -617,8 +399,7 @@ const Location = () => {
                       }}
                       onMouseLeave={(e) => {
                         if (!isSelected) {
-                          e.currentTarget.style.backgroundColor =
-                            'var(--theme-champagne-light)';
+                          e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)';
                           e.currentTarget.style.borderColor = 'var(--border-light)';
                         }
                       }}
@@ -636,23 +417,14 @@ const Location = () => {
 
           {/* Footer Assurance Banner */}
           <div
+            className="px-[1.15rem] py-[0.65rem] flex items-center gap-2"
             style={{
-              padding: '0.65rem 1.15rem',
               backgroundColor: 'var(--theme-champagne-light)',
               borderTop: '1px solid var(--border-light)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
             }}
           >
-            <Truck size={14} color="var(--text-gold)" style={{ flexShrink: 0 }} />
-            <div
-              style={{
-                fontSize: '10.5px',
-                color: 'var(--text-secondary)',
-                lineHeight: 1.25,
-              }}
-            >
+            <Truck size={14} color="var(--text-gold)" className="shrink-0" />
+            <div className="text-[10.5px] leading-[1.25]" style={{ color: 'var(--text-secondary)' }}>
               Pan-India insured express delivery in signature velvet boxes.
             </div>
           </div>

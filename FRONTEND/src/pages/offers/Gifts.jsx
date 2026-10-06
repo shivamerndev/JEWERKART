@@ -20,40 +20,33 @@ const Gifts = () => {
 
   return (
     <main
+      className="min-h-screen pt-12 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '3rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+      <div className="max-w-7xl mx-auto">
         
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-14">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               ROYAL ATELIER GIFTING
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2 tracking-[1px]"
             style={{
               fontSize: 'clamp(2.2rem, 4vw, 3rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
-              letterSpacing: '1px',
             }}
           >
             The Fine Jewellery Gift Boutique
           </h1>
           <p
-            className="font-garamond"
+            className="font-garamond text-[1.2rem] max-w-[620px] mx-auto"
             style={{
               color: 'var(--text-secondary)',
-              fontSize: '1.2rem',
-              maxWidth: '620px',
-              margin: '0 auto',
             }}
           >
             Celebrate life’s unforgettable milestones with heirloom 925 sterling silver and 22K gold vermeil treasures.
@@ -62,29 +55,21 @@ const Gifts = () => {
 
         {/* Complimentary Gift Box Showcase */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-[20px] py-10 px-12 mb-14 flex items-center justify-between flex-wrap gap-8"
           style={{
-            borderRadius: '20px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem 3rem',
             boxShadow: 'var(--shadow-md)',
-            marginBottom: '3.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '2rem',
           }}
         >
-          <div style={{ maxWidth: '650px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--theme-gold)', marginBottom: '0.5rem' }}>
+          <div className="max-w-[650px]">
+            <div className="flex items-center gap-2 mb-2" style={{ color: 'var(--theme-gold)' }}>
               <Package size={20} />
-              <span style={{ fontSize: '0.85rem', fontWeight: '600', letterSpacing: '1.5px' }}>COMPLIMENTARY HEIRLOOM PACKAGING</span>
+              <span className="text-[0.85rem] font-semibold tracking-[1.5px]">COMPLIMENTARY HEIRLOOM PACKAGING</span>
             </div>
-            <h2 className="font-serif" style={{ fontSize: '1.75rem', color: 'var(--text-primary)', margin: '0 0 0.75rem' }}>
+            <h2 className="font-serif text-[1.75rem] mb-3" style={{ color: 'var(--text-primary)' }}>
               Royal Velvet Keepsake Box & Golden Ribbon
             </h2>
-            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.7' }}>
+            <p className="m-0 text-[0.92rem] leading-[1.7]" style={{ color: 'var(--text-secondary)' }}>
               Every gift from Jewerkart arrives pre-packaged in our signature embossed warm champagne outer box, royal velvet interior cushion, BIS authenticity certificate, and an optional personalized wax-sealed handwritten note.
             </p>
           </div>
@@ -92,17 +77,7 @@ const Gifts = () => {
           <div>
             <Link
               to="/gift-cards"
-              className="btn-gold"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '0.85rem 1.75rem',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontWeight: '600',
-                fontSize: '0.95rem',
-              }}
+              className="btn-gold inline-flex items-center gap-2 py-3.5 px-7 rounded-md no-underline font-semibold text-[0.95rem]"
             >
               <Gift size={16} /> Send E-Gift Voucher
             </Link>
@@ -110,20 +85,17 @@ const Gifts = () => {
         </div>
 
         {/* Filter Pills */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
+        <div className="flex justify-center gap-2.5 mb-10 flex-wrap">
           {GIFT_CATEGORIES.map(cat => (
             <button
               key={cat.id}
               onClick={() => setSelectedRecipient(cat.id)}
+              className="py-2.5 px-6 rounded-full text-[0.9rem] cursor-pointer"
               style={{
-                padding: '0.6rem 1.5rem',
-                borderRadius: '30px',
                 border: selectedRecipient === cat.id ? '2px solid var(--text-primary)' : '1px solid var(--border-light)',
                 backgroundColor: selectedRecipient === cat.id ? 'var(--accent-slate)' : 'var(--bg-card)',
                 color: selectedRecipient === cat.id ? '#FEF0E0' : 'var(--text-primary)',
                 fontWeight: selectedRecipient === cat.id ? '600' : '400',
-                fontSize: '0.9rem',
-                cursor: 'pointer',
               }}
             >
               {cat.label}
@@ -132,31 +104,18 @@ const Gifts = () => {
         </div>
 
         {/* Gift Product Cards */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-            gap: '1.75rem',
-          }}
-        >
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-7">
           {giftProducts.map((product) => (
             <Link
               key={product.id}
               to={`/product/${product.slug}`}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              className="no-underline text-inherit"
             >
               <div
-                className="bg-theme-card"
+                className="bg-theme-card rounded-lg overflow-hidden relative flex flex-col h-full transition-[transform,box-shadow] duration-300"
                 style={{
-                  borderRadius: '8px',
-                  overflow: 'hidden',
                   border: '1px solid var(--border-light)',
                   boxShadow: 'var(--shadow-sm)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -167,36 +126,39 @@ const Gifts = () => {
                   e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
                 }}
               >
-                <div style={{ height: '240px', backgroundColor: 'var(--bg-circle-item)', position: 'relative', overflow: 'hidden' }}>
-                  <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
-                    <span className="badge-925" style={{ fontSize: '9px' }}>
+                <div
+                  className="h-60 relative overflow-hidden"
+                  style={{ backgroundColor: 'var(--bg-circle-item)' }}
+                >
+                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="badge-925 text-[9px]">
                       GIFT FAVORITE
                     </span>
                   </div>
                 </div>
 
-                <div style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                <div className="p-5 flex flex-col grow">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[0.75rem] uppercase" style={{ color: 'var(--text-secondary)' }}>
                       {product.categoryName}
                     </span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    <div className="flex items-center gap-1">
                       <Star size={12} style={{ color: 'var(--theme-gold)', fill: 'var(--theme-gold)' }} />
-                      <span style={{ fontSize: '0.75rem', fontWeight: '600' }}>{product.rating}</span>
+                      <span className="text-[0.75rem] font-semibold">{product.rating}</span>
                     </div>
                   </div>
 
-                  <h3 className="font-serif" style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-primary)', margin: '0 0 0.5rem' }}>
+                  <h3 className="font-serif text-base font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
                     {product.name}
                   </h3>
 
-                  <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                    <span style={{ fontSize: '1.15rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                  <div className="mt-auto flex items-baseline gap-2">
+                    <span className="text-[1.15rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                       ₹{product.price.toLocaleString('en-IN')}
                     </span>
                     {product.originalPrice && (
-                      <span style={{ fontSize: '0.85rem', color: '#9CA3AF', textDecoration: 'line-through' }}>
+                      <span className="text-[0.85rem] text-[#9CA3AF] line-through">
                         ₹{product.originalPrice.toLocaleString('en-IN')}
                       </span>
                     )}

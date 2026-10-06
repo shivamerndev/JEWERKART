@@ -12,55 +12,29 @@ const Footer = () => {
       }}
     >
       {/* Main Footer Content */}
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '3.5rem 1.5rem 2rem',
-        }}
-      >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '2.5rem',
-          }}
-        >
+      <div className="max-w-[1280px] mx-auto px-6 pt-14 pb-8">
+        <div className="grid grid-cols-4 gap-10">
           {/* Brand Column */}
           <div>
             <h3
-              className="font-serif"
-              style={{
-                fontSize: '1.5rem',
-                fontWeight: '700',
-                color: 'var(--text-primary)',
-                letterSpacing: '2px',
-                marginBottom: '1rem',
-              }}
+              className="font-serif text-2xl font-bold tracking-[2px] mb-4"
+              style={{ color: 'var(--text-primary)' }}
             >
               JEWERKART
             </h3>
             <p
-              className="text-theme-secondary"
-              style={{
-                fontSize: '0.875rem',
-                lineHeight: '1.7',
-                marginBottom: '1.25rem',
-              }}
+              className="text-theme-secondary text-[0.875rem] leading-[1.7] mb-5"
             >
               Crafting timeless elegance in 925 sterling silver and fine jewellery. Every piece tells a story of artistry, heritage, and modern sophistication.
             </p>
             {/* Social Icons */}
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div className="flex gap-4">
               {[Globe, Mail, Send].map((Icon, idx) => (
                 <a
                   key={idx}
                   href="#"
-                  style={{
-                    color: 'var(--text-secondary)',
-                    transition: 'color 0.2s ease, transform 0.2s ease',
-                    display: 'flex',
-                  }}
+                  className="flex transition-[color,transform] duration-200"
+                  style={{ color: 'var(--text-secondary)' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = 'var(--text-gold)';
                     e.currentTarget.style.transform = 'translateY(-2px)';
@@ -79,34 +53,25 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4
+              className="text-[0.8rem] font-semibold tracking-[1.5px] uppercase mb-5"
               style={{
                 color: 'var(--text-primary)',
-                fontSize: '0.8rem',
-                fontWeight: '600',
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                marginBottom: '1.25rem',
                 fontFamily: 'var(--font-sans)',
               }}
             >
               Quick Links
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul className="list-none p-0 m-0">
               {[
                 { name: 'Collections', path: '/collections' },
                 { name: 'New Arrivals', path: '/new-arrivals' },
                 { name: 'Best Sellers', path: '/best-sellers' },
                 { name: 'Gifts Boutique', path: '/gifts' },
               ].map((item) => (
-                <li key={item.name} style={{ marginBottom: '0.75rem' }}>
+                <li key={item.name} className="mb-3">
                   <Link
                     to={item.path}
-                    className="text-theme-secondary"
-                    style={{
-                      textDecoration: 'none',
-                      fontSize: '0.875rem',
-                      transition: 'color 0.2s ease',
-                    }}
+                    className="text-theme-secondary no-underline text-[0.875rem] transition-colors duration-200"
                     onMouseEnter={(e) => (e.target.style.color = 'var(--text-gold)')}
                     onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                   >
@@ -120,19 +85,15 @@ const Footer = () => {
           {/* Customer Care */}
           <div>
             <h4
+              className="text-[0.8rem] font-semibold tracking-[1.5px] uppercase mb-5"
               style={{
                 color: 'var(--text-primary)',
-                fontSize: '0.8rem',
-                fontWeight: '600',
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                marginBottom: '1.25rem',
                 fontFamily: 'var(--font-sans)',
               }}
             >
               Customer Care
             </h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul className="list-none p-0 m-0">
               {[
                 { name: 'Frequently Asked Questions', path: '/faqs' },
                 { name: 'Track Order Live', path: '/track-order' },
@@ -141,15 +102,10 @@ const Footer = () => {
                 { name: 'Jewellery Sizing Guide', path: '/size-guide' },
                 { name: 'Jewellery Care Guide', path: '/jewellery-care' },
               ].map((item) => (
-                <li key={item.name} style={{ marginBottom: '0.75rem' }}>
+                <li key={item.name} className="mb-3">
                   <Link
                     to={item.path}
-                    className="text-theme-secondary"
-                    style={{
-                      textDecoration: 'none',
-                      fontSize: '0.875rem',
-                      transition: 'color 0.2s ease',
-                    }}
+                    className="text-theme-secondary no-underline text-[0.875rem] transition-colors duration-200"
                     onMouseEnter={(e) => (e.target.style.color = 'var(--text-gold)')}
                     onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
                   >
@@ -163,55 +119,31 @@ const Footer = () => {
           {/* Contact Info */}
           <div>
             <h4
+              className="text-[0.8rem] font-semibold tracking-[1.5px] uppercase mb-5"
               style={{
                 color: 'var(--text-primary)',
-                fontSize: '0.8rem',
-                fontWeight: '600',
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                marginBottom: '1.25rem',
                 fontFamily: 'var(--font-sans)',
               }}
             >
               Contact
             </h4>
-            <div
-              className="text-theme-secondary"
-              style={{
-                fontSize: '0.875rem',
-                lineHeight: '1.8',
-              }}
-            >
-              <p style={{ margin: '0 0 0.5rem' }}>support@jewerkart.com</p>
-              <p style={{ margin: '0 0 0.5rem' }}>+91 98765 43210</p>
-              <p style={{ margin: 0 }}>Mon - Sat, 10AM - 7PM IST</p>
+            <div className="text-theme-secondary text-[0.875rem] leading-[1.8]">
+              <p className="m-0 mb-2">support@jewerkart.com</p>
+              <p className="m-0 mb-2">+91 98765 43210</p>
+              <p className="m-0">Mon - Sat, 10AM - 7PM IST</p>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div
-          style={{
-            borderTop: '1px solid var(--border-light)',
-            marginTop: '2.5rem',
-            paddingTop: '1.5rem',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
+          className="mt-10 pt-6 flex justify-between items-center"
+          style={{ borderTop: '1px solid var(--border-light)' }}
         >
-          <p
-            className="text-theme-secondary"
-            style={{ fontSize: '0.8rem', margin: 0 }}
-          >
+          <p className="text-theme-secondary text-[0.8rem] m-0">
             &copy; {new Date().getFullYear()} Jewerkart. All rights reserved.
           </p>
-          <div
-            style={{
-              display: 'flex',
-              gap: '1.5rem',
-            }}
-          >
+          <div className="flex gap-6">
             {[
               { name: 'About Atelier', path: '/about' },
               { name: 'Privacy Policy', path: '/privacy-policy' },
@@ -220,12 +152,7 @@ const Footer = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-theme-secondary"
-                style={{
-                  textDecoration: 'none',
-                  fontSize: '0.8rem',
-                  transition: 'color 0.2s ease',
-                }}
+                className="text-theme-secondary no-underline text-[0.8rem] transition-colors duration-200"
                 onMouseEnter={(e) => (e.target.style.color = 'var(--text-gold)')}
                 onMouseLeave={(e) => (e.target.style.color = 'var(--text-secondary)')}
               >

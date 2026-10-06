@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { 
   Search, 
@@ -98,7 +98,7 @@ const TrackOrder = () => {
         title: 'Delivered to Recipient',
         timestamp: 'Expected Today by 8:00 PM',
         location: 'Delivery Destination',
-        description: 'Delivery confirmation pending OTP entry at doorstep.',
+        description: 'Secret delivery OTP will be validated before final physical handover.',
         status: 'upcoming',
       },
     ],
@@ -111,9 +111,9 @@ const TrackOrder = () => {
       setIsSearching(false);
       setShipmentData((prev) => ({
         ...prev,
-        orderId: orderIdInput.trim() || 'JK-2026-894215',
+        orderId: orderIdInput.toUpperCase(),
       }));
-    }, 600);
+    }, 700);
   };
 
   const handleCopyAwb = () => {
@@ -124,86 +124,63 @@ const TrackOrder = () => {
 
   return (
     <main
+      className="min-h-[calc(100vh-250px)] pt-10 px-6 pb-20"
       style={{
-        minHeight: 'calc(100vh - 250px)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1100px',
-          margin: '0 auto',
-        }}
-      >
+      <div className="max-w-[1100px] mx-auto">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>LIVE SHIPMENT RADAR</span>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">LIVE SHIPMENT RADAR</span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-1.5 tracking-[1px]"
             style={{
               fontSize: 'clamp(1.85rem, 3.5vw, 2.5rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.35rem',
-              letterSpacing: '1px',
             }}
           >
             Track Your Jewellery Order
           </h1>
-          <p
-            className="font-garamond"
-            style={{
-              color: 'var(--text-secondary)',
-              fontSize: '1.1rem',
-              margin: 0,
-            }}
-          >
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Real-time armored logistics tracking with tamper-proof security
           </p>
         </div>
 
         {/* Tracking Input Search Card */}
         <div
+          className="rounded-lg p-7 mb-10"
           style={{
             backgroundColor: 'var(--bg-card)',
-            borderRadius: '8px',
             border: '1px solid var(--border-light)',
-            padding: '1.75rem',
             boxShadow: 'var(--shadow-sm)',
-            marginBottom: '2.5rem',
           }}
         >
-          <form onSubmit={handleTrackSubmit} style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr auto', gap: '1rem', alignItems: 'end' }}>
+          <form onSubmit={handleTrackSubmit} className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr_auto] gap-4 items-end">
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+              <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                 Order ID / AWB Number *
               </label>
-              <div style={{ position: 'relative' }}>
-                <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
+              <div className="relative">
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-secondary)' }} />
                 <input
                   type="text"
                   placeholder="e.g. JK-2026-894215"
                   value={orderIdInput}
                   onChange={(e) => setOrderIdInput(e.target.value)}
                   required
+                  className="w-full py-2.5 pr-3.5 pl-9 rounded bg-[#FFFDF9] text-[0.9rem] outline-none"
                   style={{
-                    width: '100%',
-                    padding: '0.65rem 0.85rem 0.65rem 2.25rem',
-                    borderRadius: '4px',
                     border: '1px solid var(--border-light)',
-                    backgroundColor: '#FFFDF9',
-                    fontSize: '0.9rem',
-                    outline: 'none',
                   }}
                 />
               </div>
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+              <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                 Phone Number / Email
               </label>
               <input
@@ -211,14 +188,9 @@ const TrackOrder = () => {
                 placeholder="+91 98765 43210"
                 value={phoneInput}
                 onChange={(e) => setPhoneInput(e.target.value)}
+                className="w-full py-2.5 px-3.5 rounded bg-[#FFFDF9] text-[0.9rem] outline-none"
                 style={{
-                  width: '100%',
-                  padding: '0.65rem 0.85rem',
-                  borderRadius: '4px',
                   border: '1px solid var(--border-light)',
-                  backgroundColor: '#FFFDF9',
-                  fontSize: '0.9rem',
-                  outline: 'none',
                 }}
               />
             </div>
@@ -226,17 +198,7 @@ const TrackOrder = () => {
             <button
               type="submit"
               disabled={isSearching}
-              className="btn-slate"
-              style={{
-                padding: '0.72rem 1.8rem',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-              }}
+              className="btn-slate py-3 px-7 text-[0.85rem] font-semibold tracking-[1px] uppercase rounded cursor-pointer whitespace-nowrap"
             >
               {isSearching ? 'Locating...' : 'Track Package'}
             </button>
@@ -244,54 +206,46 @@ const TrackOrder = () => {
         </div>
 
         {/* Live Tracking Information Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.6fr) minmax(320px, 1fr)',
-            gap: '2.5rem',
-            alignItems: 'start',
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.6fr)_minmax(320px,1fr)] gap-10 items-start">
           {/* LEFT: Interactive Step Timeline */}
           <div
+            className="rounded-lg p-8"
             style={{
               backgroundColor: 'var(--bg-card)',
-              borderRadius: '8px',
               border: '1px solid var(--border-light)',
-              padding: '2rem',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
             {/* Header info */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '1.25rem' }}>
+            <div
+              className="flex justify-between items-center mb-8 pb-5"
+              style={{
+                borderBottom: '1px solid var(--border-light)',
+              }}
+            >
               <div>
-                <span className="badge-gold" style={{ fontSize: '10px', marginBottom: '0.4rem', display: 'inline-block' }}>
+                <span className="badge-gold text-[10px] mb-1.5 inline-block">
                   {shipmentData.currentStatus.toUpperCase()}
                 </span>
-                <h3 className="font-serif" style={{ fontSize: '1.4rem', margin: 0, fontWeight: '700', color: 'var(--text-primary)' }}>
+                <h3 className="font-serif text-[1.4rem] m-0 font-bold" style={{ color: 'var(--text-primary)' }}>
                   Delivery Progress
                 </h3>
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block' }}>Expected Arrival</span>
-                <strong style={{ fontSize: '0.95rem', color: 'var(--theme-gold)' }}>
+              <div className="text-right">
+                <span className="text-[0.75rem] block" style={{ color: 'var(--text-secondary)' }}>Expected Arrival</span>
+                <strong className="text-[0.95rem]" style={{ color: 'var(--theme-gold)' }}>
                   {shipmentData.estimatedDelivery}
                 </strong>
               </div>
             </div>
 
             {/* Timeline Stepper */}
-            <div style={{ position: 'relative', paddingLeft: '2.5rem' }}>
+            <div className="relative pl-10">
               {/* Vertical connecting line */}
               <div
+                className="absolute top-4 bottom-9 left-3.5 w-0.5 z-0"
                 style={{
-                  position: 'absolute',
-                  top: '15px',
-                  bottom: '35px',
-                  left: '14px',
-                  width: '2px',
                   backgroundColor: 'var(--border-light)',
-                  zIndex: 0,
                 }}
               />
 
@@ -301,25 +255,16 @@ const TrackOrder = () => {
                 const isUpcoming = step.status === 'upcoming';
 
                 return (
-                  <div key={step.id} style={{ position: 'relative', marginBottom: idx === shipmentData.timeline.length - 1 ? 0 : '2rem' }}>
+                  <div key={step.id} className={`relative ${idx === shipmentData.timeline.length - 1 ? 'mb-0' : 'mb-8'}`}>
                     {/* Step Icon / Dot */}
                     <div
+                      className={`absolute -left-10 top-0 w-[30px] h-[30px] rounded-full flex items-center justify-center z-1 transition-all duration-300 ${
+                        isActive ? 'shadow-[0_0_0_4px_rgba(197,145,74,0.25)]' : ''
+                      }`}
                       style={{
-                        position: 'absolute',
-                        left: '-2.5rem',
-                        top: '0',
-                        width: '30px',
-                        height: '30px',
-                        borderRadius: '50%',
                         backgroundColor: isCompleted ? 'var(--theme-gold)' : isActive ? 'var(--text-primary)' : '#FFFFFF',
                         border: isUpcoming ? '2px solid var(--border-light)' : '2px solid transparent',
                         color: isUpcoming ? 'var(--text-secondary)' : '#FEF0E0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: 1,
-                        boxShadow: isActive ? '0 0 0 4px rgba(197, 145, 74, 0.25)' : 'none',
-                        transition: 'all 0.3s ease',
                       }}
                     >
                       {isCompleted ? (
@@ -333,35 +278,32 @@ const TrackOrder = () => {
 
                     {/* Step Content */}
                     <div
+                      className={`rounded-md ${isActive ? 'p-4' : 'p-0'}`}
                       style={{
                         backgroundColor: isActive ? 'var(--theme-champagne-light)' : 'transparent',
-                        padding: isActive ? '1rem 1.25rem' : '0 0',
-                        borderRadius: '6px',
                         border: isActive ? '1px solid var(--border-light)' : 'none',
                       }}
                     >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                      <div className="flex justify-between items-baseline flex-wrap gap-2 mb-1">
                         <h4
+                          className="m-0 text-[0.95rem] font-bold"
                           style={{
-                            margin: 0,
-                            fontSize: '0.95rem',
-                            fontWeight: '700',
                             color: isActive ? 'var(--theme-gold)' : 'var(--text-primary)',
                           }}
                         >
                           {step.title}
                         </h4>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                        <span className="text-[0.75rem]" style={{ color: 'var(--text-secondary)' }}>
                           {step.timestamp}
                         </span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
+                      <div className="flex items-center gap-1.5 text-[0.75rem] mb-1.5" style={{ color: 'var(--text-secondary)' }}>
                         <MapPin size={13} style={{ color: 'var(--theme-gold)' }} />
                         <span>{step.location}</span>
                       </div>
 
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                      <p className="m-0 text-[0.85rem] leading-[1.5]" style={{ color: 'var(--text-secondary)' }}>
                         {step.description}
                       </p>
                     </div>
@@ -371,61 +313,61 @@ const TrackOrder = () => {
             </div>
           </div>
 
-          {/* RIGHT: Logistics & Security Overview */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {/* Courier & Waybill Information */}
+          {/* RIGHT: Armored Logistics & Parcel Details */}
+          <div className="flex flex-col gap-6">
+            {/* Courier & Escort Card */}
             <div
+              className="rounded-lg p-7"
               style={{
                 backgroundColor: 'var(--bg-card)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '1.75rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <h4 className="font-serif" style={{ fontSize: '1.1rem', margin: '0 0 1.25rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                Courier & Waybill Dossier
+              <h4 className="font-serif text-[1.1rem] m-0 mb-5 font-semibold" style={{ color: 'var(--text-primary)' }}>
+                Consignment Details
               </h4>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.85rem' }}>
+              <div className="flex flex-col gap-4 text-[0.85rem]">
                 <div>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', display: 'block' }}>Armored Carrier:</span>
+                  <span className="text-[0.75rem] block" style={{ color: 'var(--text-secondary)' }}>Armored Carrier:</span>
                   <strong style={{ color: 'var(--text-primary)' }}>{shipmentData.courierPartner}</strong>
                 </div>
 
                 <div>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', display: 'block' }}>AWB Waybill Tracking Number:</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.2rem' }}>
-                    <code style={{ backgroundColor: 'var(--theme-champagne-light)', padding: '0.25rem 0.5rem', borderRadius: '4px', fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: '600' }}>
+                  <span className="text-[0.75rem] block" style={{ color: 'var(--text-secondary)' }}>AWB Waybill Tracking Number:</span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <code
+                      className="py-1 px-2 rounded text-[0.85rem] font-semibold"
+                      style={{
+                        backgroundColor: 'var(--theme-champagne-light)',
+                        color: 'var(--text-primary)',
+                      }}
+                    >
                       {shipmentData.awbNumber}
                     </code>
                     <button
+                      type="button"
                       onClick={handleCopyAwb}
+                      title="Copy AWB number"
+                      className="bg-transparent border-none cursor-pointer p-1"
                       style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: copied ? '#059669' : 'var(--text-gold)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.25rem',
-                        fontSize: '0.75rem',
+                        color: 'var(--theme-gold)',
                       }}
                     >
                       {copied ? <Check size={14} /> : <Copy size={14} />}
-                      {copied ? 'Copied' : 'Copy'}
                     </button>
                   </div>
                 </div>
 
-                <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.75rem' }}>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', display: 'block' }}>Delivery Verification:</span>
-                  <strong style={{ color: '#059669' }}>{shipmentData.otpRequired}</strong>
+                <div className="pt-3" style={{ borderTop: '1px solid var(--border-light)' }}>
+                  <span className="text-[0.75rem] block" style={{ color: 'var(--text-secondary)' }}>Delivery Verification:</span>
+                  <strong className="text-[#059669]">{shipmentData.otpRequired}</strong>
                 </div>
 
-                <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.75rem' }}>
-                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', display: 'block' }}>Destination Address:</span>
-                  <p style={{ margin: '0.2rem 0 0', color: 'var(--text-primary)', lineHeight: '1.4' }}>
+                <div className="pt-3" style={{ borderTop: '1px solid var(--border-light)' }}>
+                  <span className="text-[0.75rem] block" style={{ color: 'var(--text-secondary)' }}>Destination Address:</span>
+                  <p className="mt-1 mb-0 leading-[1.4]" style={{ color: 'var(--text-primary)' }}>
                     {shipmentData.recipientName}<br />
                     {shipmentData.deliveryAddress}
                   </p>
@@ -435,37 +377,31 @@ const TrackOrder = () => {
 
             {/* Jewellery In This Shipment */}
             <div
+              className="rounded-lg p-7"
               style={{
                 backgroundColor: 'var(--bg-card)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '1.75rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <h4 className="font-serif" style={{ fontSize: '1.1rem', margin: '0 0 1rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+              <h4 className="font-serif text-[1.1rem] m-0 mb-4 font-semibold" style={{ color: 'var(--text-primary)' }}>
                 Jewellery In This Parcel
               </h4>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div className="flex flex-col gap-3">
                 {shipmentData.items.map((item) => (
-                  <div key={item.id} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                  <div key={item.id} className="flex gap-3 items-center">
                     <img
                       src={item.image}
                       alt={item.name}
-                      style={{
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: '4px',
-                        objectFit: 'cover',
-                        border: '1px solid var(--border-light)',
-                      }}
+                      className="w-12 h-12 rounded object-cover"
+                      style={{ border: '1px solid var(--border-light)' }}
                     />
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div className="flex-1 min-w-0">
+                      <p className="m-0 text-[0.85rem] font-semibold truncate" style={{ color: 'var(--text-primary)' }}>
                         {item.name}
                       </p>
-                      <p style={{ margin: 0, fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 text-[0.7rem]" style={{ color: 'var(--text-secondary)' }}>
                         Qty: {item.qty} • {item.purity}
                       </p>
                     </div>
@@ -476,47 +412,32 @@ const TrackOrder = () => {
 
             {/* Need Assistance Card */}
             <div
+              className="rounded-lg p-6"
               style={{
                 backgroundColor: 'var(--theme-champagne-light)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '1.5rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+              <div className="flex items-center gap-2 mb-3">
                 <Phone size={18} style={{ color: 'var(--theme-gold)' }} />
-                <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                <h4 className="m-0 text-[0.95rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                   Concierge Support Desk
                 </h4>
               </div>
-              <p style={{ margin: '0 0 1rem', fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+              <p className="m-0 mb-4 text-[0.8rem] leading-[1.5]" style={{ color: 'var(--text-secondary)' }}>
                 Have an urgent delivery inquiry or special instructions for the armored delivery officer?
               </p>
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <div className="flex gap-3">
                 <Link
                   to="/contact"
-                  className="btn-gold"
-                  style={{
-                    padding: '0.5rem 1rem',
-                    borderRadius: '4px',
-                    fontSize: '0.75rem',
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                  }}
+                  className="btn-gold py-2 px-4 rounded text-[0.75rem] no-underline inline-flex items-center gap-1.5"
                 >
                   Contact Concierge <ExternalLink size={12} />
                 </Link>
                 <Link
                   to="/faqs"
-                  style={{
-                    color: 'var(--text-primary)',
-                    fontSize: '0.75rem',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    textDecoration: 'underline',
-                  }}
+                  className="text-[0.75rem] inline-flex items-center underline"
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Shipping FAQs
                 </Link>

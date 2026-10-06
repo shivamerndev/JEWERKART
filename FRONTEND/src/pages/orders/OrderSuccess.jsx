@@ -83,87 +83,58 @@ const OrderSuccess = () => {
 
   return (
     <main
+      className="min-h-[calc(100vh-250px)] pt-12 px-6 pb-20"
       style={{
-        minHeight: 'calc(100vh - 250px)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '3rem 1.5rem 5rem',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1040px',
-          margin: '0 auto',
-        }}
-      >
+      <div className="max-w-[1040px] mx-auto">
         {/* Celebration Header Card */}
         <div
+          className="rounded-xl py-12 px-8 text-center relative overflow-hidden mb-10"
           style={{
             backgroundColor: 'var(--bg-card)',
-            borderRadius: '12px',
             border: '1px solid var(--border-light)',
-            padding: '3rem 2rem',
-            textAlign: 'center',
             boxShadow: 'var(--shadow-md)',
-            position: 'relative',
-            overflow: 'hidden',
-            marginBottom: '2.5rem',
           }}
         >
           {/* Subtle gold decorative gradient background */}
           <div
+            className="absolute top-0 left-0 right-0 h-1.5"
             style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '6px',
               background: 'linear-gradient(90deg, #D4A373 0%, #C5914A 50%, #B37F38 100%)',
             }}
           />
 
           {/* Golden Success Icon Badge */}
           <div
+            className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_8px_24px_rgba(197,145,74,0.25)]"
             style={{
-              width: '80px',
-              height: '80px',
-              borderRadius: '50%',
               background: 'linear-gradient(135deg, #FFF9F2 0%, #FEF0E0 50%, #F5DEC3 100%)',
               border: '2px solid var(--theme-gold)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.5rem',
-              boxShadow: '0 8px 24px rgba(197, 145, 74, 0.25)',
             }}
           >
             <CheckCircle2 size={44} style={{ color: 'var(--theme-gold)' }} />
           </div>
 
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>CONGRATULATIONS</span>
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">CONGRATULATIONS</span>
           </div>
 
           <h1
-            className="font-serif"
+            className="font-serif font-bold mb-2 tracking-[1px]"
             style={{
               fontSize: 'clamp(2rem, 4vw, 2.75rem)',
-              fontWeight: '700',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
-              letterSpacing: '1px',
             }}
           >
             Thank You for Your Order!
           </h1>
 
           <p
-            className="font-garamond"
+            className="font-garamond text-[1.2rem] max-w-[650px] mx-auto mb-7 leading-[1.6]"
             style={{
               color: 'var(--text-secondary)',
-              fontSize: '1.2rem',
-              maxWidth: '650px',
-              margin: '0 auto 1.75rem',
-              lineHeight: '1.6',
             }}
           >
             Your jewellery order has been received by our master artisans. Each piece is undergoing hallmarking inspection and will be packed in our signature velvet keepsake box.
@@ -171,37 +142,24 @@ const OrderSuccess = () => {
 
           {/* Order ID & Copy Bar */}
           <div
+            className="inline-flex items-center gap-4 py-3 px-6 rounded-full mb-8"
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '1rem',
               backgroundColor: 'var(--theme-champagne-light)',
-              padding: '0.75rem 1.5rem',
-              borderRadius: '30px',
               border: '1px solid var(--border-light)',
-              marginBottom: '2rem',
             }}
           >
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+            <span className="text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>
               Order Reference:
             </span>
-            <strong style={{ fontSize: '1rem', color: 'var(--text-primary)', letterSpacing: '1px' }}>
+            <strong className="text-base tracking-[1px]" style={{ color: 'var(--text-primary)' }}>
               {order.orderId}
             </strong>
             <button
               onClick={handleCopyOrderId}
               title="Copy Order ID"
+              className="bg-transparent border-none cursor-pointer flex items-center gap-1 text-[0.8rem] font-semibold py-0.5 px-1.5"
               style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.35rem',
                 color: copied ? '#059669' : 'var(--text-gold)',
-                fontSize: '0.8rem',
-                fontWeight: '600',
-                padding: '2px 6px',
               }}
             >
               {copied ? <Check size={14} /> : <Copy size={14} />}
@@ -210,29 +168,10 @@ const OrderSuccess = () => {
           </div>
 
           {/* Fast action CTA buttons */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '1rem',
-              flexWrap: 'wrap',
-            }}
-          >
+          <div className="flex justify-center gap-4 flex-wrap">
             <button
               onClick={() => navigate(`/track-order?id=${order.orderId}`)}
-              className="btn-slate"
-              style={{
-                padding: '0.85rem 1.8rem',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                cursor: 'pointer',
-              }}
+              className="btn-slate py-3.5 px-7 text-[0.85rem] font-semibold tracking-[1px] uppercase rounded flex items-center gap-2.5 cursor-pointer"
             >
               <Truck size={18} />
               Track Shipment Live
@@ -241,19 +180,7 @@ const OrderSuccess = () => {
             <button
               onClick={handleDownloadInvoice}
               disabled={downloading}
-              className="btn-gold"
-              style={{
-                padding: '0.85rem 1.8rem',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                cursor: 'pointer',
-              }}
+              className="btn-gold py-3.5 px-7 text-[0.85rem] font-semibold tracking-[1px] uppercase rounded flex items-center gap-2.5 cursor-pointer"
             >
               <Download size={18} />
               {downloading ? 'Generating...' : 'Download Invoice'}
@@ -261,19 +188,7 @@ const OrderSuccess = () => {
 
             <Link
               to="/"
-              className="btn-outline-dark"
-              style={{
-                padding: '0.85rem 1.8rem',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                textDecoration: 'none',
-              }}
+              className="btn-outline-dark py-3.5 px-7 text-[0.85rem] font-semibold tracking-[1px] uppercase rounded inline-flex items-center gap-2.5 no-underline"
             >
               Continue Shopping <ArrowRight size={16} />
             </Link>
@@ -281,74 +196,63 @@ const OrderSuccess = () => {
         </div>
 
         {/* Detailed Two-Column Breakdown */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.4fr) minmax(320px, 1fr)',
-            gap: '2rem',
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.4fr)_minmax(320px,1fr)] gap-8">
           {/* LEFT: Items Ordered */}
           <div
+            className="rounded-lg p-8"
             style={{
               backgroundColor: 'var(--bg-card)',
-              borderRadius: '8px',
               border: '1px solid var(--border-light)',
-              padding: '2rem',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-light)', paddingBottom: '1rem', marginBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div
+              className="flex justify-between items-center pb-4 mb-6"
+              style={{ borderBottom: '1px solid var(--border-light)' }}
+            >
+              <div className="flex items-center gap-3">
                 <Package size={20} style={{ color: 'var(--theme-gold)' }} />
-                <h3 className="font-serif" style={{ fontSize: '1.25rem', margin: 0, fontWeight: '600', color: 'var(--text-primary)' }}>
+                <h3 className="font-serif text-[1.25rem] m-0 font-semibold" style={{ color: 'var(--text-primary)' }}>
                   Ordered Items ({order.items.length})
                 </h3>
               </div>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              <span className="text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                 Date: {order.date}
               </span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '1.5rem' }}>
+            <div className="flex flex-col gap-5 mb-6">
               {order.items.map((item) => (
                 <div
                   key={item.id}
-                  style={{
-                    display: 'flex',
-                    gap: '1rem',
-                    paddingBottom: '1.25rem',
-                    borderBottom: '1px solid var(--border-light)',
-                  }}
+                  className="flex gap-4 pb-5"
+                  style={{ borderBottom: '1px solid var(--border-light)' }}
                 >
                   <img
                     src={item.image}
                     alt={item.name}
+                    className="w-[74px] h-[74px] object-cover rounded-md"
                     style={{
-                      width: '74px',
-                      height: '74px',
-                      objectFit: 'cover',
-                      borderRadius: '6px',
                       border: '1px solid var(--border-light)',
                       backgroundColor: 'var(--bg-circle-item)',
                     }}
                   />
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <h4 style={{ margin: '0 0 0.25rem', fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start">
+                      <h4 className="m-0 mb-1 text-[0.95rem] font-semibold" style={{ color: 'var(--text-primary)' }}>
                         {item.name}
                       </h4>
-                      <span style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                      <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
                         ₹{(item.price * item.quantity).toLocaleString()}
                       </span>
                     </div>
-                    <p style={{ margin: '0 0 0.35rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                    <p className="m-0 mb-1.5 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                       {item.subtitle}
                     </p>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                    <div className="flex items-center gap-4 text-[0.75rem]" style={{ color: 'var(--text-secondary)' }}>
                       <span>Qty: <strong>{item.quantity}</strong></span>
                       <span>•</span>
-                      <span style={{ color: 'var(--theme-gold)', fontWeight: '600' }}>BIS Hallmark Certified</span>
+                      <span className="font-semibold" style={{ color: 'var(--theme-gold)' }}>BIS Hallmark Certified</span>
                     </div>
                   </div>
                 </div>
@@ -356,28 +260,31 @@ const OrderSuccess = () => {
             </div>
 
             {/* Price Calculations */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.85rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
+            <div className="flex flex-col gap-2.5 text-[0.85rem]">
+              <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
                 <span>Subtotal</span>
-                <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>₹{order.subtotal.toLocaleString()}</span>
+                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>₹{order.subtotal.toLocaleString()}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
+              <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
                 <span>Insured Armored Shipping</span>
-                <span style={{ color: '#059669', fontWeight: '600' }}>FREE</span>
+                <span className="text-[#059669] font-semibold">FREE</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
+              <div className="flex justify-between" style={{ color: 'var(--text-secondary)' }}>
                 <span>GST (3% jewellery)</span>
-                <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>₹{order.tax.toLocaleString()}</span>
+                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>₹{order.tax.toLocaleString()}</span>
               </div>
               {order.discount > 0 && (
-                <div style={{ display: 'flex', justifyContent: 'space-between', color: '#059669' }}>
+                <div className="flex justify-between text-[#059669]">
                   <span>Royal Discount Applied</span>
-                  <span style={{ fontWeight: '600' }}>- ₹{order.discount.toLocaleString()}</span>
+                  <span className="font-semibold">- ₹{order.discount.toLocaleString()}</span>
                 </div>
               )}
-              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.75rem', marginTop: '0.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <span style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)' }}>Grand Total Paid</span>
-                <span style={{ fontSize: '1.35rem', fontWeight: '700', color: 'var(--theme-gold)' }}>
+              <div
+                className="pt-3 mt-1 flex justify-between items-baseline"
+                style={{ borderTop: '1px solid var(--border-light)' }}
+              >
+                <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Grand Total Paid</span>
+                <span className="text-[1.35rem] font-bold" style={{ color: 'var(--theme-gold)' }}>
                   ₹{order.totalAmount.toLocaleString()}
                 </span>
               </div>
@@ -385,81 +292,82 @@ const OrderSuccess = () => {
           </div>
 
           {/* RIGHT: Delivery & Trust Guarantee */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="flex flex-col gap-6">
             {/* Delivery address & info */}
             <div
+              className="rounded-lg p-7"
               style={{
                 backgroundColor: 'var(--bg-card)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '1.75rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.75rem' }}>
+              <div
+                className="flex items-center gap-2.5 mb-5 pb-3"
+                style={{ borderBottom: '1px solid var(--border-light)' }}
+              >
                 <MapPin size={18} style={{ color: 'var(--theme-gold)' }} />
-                <h4 className="font-serif" style={{ fontSize: '1.1rem', margin: 0, fontWeight: '600', color: 'var(--text-primary)' }}>
+                <h4 className="font-serif text-[1.1rem] m-0 font-semibold" style={{ color: 'var(--text-primary)' }}>
                   Delivery Destination
                 </h4>
               </div>
 
-              <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>
-                <p style={{ margin: '0 0 0.25rem', fontWeight: '700' }}>{order.shippingDetails?.fullName}</p>
-                <p style={{ margin: '0 0 0.25rem', color: 'var(--text-secondary)' }}>{order.shippingDetails?.address}</p>
-                <p style={{ margin: '0 0 0.25rem', color: 'var(--text-secondary)' }}>
+              <div className="text-[0.85rem] leading-[1.6] mb-5" style={{ color: 'var(--text-primary)' }}>
+                <p className="m-0 mb-1 font-bold">{order.shippingDetails?.fullName}</p>
+                <p className="m-0 mb-1" style={{ color: 'var(--text-secondary)' }}>{order.shippingDetails?.address}</p>
+                <p className="m-0 mb-1" style={{ color: 'var(--text-secondary)' }}>
                   {order.shippingDetails?.city}, {order.shippingDetails?.state} - {order.shippingDetails?.pincode}
                 </p>
-                <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Phone: {order.shippingDetails?.phone}</p>
+                <p className="m-0" style={{ color: 'var(--text-secondary)' }}>Phone: {order.shippingDetails?.phone}</p>
               </div>
 
-              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+              <div className="pt-4" style={{ borderTop: '1px solid var(--border-light)' }}>
+                <div className="flex items-center gap-2.5 mb-2">
                   <Calendar size={16} style={{ color: 'var(--theme-gold)' }} />
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Estimated Delivery:</span>
+                  <span className="text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>Estimated Delivery:</span>
                 </div>
-                <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                <p className="m-0 text-[0.9rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                   {order.deliveryEstimate}
                 </p>
               </div>
 
-              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '1rem', marginTop: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+              <div className="pt-4 mt-4" style={{ borderTop: '1px solid var(--border-light)' }}>
+                <div className="flex items-center gap-2.5 mb-2">
                   <CreditCard size={16} style={{ color: 'var(--theme-gold)' }} />
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Payment Mode:</span>
+                  <span className="text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>Payment Mode:</span>
                 </div>
-                <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                  {order.paymentMethod} • <span style={{ color: '#059669' }}>Paid In Full</span>
+                <p className="m-0 text-[0.85rem] font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  {order.paymentMethod} • <span className="text-[#059669]">Paid In Full</span>
                 </p>
               </div>
             </div>
 
             {/* Quality & Return Assurances */}
             <div
+              className="rounded-lg p-6"
               style={{
                 backgroundColor: 'var(--theme-champagne-light)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '1.5rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+              <div className="flex items-center gap-2 mb-4">
                 <Sparkles size={18} style={{ color: 'var(--theme-gold)' }} />
-                <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                <h4 className="m-0 text-[0.95rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                   The Jewerkart Promise
                 </h4>
               </div>
 
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                  <ShieldCheck size={16} style={{ color: 'var(--theme-gold)', flexShrink: 0, marginTop: '2px' }} />
+              <ul className="list-none p-0 m-0 flex flex-col gap-3 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
+                <li className="flex items-start gap-2">
+                  <ShieldCheck size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--theme-gold)' }} />
                   <span><strong>BIS Hallmarked:</strong> Official laser-engraved hallmarking certificate included in box.</span>
                 </li>
-                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                  <CheckCircle2 size={16} style={{ color: 'var(--theme-gold)', flexShrink: 0, marginTop: '2px' }} />
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--theme-gold)' }} />
                   <span><strong>15-Day Easy Returns:</strong> No questions asked return & doorstep pickup policy.</span>
                 </li>
-                <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                  <Sparkles size={16} style={{ color: 'var(--theme-gold)', flexShrink: 0, marginTop: '2px' }} />
+                <li className="flex items-start gap-2">
+                  <Sparkles size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--theme-gold)' }} />
                   <span><strong>Complimentary Lifetime Care:</strong> Free lifetime polishing & cleaning at any atelier.</span>
                 </li>
               </ul>

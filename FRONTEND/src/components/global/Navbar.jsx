@@ -74,66 +74,34 @@ const Navbar = () => {
         backgroundColor: '#FFFFFF',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1360px',
-          margin: '0 auto',
-          padding: '0 1.25rem',
-        }}
-      >
+      <div className="max-w-[1360px] mx-auto px-5">
         {/* Main Header Bar */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '1rem 0',
-            gap: '1rem',
-          }}
-        >
+        <div className="flex items-center justify-between py-4 gap-4">
           {/* Mobile Menu Toggle & Brand Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileMenuOpen(prev => !prev)}
               aria-label="Toggle Navigation Menu"
-              className="md:hidden flex"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text-primary)',
-                padding: '6px',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
+              className="md:hidden flex items-center justify-center p-[6px] bg-transparent border-none cursor-pointer"
+              style={{ color: 'var(--text-primary)' }}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
-            <Link to="/" style={{ textDecoration: 'none' }}>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Link to="/" className="no-underline">
+              <div className="flex flex-col">
                 <h1
-                  className="font-serif"
+                  className="font-serif font-bold m-0 leading-[1.1] tracking-[2.5px]"
                   style={{
                     fontSize: 'clamp(1.4rem, 2.5vw, 1.85rem)',
-                    fontWeight: '700',
                     color: 'var(--text-primary)',
-                    letterSpacing: '2.5px',
-                    margin: 0,
-                    lineHeight: 1.1,
                   }}
                 >
                   JEWERKART
                 </h1>
                 <span
-                  style={{
-                    fontSize: '9px',
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-gold)',
-                    fontWeight: '600',
-                    marginTop: '2px',
-                  }}
+                  className="text-[9px] tracking-[2px] uppercase font-semibold mt-[2px]"
+                  style={{ color: 'var(--text-gold)' }}
                 >
                   Pure 925 Silver Atelier
                 </span>
@@ -142,26 +110,15 @@ const Navbar = () => {
 
             {/* Subtle Divider between Brand and Delivery Location */}
             <div
-              className="hidden sm:block"
-              style={{
-                width: '1px',
-                height: '24px',
-                backgroundColor: 'var(--border-light)',
-                margin: '0 0.25rem',
-              }}
+              className="hidden sm:block w-px h-6 mx-1"
+              style={{ backgroundColor: 'var(--border-light)' }}
             />
 
             <Location />
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav
-            className="hidden lg:flex"
-            style={{
-              alignItems: 'center',
-              gap: '1.4rem',
-            }}
-          >
+          <nav className="hidden lg:flex items-center gap-[1.4rem]">
             {navLinks.map((item) => {
               if (item.hasDropdown) {
                 const isCatActive = location.pathname.startsWith('/category');
@@ -169,27 +126,16 @@ const Navbar = () => {
                   <div
                     key={item.name}
                     ref={categoryMenuRef}
-                    style={{ position: 'relative' }}
+                    className="relative"
                     onMouseEnter={() => setCategoriesDropdownOpen(true)}
                     onMouseLeave={() => setCategoriesDropdownOpen(false)}
                   >
                     <button
                       onClick={() => setCategoriesDropdownOpen(prev => !prev)}
+                      className="flex items-center gap-1 bg-transparent border-none cursor-pointer text-[0.8rem] font-semibold tracking-[1.2px] uppercase transition-colors duration-200 py-[6px]"
                       style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.25rem',
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontSize: '0.8rem',
-                        fontWeight: '600',
-                        letterSpacing: '1.2px',
-                        textTransform: 'uppercase',
-                        transition: 'color 0.2s ease',
                         fontFamily: 'var(--font-sans)',
                         color: isCatActive ? 'var(--text-gold)' : 'var(--text-secondary)',
-                        padding: '6px 0',
                       }}
                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-gold)')}
                       onMouseLeave={(e) => (e.currentTarget.style.color = isCatActive ? 'var(--text-gold)' : 'var(--text-secondary)')}
@@ -207,22 +153,17 @@ const Navbar = () => {
                     {/* Category Dropdown Menu */}
                     {categoriesDropdownOpen && (
                       <div
+                        className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-white rounded-lg py-3 z-[60]"
                         style={{
-                          position: 'absolute',
-                          top: '100%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '320px',
-                          backgroundColor: '#FFFFFF',
                           border: '1px solid var(--border-light)',
-                          borderRadius: '8px',
                           boxShadow: 'var(--shadow-lg)',
-                          padding: '0.75rem 0',
-                          zIndex: 60,
                         }}
                       >
-                        <div style={{ padding: '0.5rem 1.25rem 0.25rem', borderBottom: '1px solid var(--border-light)' }}>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-gold)' }}>
+                        <div
+                          className="px-5 pb-1 pt-2"
+                          style={{ borderBottom: '1px solid var(--border-light)' }}
+                        >
+                          <span className="text-[0.7rem] font-bold tracking-[1px] uppercase" style={{ color: 'var(--text-gold)' }}>
                             Explore By Jewellery
                           </span>
                         </div>
@@ -232,37 +173,28 @@ const Navbar = () => {
                             <Link
                               key={sub.name}
                               to={sub.path}
-                              style={{
-                                display: 'block',
-                                padding: '0.65rem 1.25rem',
-                                textDecoration: 'none',
-                                transition: 'background-color 0.2s ease',
-                                backgroundColor: isSubActive ? 'var(--theme-champagne-light)' : 'transparent',
-                              }}
+                              className="block px-5 py-[0.65rem] no-underline transition-colors duration-200"
+                              style={{ backgroundColor: isSubActive ? 'var(--theme-champagne-light)' : 'transparent' }}
                               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)')}
                               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = isSubActive ? 'var(--theme-champagne-light)' : 'transparent')}
                             >
-                              <div style={{ fontSize: '0.825rem', fontWeight: '600', color: isSubActive ? 'var(--text-gold)' : 'var(--text-primary)' }}>
+                              <div className="text-[0.825rem] font-semibold" style={{ color: isSubActive ? 'var(--text-gold)' : 'var(--text-primary)' }}>
                                 {sub.name}
                               </div>
-                              <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                              <div className="text-[0.72rem] mt-[2px]" style={{ color: 'var(--text-secondary)' }}>
                                 {sub.desc}
                               </div>
                             </Link>
                           );
                         })}
-                        <div style={{ borderTop: '1px solid var(--border-light)', marginTop: '0.25rem', padding: '0.5rem 1.25rem 0.25rem' }}>
+                        <div
+                          className="mt-1 px-5 py-2 pt-2"
+                          style={{ borderTop: '1px solid var(--border-light)' }}
+                        >
                           <Link
                             to="/shop"
-                            style={{
-                              fontSize: '0.78rem',
-                              fontWeight: '600',
-                              color: 'var(--text-gold)',
-                              textDecoration: 'none',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '0.35rem',
-                            }}
+                            className="text-[0.78rem] font-semibold no-underline flex items-center gap-[0.35rem]"
+                            style={{ color: 'var(--text-gold)' }}
                           >
                             <span>Browse All Categories</span>
                             <span>→</span>
@@ -280,52 +212,25 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
+                  className="relative no-underline text-[0.8rem] tracking-[1.2px] uppercase transition-colors duration-200 flex items-center gap-[0.35rem] py-[6px]"
                   style={{
-                    position: 'relative',
-                    textDecoration: 'none',
-                    fontSize: '0.8rem',
                     fontWeight: active ? '700' : '600',
-                    letterSpacing: '1.2px',
-                    textTransform: 'uppercase',
-                    transition: 'color 0.2s ease',
                     fontFamily: 'var(--font-sans)',
                     color: active ? 'var(--text-gold)' : 'var(--text-secondary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    padding: '6px 0',
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-gold)')}
                   onMouseLeave={(e) => (e.currentTarget.style.color = active ? 'var(--text-gold)' : 'var(--text-secondary)')}
                 >
                   <span>{item.name}</span>
                   {item.badge && (
-                    <span
-                      style={{
-                        backgroundColor: '#C5914A',
-                        color: '#FFFFFF',
-                        fontSize: '9px',
-                        fontWeight: '700',
-                        letterSpacing: '0.5px',
-                        padding: '1px 5px',
-                        borderRadius: '10px',
-                        textTransform: 'uppercase',
-                      }}
-                    >
+                    <span className="bg-[#C5914A] text-white text-[9px] font-bold tracking-[0.5px] px-[5px] py-[1px] rounded-[10px] uppercase">
                       {item.badge}
                     </span>
                   )}
                   {active && (
                     <span
-                      style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: '2px',
-                        backgroundColor: 'var(--text-gold)',
-                        borderRadius: '2px',
-                      }}
+                      className="absolute bottom-0 left-0 right-0 h-[2px] rounded-[2px]"
+                      style={{ backgroundColor: 'var(--text-gold)' }}
                     />
                   )}
                 </Link>
@@ -334,27 +239,13 @@ const Navbar = () => {
           </nav>
 
           {/* Action Icons & Utilities */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.85rem',
-            }}
-          >
+          <div className="flex items-center gap-[0.85rem]">
             {/* Search Button */}
             <button
               onClick={() => navigate('/search')}
               aria-label="Search Fine Jewellery"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: isCurrentActive('/search') ? 'var(--text-gold)' : 'var(--text-primary)',
-                transition: 'color 0.2s ease, transform 0.2s ease',
-                padding: '6px',
-                display: 'flex',
-                alignItems: 'center',
-              }}
+              className="bg-transparent border-none cursor-pointer transition-[color,transform] duration-200 p-[6px] flex items-center"
+              style={{ color: isCurrentActive('/search') ? 'var(--text-gold)' : 'var(--text-primary)' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-gold)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = isCurrentActive('/search') ? 'var(--text-gold)' : 'var(--text-primary)')}
             >
@@ -365,16 +256,8 @@ const Navbar = () => {
             <button
               onClick={() => navigate('/wishlist')}
               aria-label="View Wishlist"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: isCurrentActive('/wishlist') ? 'var(--text-gold)' : 'var(--text-primary)',
-                transition: 'color 0.2s ease, transform 0.2s ease',
-                padding: '6px',
-                display: 'flex',
-                alignItems: 'center',
-              }}
+              className="bg-transparent border-none cursor-pointer transition-[color,transform] duration-200 p-[6px] flex items-center"
+              style={{ color: isCurrentActive('/wishlist') ? 'var(--text-gold)' : 'var(--text-primary)' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-gold)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = isCurrentActive('/wishlist') ? 'var(--text-gold)' : 'var(--text-primary)')}
             >
@@ -385,16 +268,8 @@ const Navbar = () => {
             <button
               onClick={() => navigate('/cart')}
               aria-label="Shopping Cart"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: isCurrentActive('/cart') ? 'var(--text-gold)' : 'var(--text-primary)',
-                transition: 'color 0.2s ease, transform 0.2s ease',
-                padding: '6px',
-                display: 'flex',
-                alignItems: 'center',
-              }}
+              className="bg-transparent border-none cursor-pointer transition-[color,transform] duration-200 p-[6px] flex items-center"
+              style={{ color: isCurrentActive('/cart') ? 'var(--text-gold)' : 'var(--text-primary)' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-gold)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = isCurrentActive('/cart') ? 'var(--text-gold)' : 'var(--text-primary)')}
             >
@@ -402,20 +277,12 @@ const Navbar = () => {
             </button>
 
             {/* User Account Menu */}
-            <div ref={accountMenuRef} style={{ position: 'relative' }}>
+            <div ref={accountMenuRef} className="relative">
               <button
                 onClick={() => setAccountMenuOpen(prev => !prev)}
                 aria-label="Customer Account"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: isCurrentActive('/account') || isCurrentActive('/login') ? 'var(--text-gold)' : 'var(--text-primary)',
-                  transition: 'color 0.2s ease, transform 0.2s ease',
-                  padding: '6px',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
+                className="bg-transparent border-none cursor-pointer transition-[color,transform] duration-200 p-[6px] flex items-center"
+                style={{ color: isCurrentActive('/account') || isCurrentActive('/login') ? 'var(--text-gold)' : 'var(--text-primary)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-gold)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = isCurrentActive('/account') || isCurrentActive('/login') ? 'var(--text-gold)' : 'var(--text-primary)')}
               >
@@ -425,41 +292,29 @@ const Navbar = () => {
               {/* Account Dropdown Card */}
               {accountMenuOpen && (
                 <div
+                  className="absolute top-[calc(100%+8px)] right-0 w-60 bg-white rounded-lg py-3 z-[60]"
                   style={{
-                    position: 'absolute',
-                    top: 'calc(100% + 8px)',
-                    right: 0,
-                    width: '240px',
-                    backgroundColor: '#FFFFFF',
                     border: '1px solid var(--border-light)',
-                    borderRadius: '8px',
                     boxShadow: 'var(--shadow-lg)',
-                    padding: '0.75rem 0',
-                    zIndex: 60,
                   }}
                 >
                   {isAuthenticated ? (
                     <>
-                      <div style={{ padding: '0.5rem 1.25rem 0.75rem', borderBottom: '1px solid var(--border-light)' }}>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Welcome back,</div>
-                        <div style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <div
+                        className="px-5 pt-2 pb-3"
+                        style={{ borderBottom: '1px solid var(--border-light)' }}
+                      >
+                        <div className="text-[0.75rem]" style={{ color: 'var(--text-secondary)' }}>Welcome back,</div>
+                        <div className="text-[0.9rem] font-bold overflow-hidden text-ellipsis whitespace-nowrap" style={{ color: 'var(--text-primary)' }}>
                           {user?.name || user?.email || 'Valued Member'}
                         </div>
                       </div>
 
-                      <div style={{ padding: '0.25rem 0' }}>
+                      <div className="py-1">
                         <Link
                           to="/account"
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.6rem',
-                            padding: '0.6rem 1.25rem',
-                            textDecoration: 'none',
-                            fontSize: '0.85rem',
-                            color: 'var(--text-primary)',
-                            transition: 'background-color 0.2s ease',
-                          }}
+                          className="flex items-center gap-[0.6rem] px-5 py-[0.6rem] no-underline text-[0.85rem] transition-colors duration-200"
+                          style={{ color: 'var(--text-primary)' }}
                           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)')}
                           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                         >
@@ -468,16 +323,8 @@ const Navbar = () => {
                         </Link>
                         <Link
                           to="/account/orders"
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.6rem',
-                            padding: '0.6rem 1.25rem',
-                            textDecoration: 'none',
-                            fontSize: '0.85rem',
-                            color: 'var(--text-primary)',
-                            transition: 'background-color 0.2s ease',
-                          }}
+                          className="flex items-center gap-[0.6rem] px-5 py-[0.6rem] no-underline text-[0.85rem] transition-colors duration-200"
+                          style={{ color: 'var(--text-primary)' }}
                           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)')}
                           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                         >
@@ -486,16 +333,8 @@ const Navbar = () => {
                         </Link>
                         <Link
                           to="/track-order"
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.6rem',
-                            padding: '0.6rem 1.25rem',
-                            textDecoration: 'none',
-                            fontSize: '0.85rem',
-                            color: 'var(--text-primary)',
-                            transition: 'background-color 0.2s ease',
-                          }}
+                          className="flex items-center gap-[0.6rem] px-5 py-[0.6rem] no-underline text-[0.85rem] transition-colors duration-200"
+                          style={{ color: 'var(--text-primary)' }}
                           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)')}
                           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                         >
@@ -504,16 +343,8 @@ const Navbar = () => {
                         </Link>
                         <Link
                           to="/wishlist"
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.6rem',
-                            padding: '0.6rem 1.25rem',
-                            textDecoration: 'none',
-                            fontSize: '0.85rem',
-                            color: 'var(--text-primary)',
-                            transition: 'background-color 0.2s ease',
-                          }}
+                          className="flex items-center gap-[0.6rem] px-5 py-[0.6rem] no-underline text-[0.85rem] transition-colors duration-200"
+                          style={{ color: 'var(--text-primary)' }}
                           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)')}
                           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                         >
@@ -522,22 +353,10 @@ const Navbar = () => {
                         </Link>
                       </div>
 
-                      <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.25rem' }}>
+                      <div className="pt-1" style={{ borderTop: '1px solid var(--border-light)' }}>
                         <button
                           onClick={handleLogout}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.6rem',
-                            width: '100%',
-                            padding: '0.6rem 1.25rem',
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            fontSize: '0.85rem',
-                            color: '#b91c1c',
-                            textAlign: 'left',
-                          }}
+                          className="flex items-center gap-[0.6rem] w-full px-5 py-[0.6rem] bg-transparent border-none cursor-pointer text-[0.85rem] text-left text-red-700"
                           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#fef2f2')}
                           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                         >
@@ -548,63 +367,43 @@ const Navbar = () => {
                     </>
                   ) : (
                     <>
-                      <div style={{ padding: '0.5rem 1.25rem 0.75rem', borderBottom: '1px solid var(--border-light)' }}>
-                        <div style={{ fontSize: '0.875rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                      <div
+                        className="px-5 pt-2 pb-3"
+                        style={{ borderBottom: '1px solid var(--border-light)' }}
+                      >
+                        <div className="text-[0.875rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                           Welcome to Jewerkart
                         </div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                        <div className="text-[0.75rem] mt-[2px]" style={{ color: 'var(--text-secondary)' }}>
                           Sign in to manage orders & wishlist
                         </div>
                       </div>
 
-                      <div style={{ padding: '0.75rem 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      <div className="px-5 py-3 flex flex-col gap-2">
                         <Link
                           to="/login"
-                          style={{
-                            display: 'block',
-                            textAlign: 'center',
-                            backgroundColor: 'var(--accent-slate)',
-                            color: '#FFFFFF',
-                            padding: '0.5rem',
-                            borderRadius: '4px',
-                            textDecoration: 'none',
-                            fontSize: '0.85rem',
-                            fontWeight: '600',
-                          }}
+                          className="block text-center text-white py-2 rounded px-0 no-underline text-[0.85rem] font-semibold"
+                          style={{ backgroundColor: 'var(--accent-slate)' }}
                         >
                           Sign In
                         </Link>
                         <Link
                           to="/register"
+                          className="block text-center bg-transparent py-[0.45rem] rounded px-0 no-underline text-[0.85rem] font-semibold"
                           style={{
-                            display: 'block',
-                            textAlign: 'center',
-                            backgroundColor: 'transparent',
                             color: 'var(--text-primary)',
                             border: '1px solid var(--border-light)',
-                            padding: '0.45rem',
-                            borderRadius: '4px',
-                            textDecoration: 'none',
-                            fontSize: '0.85rem',
-                            fontWeight: '600',
                           }}
                         >
                           Register
                         </Link>
                       </div>
 
-                      <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.25rem' }}>
+                      <div className="pt-1" style={{ borderTop: '1px solid var(--border-light)' }}>
                         <Link
                           to="/track-order"
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.6rem',
-                            padding: '0.6rem 1.25rem',
-                            textDecoration: 'none',
-                            fontSize: '0.85rem',
-                            color: 'var(--text-secondary)',
-                          }}
+                          className="flex items-center gap-[0.6rem] px-5 py-[0.6rem] no-underline text-[0.85rem] transition-colors duration-200"
+                          style={{ color: 'var(--text-secondary)' }}
                           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--theme-champagne-light)')}
                           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                         >
@@ -624,71 +423,40 @@ const Navbar = () => {
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.45)',
-            zIndex: 100,
-            display: 'flex',
-          }}
+          className="fixed inset-0 z-[100] flex"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.45)' }}
           onClick={() => setMobileMenuOpen(false)}
         >
           <div
-            style={{
-              width: '85%',
-              maxWidth: '340px',
-              backgroundColor: '#FFFFFF',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              boxShadow: 'var(--shadow-lg)',
-            }}
+            className="w-[85%] max-w-[340px] bg-white h-full flex flex-col"
+            style={{ boxShadow: 'var(--shadow-lg)' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Drawer Header */}
             <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '1.25rem 1.25rem 1rem',
-                borderBottom: '1px solid var(--border-light)',
-              }}
+              className="flex items-center justify-between px-5 pt-5 pb-4"
+              style={{ borderBottom: '1px solid var(--border-light)' }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span className="font-serif" style={{ fontSize: '1.3rem', fontWeight: '700', letterSpacing: '2px' }}>
+              <div className="flex flex-col">
+                <span className="font-serif text-[1.3rem] font-bold tracking-[2px]">
                   JEWERKART
                 </span>
-                <span style={{ fontSize: '8px', letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-gold)', fontWeight: '600' }}>
+                <span className="text-[8px] tracking-[1.5px] uppercase font-semibold" style={{ color: 'var(--text-gold)' }}>
                   Pure 925 Silver Atelier
                 </span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '4px',
-                  color: 'var(--text-primary)',
-                }}
+                className="bg-transparent border-none cursor-pointer p-1"
+                style={{ color: 'var(--text-primary)' }}
               >
                 <X size={22} />
               </button>
             </div>
 
             {/* Drawer Links List */}
-            <div
-              style={{
-                flex: 1,
-                overflowY: 'auto',
-                padding: '1rem 1.25rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.25rem',
-              }}
-            >
-              <div style={{ fontSize: '0.7rem', fontWeight: '700', letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-gold)', marginBottom: '0.4rem' }}>
+            <div className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-1">
+              <div className="text-[0.7rem] font-bold tracking-[1.5px] uppercase mb-[0.4rem]" style={{ color: 'var(--text-gold)' }}>
                 Featured Curations
               </div>
 
@@ -705,31 +473,16 @@ const Navbar = () => {
                   <Link
                     key={item.name}
                     to={item.path}
+                    className="flex items-center justify-between px-2 py-[0.65rem] no-underline text-[0.88rem] rounded"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '0.65rem 0.5rem',
-                      textDecoration: 'none',
-                      fontSize: '0.88rem',
                       fontWeight: active ? '700' : '500',
                       color: active ? 'var(--text-gold)' : 'var(--text-primary)',
-                      borderRadius: '4px',
                       backgroundColor: active ? 'var(--theme-champagne-light)' : 'transparent',
                     }}
                   >
                     <span>{item.name}</span>
                     {item.badge && (
-                      <span
-                        style={{
-                          backgroundColor: '#C5914A',
-                          color: '#FFFFFF',
-                          fontSize: '9px',
-                          fontWeight: '700',
-                          padding: '1px 6px',
-                          borderRadius: '10px',
-                        }}
-                      >
+                      <span className="bg-[#C5914A] text-white text-[9px] font-bold px-[6px] py-[1px] rounded-[10px]">
                         {item.badge}
                       </span>
                     )}
@@ -737,9 +490,9 @@ const Navbar = () => {
                 );
               })}
 
-              <div style={{ height: '1px', backgroundColor: 'var(--border-light)', margin: '0.75rem 0' }} />
+              <div className="h-px my-3" style={{ backgroundColor: 'var(--border-light)' }} />
 
-              <div style={{ fontSize: '0.7rem', fontWeight: '700', letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-gold)', marginBottom: '0.4rem' }}>
+              <div className="text-[0.7rem] font-bold tracking-[1.5px] uppercase mb-[0.4rem]" style={{ color: 'var(--text-gold)' }}>
                 Categories
               </div>
 
@@ -756,10 +509,8 @@ const Navbar = () => {
                   <Link
                     key={cat.name}
                     to={cat.path}
+                    className="px-2 py-[0.55rem] no-underline text-[0.85rem]"
                     style={{
-                      padding: '0.55rem 0.5rem',
-                      textDecoration: 'none',
-                      fontSize: '0.85rem',
                       color: active ? 'var(--text-gold)' : 'var(--text-secondary)',
                       fontWeight: active ? '600' : '400',
                     }}
@@ -769,38 +520,24 @@ const Navbar = () => {
                 );
               })}
 
-              <div style={{ height: '1px', backgroundColor: 'var(--border-light)', margin: '0.75rem 0' }} />
+              <div className="h-px my-3" style={{ backgroundColor: 'var(--border-light)' }} />
 
-              <div style={{ fontSize: '0.7rem', fontWeight: '700', letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-gold)', marginBottom: '0.4rem' }}>
+              <div className="text-[0.7rem] font-bold tracking-[1.5px] uppercase mb-[0.4rem]" style={{ color: 'var(--text-gold)' }}>
                 Assistance & Orders
               </div>
 
               <Link
                 to="/track-order"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  padding: '0.55rem 0.5rem',
-                  textDecoration: 'none',
-                  fontSize: '0.85rem',
-                  color: 'var(--text-primary)',
-                }}
+                className="flex items-center gap-[0.6rem] px-2 py-[0.55rem] no-underline text-[0.85rem]"
+                style={{ color: 'var(--text-primary)' }}
               >
                 <Truck size={16} color="var(--text-gold)" />
                 <span>Track Order Live</span>
               </Link>
               <Link
                 to="/faqs"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.6rem',
-                  padding: '0.55rem 0.5rem',
-                  textDecoration: 'none',
-                  fontSize: '0.85rem',
-                  color: 'var(--text-primary)',
-                }}
+                className="flex items-center gap-[0.6rem] px-2 py-[0.55rem] no-underline text-[0.85rem]"
+                style={{ color: 'var(--text-primary)' }}
               >
                 <Sparkles size={16} color="var(--text-gold)" />
                 <span>Customer Care & FAQs</span>
@@ -809,74 +546,44 @@ const Navbar = () => {
 
             {/* Drawer Footer with Account Action */}
             <div
+              className="p-5"
               style={{
-                padding: '1.25rem',
                 borderTop: '1px solid var(--border-light)',
                 backgroundColor: 'var(--theme-champagne-light)',
               }}
             >
               {isAuthenticated ? (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="flex items-center justify-between">
                   <Link
                     to="/account"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      textDecoration: 'none',
-                      color: 'var(--text-primary)',
-                      fontSize: '0.85rem',
-                      fontWeight: '600',
-                    }}
+                    className="flex items-center gap-2 no-underline text-[0.85rem] font-semibold"
+                    style={{ color: 'var(--text-primary)' }}
                   >
                     <User size={16} color="var(--text-gold)" />
                     <span>My Account</span>
                   </Link>
                   <button
                     onClick={handleLogout}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      color: '#b91c1c',
-                      fontSize: '0.8rem',
-                      fontWeight: '600',
-                    }}
+                    className="bg-transparent border-none cursor-pointer text-[0.8rem] font-semibold text-red-700"
                   >
                     Log Out
                   </button>
                 </div>
               ) : (
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div className="flex gap-2">
                   <Link
                     to="/login"
-                    style={{
-                      flex: 1,
-                      textAlign: 'center',
-                      padding: '0.5rem',
-                      backgroundColor: 'var(--accent-slate)',
-                      color: '#FFFFFF',
-                      borderRadius: '4px',
-                      textDecoration: 'none',
-                      fontSize: '0.825rem',
-                      fontWeight: '600',
-                    }}
+                    className="flex-1 text-center py-2 text-white rounded no-underline text-[0.825rem] font-semibold"
+                    style={{ backgroundColor: 'var(--accent-slate)' }}
                   >
                     Sign In
                   </Link>
                   <Link
                     to="/register"
+                    className="flex-1 text-center py-2 bg-white rounded no-underline text-[0.825rem] font-semibold"
                     style={{
-                      flex: 1,
-                      textAlign: 'center',
-                      padding: '0.5rem',
-                      backgroundColor: '#FFFFFF',
                       border: '1px solid var(--border-light)',
                       color: 'var(--text-primary)',
-                      borderRadius: '4px',
-                      textDecoration: 'none',
-                      fontSize: '0.825rem',
-                      fontWeight: '600',
                     }}
                   >
                     Register

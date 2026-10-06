@@ -38,154 +38,122 @@ const Checkout = () => {
 
   return (
     <main
+      className="min-h-screen py-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <div className="max-w-[1100px] mx-auto">
         
         {/* Checkout Stepper Bar */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="flex justify-center items-center gap-4 mb-12 flex-wrap">
+          <div className="flex items-center gap-2">
             <span
+              className="w-7 h-7 rounded-full text-[#FEF0E0] flex items-center justify-center text-[0.85rem] font-bold"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--accent-slate)',
-                color: '#FEF0E0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.85rem',
-                fontWeight: '700',
               }}
             >
               1
             </span>
-            <span style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.9rem' }}>Review Bag</span>
+            <span className="font-semibold text-[0.9rem]" style={{ color: 'var(--text-primary)' }}>Review Bag</span>
           </div>
           <ChevronRight size={16} style={{ color: 'var(--border-light)' }} />
-          <Link to="/checkout/address" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Link to="/checkout/address" className="no-underline flex items-center gap-2">
             <span
+              className="w-7 h-7 rounded-full flex items-center justify-center text-[0.85rem]"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--bg-card)',
                 color: 'var(--text-secondary)',
                 border: '1px solid var(--border-light)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.85rem',
               }}
             >
               2
             </span>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Shipping Address</span>
+            <span className="text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>Shipping Address</span>
           </Link>
           <ChevronRight size={16} style={{ color: 'var(--border-light)' }} />
-          <Link to="/checkout/payment" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Link to="/checkout/payment" className="no-underline flex items-center gap-2">
             <span
+              className="w-7 h-7 rounded-full flex items-center justify-center text-[0.85rem]"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--bg-card)',
                 color: 'var(--text-secondary)',
                 border: '1px solid var(--border-light)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.85rem',
               }}
             >
               3
             </span>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Payment</span>
+            <span className="text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>Payment</span>
           </Link>
         </div>
 
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               STEP 1 OF 3
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2"
             style={{
               fontSize: 'clamp(2rem, 3.5vw, 2.5rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             Review Your Order
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0 }}>
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Verify your heirloom selections before specifying your armored delivery destination.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '2.5rem' }}>
+        <div className="grid grid-cols-12 gap-10">
           
           {/* Items Container */}
-          <div style={{ gridColumn: 'span 12' }} className="md:col-span-7">
+          <div className="col-span-12 md:col-span-7">
             <div
-              className="bg-theme-card"
+              className="bg-theme-card rounded-2xl p-8"
               style={{
-                borderRadius: '16px',
                 border: '1px solid var(--border-light)',
-                padding: '2rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <h2 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 1.5rem', color: 'var(--text-primary)' }}>
+              <h2 className="font-serif text-[1.25rem] mb-6" style={{ color: 'var(--text-primary)' }}>
                 Items Ready for Atelier Dispatch
               </h2>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div className="flex flex-col gap-5">
                 {checkoutItems.map((item) => (
                   <div
                     key={item.id}
+                    className="flex gap-5 pb-5 items-center"
                     style={{
-                      display: 'flex',
-                      gap: '1.25rem',
-                      paddingBottom: '1.25rem',
                       borderBottom: '1px solid var(--border-light)',
-                      alignItems: 'center',
                     }}
                   >
                     <div
+                      className="w-20 h-20 rounded-lg overflow-hidden shrink-0"
                       style={{
-                        width: '80px',
-                        height: '80px',
-                        borderRadius: '8px',
                         backgroundColor: 'var(--bg-circle-item)',
-                        overflow: 'hidden',
-                        flexShrink: 0,
                       }}
                     >
-                      <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
-                    <div style={{ flexGrow: 1 }}>
-                      <h3 className="font-serif" style={{ fontSize: '1rem', fontWeight: '600', margin: '0 0 0.25rem', color: 'var(--text-primary)' }}>
+                    <div className="grow">
+                      <h3 className="font-serif text-base font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
                         {item.name}
                       </h3>
-                      <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: '0 0 0.25rem' }}>
+                      <p className="text-[0.8rem] mb-1" style={{ color: 'var(--text-secondary)' }}>
                         {item.purity}
                       </p>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      <div className="text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                         Quantity: <strong>{item.quantity}</strong>
                       </div>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    <div className="text-right">
+                      <div className="text-[1.1rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                         ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                       </div>
                     </div>
@@ -195,19 +163,14 @@ const Checkout = () => {
 
               {/* Delivery Assurance */}
               <div
+                className="mt-6 p-4 rounded-lg flex items-center gap-3"
                 style={{
-                  marginTop: '1.5rem',
-                  padding: '1rem',
-                  borderRadius: '8px',
                   backgroundColor: 'var(--theme-champagne-light)',
                   border: '1px solid var(--border-light)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
                 }}
               >
-                <Truck size={22} style={{ color: 'var(--theme-gold)', flexShrink: 0 }} />
-                <div style={{ fontSize: '0.82rem', color: 'var(--text-primary)' }}>
+                <Truck size={22} className="shrink-0" style={{ color: 'var(--theme-gold)' }} />
+                <div className="text-[0.82rem]" style={{ color: 'var(--text-primary)' }}>
                   <strong>Sequel Armored Logistics</strong> will deliver with transit insurance. Secure OTP verification upon delivery.
                 </div>
               </div>
@@ -215,42 +178,36 @@ const Checkout = () => {
           </div>
 
           {/* Right Summary & Next Step */}
-          <div style={{ gridColumn: 'span 12' }} className="md:col-span-5">
+          <div className="col-span-12 md:col-span-5">
             <div
-              className="bg-theme-card"
+              className="bg-theme-card rounded-2xl p-8"
               style={{
-                borderRadius: '16px',
                 border: '1px solid var(--border-light)',
-                padding: '2rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <h2 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 1.25rem', color: 'var(--text-primary)' }}>
+              <h2 className="font-serif text-[1.25rem] mb-5" style={{ color: 'var(--text-primary)' }}>
                 Pricing Summary
               </h2>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+              <div className="flex flex-col gap-[0.85rem] mb-6">
+                <div className="flex justify-between text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
                   <span>Items Subtotal</span>
                   <span style={{ color: 'var(--text-primary)' }}>₹{subtotal.toLocaleString('en-IN')}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                <div className="flex justify-between text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
                   <span>Armored Insured Shipping</span>
-                  <span style={{ color: '#065F46', fontWeight: '600' }}>COMPLIMENTARY</span>
+                  <span className="text-emerald-800 font-semibold">COMPLIMENTARY</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                <div className="flex justify-between text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
                   <span>Taxes (3% Fine Jewellery GST)</span>
                   <span style={{ color: 'var(--text-primary)' }}>Included</span>
                 </div>
                 <div
+                  className="flex justify-between text-[1.25rem] font-bold pt-4"
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '1.25rem',
-                    fontWeight: '700',
                     color: 'var(--text-primary)',
                     borderTop: '1px solid var(--border-light)',
-                    paddingTop: '1rem',
                   }}
                 >
                   <span>Grand Total</span>
@@ -260,43 +217,25 @@ const Checkout = () => {
 
               <button
                 onClick={() => navigate('/checkout/address')}
-                className="btn-slate"
-                style={{
-                  width: '100%',
-                  padding: '0.95rem',
-                  borderRadius: '8px',
-                  fontWeight: '600',
-                  fontSize: '1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  cursor: 'pointer',
-                  marginBottom: '1rem',
-                }}
+                className="btn-slate w-full p-[0.95rem] rounded-lg font-semibold text-base flex items-center justify-center gap-2 cursor-pointer mb-4"
               >
                 Proceed to Shipping Address <ArrowRight size={16} />
               </button>
 
-              <div style={{ textAlign: 'center' }}>
-                <Link to="/cart" style={{ color: 'var(--theme-gold)', fontSize: '0.85rem', textDecoration: 'none' }}>
+              <div className="text-center">
+                <Link to="/cart" className="text-[0.85rem] no-underline" style={{ color: 'var(--theme-gold)' }}>
                   ← Modify Shopping Bag
                 </Link>
               </div>
 
               <div
+                className="mt-6 pt-5 flex items-center gap-2 text-[0.8rem]"
                 style={{
-                  marginTop: '1.5rem',
-                  paddingTop: '1.25rem',
                   borderTop: '1px solid var(--border-light)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.8rem',
                   color: 'var(--text-secondary)',
                 }}
               >
-                <ShieldCheck size={18} style={{ color: 'var(--theme-gold)', flexShrink: 0 }} />
+                <ShieldCheck size={18} className="shrink-0" style={{ color: 'var(--theme-gold)' }} />
                 <span>100% Transit-Insured Armored Delivery Guarantee</span>
               </div>
             </div>

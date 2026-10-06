@@ -135,15 +135,10 @@ function ReelCard({ reel, onOpenModal }) {
       onClick={onOpenModal}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="reel-card-item"
+      className="reel-card-item rounded-[10px] overflow-hidden relative cursor-pointer transition-all duration-300"
       style={{
-        borderRadius: '10px',
-        overflow: 'hidden',
-        position: 'relative',
         backgroundColor: '#1C140E',
         border: '1px solid var(--border-light)',
-        cursor: 'pointer',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         boxShadow: 'var(--shadow-sm)',
       }}
     >
@@ -155,43 +150,15 @@ function ReelCard({ reel, onOpenModal }) {
         loop
         playsInline
         preload="metadata"
+        className="w-full h-full object-cover block transition-transform duration-500"
         style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          display: 'block',
-          transition: 'transform 0.5s ease',
           transform: isPlaying ? 'scale(1.05)' : 'scale(1)',
         }}
       />
 
       {/* Top badges & sound control */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '0.65rem',
-          left: '0.65rem',
-          right: '0.65rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          zIndex: 3,
-        }}
-      >
-        <span
-          style={{
-            background: 'rgba(28, 20, 14, 0.78)',
-            backdropFilter: 'blur(6px)',
-            color: '#FEF0E0',
-            fontSize: '0.625rem',
-            fontWeight: '700',
-            letterSpacing: '1px',
-            padding: '3px 8px',
-            borderRadius: '4px',
-            border: '1px solid rgba(197, 145, 74, 0.45)',
-            textTransform: 'uppercase',
-          }}
-        >
+      <div className="absolute top-[0.65rem] left-[0.65rem] right-[0.65rem] flex justify-between items-center z-[3]">
+        <span className="bg-[#1C140E]/[0.78] backdrop-blur-[6px] text-[#FEF0E0] text-[0.625rem] font-bold tracking-[1px] py-[3px] px-2 rounded border border-[#C5914A]/45 uppercase">
           {reel.tag}
         </span>
 
@@ -199,29 +166,7 @@ function ReelCard({ reel, onOpenModal }) {
           type="button"
           onClick={handleToggleMute}
           aria-label={isMuted ? 'Unmute preview' : 'Mute preview'}
-          style={{
-            width: '28px',
-            height: '28px',
-            borderRadius: '50%',
-            background: 'rgba(28, 20, 14, 0.78)',
-            backdropFilter: 'blur(6px)',
-            border: '1px solid rgba(254, 240, 224, 0.3)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#FEF0E0',
-            cursor: 'pointer',
-            padding: 0,
-            transition: 'transform 0.2s ease, background-color 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.1)';
-            e.currentTarget.style.backgroundColor = 'rgba(197, 145, 74, 0.9)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.backgroundColor = 'rgba(28, 20, 14, 0.78)';
-          }}
+          className="w-7 h-7 rounded-full bg-[#1C140E]/[0.78] backdrop-blur-[6px] border border-[#FEF0E0]/30 flex items-center justify-center text-[#FEF0E0] cursor-pointer p-0 transition-all duration-200 hover:scale-110 hover:bg-[#C5914A]/90"
         >
           {isMuted ? <VolumeX size={13} /> : <Volume2 size={13} />}
         </button>
@@ -229,87 +174,37 @@ function ReelCard({ reel, onOpenModal }) {
 
       {/* Play Icon Overlay (subtly fades when playing) */}
       <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: isPlaying ? 'transparent' : 'rgba(28, 20, 14, 0.25)',
-          transition: 'background 0.3s ease, opacity 0.3s ease',
-          opacity: isPlaying ? 0 : 1,
-          pointerEvents: 'none',
-          zIndex: 2,
-        }}
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-300 pointer-events-none z-[2] ${
+          isPlaying ? 'bg-transparent opacity-0' : 'bg-[#1C140E]/25 opacity-100'
+        }`}
       >
-        <div
-          style={{
-            width: '46px',
-            height: '46px',
-            borderRadius: '50%',
-            background: 'rgba(28, 20, 14, 0.75)',
-            backdropFilter: 'blur(6px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '1px solid rgba(254, 240, 224, 0.4)',
-            boxShadow: '0 4px 12px rgba(28, 20, 14, 0.25)',
-          }}
-        >
-          <Play size={18} fill="#FEF0E0" style={{ color: '#FEF0E0', marginLeft: '2px' }} />
+        <div className="w-[46px] h-[46px] rounded-full bg-[#1C140E]/75 backdrop-blur-[6px] flex items-center justify-center border border-[#FEF0E0]/40 shadow-[0_4px_12px_rgba(28,20,14,0.25)]">
+          <Play size={18} fill="#FEF0E0" className="text-[#FEF0E0] ml-0.5" />
         </div>
       </div>
 
       {/* Bottom info label */}
       <div
+        className="absolute bottom-0 left-0 right-0 pt-5 pb-3 px-3 z-[3] pointer-events-none text-left"
         style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: '1.25rem 0.75rem 0.75rem',
           background: 'linear-gradient(to top, rgba(28, 20, 14, 0.92) 0%, rgba(28, 20, 14, 0.6) 65%, transparent 100%)',
-          zIndex: 3,
-          pointerEvents: 'none',
-          textAlign: 'left',
         }}
       >
-        <p
-          style={{
-            color: '#FFF9F2',
-            fontSize: '0.8rem',
-            fontWeight: '600',
-            margin: '0 0 0.25rem',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}
-        >
+        <p className="text-[#FFF9F2] text-[0.8rem] font-semibold m-0 mb-1 truncate">
           {reel.title}
         </p>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <span style={{ color: '#FEF0E0', fontSize: '0.8rem', fontWeight: '700' }}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[#FEF0E0] text-[0.8rem] font-bold">
               {reel.price}
             </span>
             {reel.originalPrice && (
-              <span style={{ color: 'rgba(254, 240, 224, 0.55)', fontSize: '0.675rem', textDecoration: 'line-through' }}>
+              <span className="text-[#FEF0E0]/55 text-[0.675rem] line-through">
                 {reel.originalPrice}
               </span>
             )}
           </div>
-          <span
-            style={{
-              color: '#C5914A',
-              fontSize: '0.65rem',
-              fontWeight: '600',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '3px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px',
-            }}
-          >
+          <span className="text-[#C5914A] text-[0.65rem] font-semibold flex items-center gap-[3px] uppercase tracking-[0.5px]">
             <Sparkles size={11} /> Watch
           </span>
         </div>
@@ -388,96 +283,34 @@ function ReelModal({ reels, activeIndex, onClose, onNavigate }) {
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(15, 10, 7, 0.88)',
-        backdropFilter: 'blur(8px)',
-        zIndex: 9999,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1rem',
-      }}
+      className="fixed inset-0 bg-[#0F0A07]/[0.88] backdrop-blur-md z-[9999] flex items-center justify-center p-4"
       onClick={onClose}
     >
       {/* Modal Dialog */}
       <div
         onClick={(e) => e.stopPropagation()}
-        style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: '410px',
-          height: 'min(86vh, 680px)',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          backgroundColor: '#1C140E',
-          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(197, 145, 74, 0.35)',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
+        className="relative w-full max-w-[410px] h-[min(86vh,680px)] rounded-2xl overflow-hidden bg-[#1C140E] shadow-[0_24px_60px_rgba(0,0,0,0.65),0_0_0_1px_rgba(197,145,74,0.35)] flex flex-col"
       >
         {/* Progress Bar */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '3px',
-          backgroundColor: 'rgba(254, 240, 224, 0.25)',
-          zIndex: 10,
-        }}>
-          <div style={{
-            height: '100%',
-            width: `${progress}%`,
-            backgroundColor: '#C5914A',
-            transition: 'width 0.1s linear',
-          }} />
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#FEF0E0]/25 z-10">
+          <div
+            className="h-full bg-[#C5914A] transition-[width] duration-100 ease-linear"
+            style={{ width: `${progress}%` }}
+          />
         </div>
 
         {/* Top Controls */}
-        <div style={{
-          position: 'absolute',
-          top: '0.85rem',
-          left: '0.85rem',
-          right: '0.85rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          zIndex: 10,
-        }}>
-          <span style={{
-            background: 'rgba(28, 20, 14, 0.78)',
-            backdropFilter: 'blur(6px)',
-            color: '#FEF0E0',
-            fontSize: '0.7rem',
-            fontWeight: '700',
-            letterSpacing: '1px',
-            padding: '4px 10px',
-            borderRadius: '6px',
-            border: '1px solid rgba(197, 145, 74, 0.45)',
-          }}>
+        <div className="absolute top-[0.85rem] left-[0.85rem] right-[0.85rem] flex items-center justify-between z-10">
+          <span className="bg-[#1C140E]/[0.78] backdrop-blur-[6px] text-[#FEF0E0] text-[0.7rem] font-bold tracking-[1px] py-1 px-2.5 rounded-md border border-[#C5914A]/45">
             {currentReel.tag}
           </span>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={toggleMute}
               aria-label={isMuted ? 'Unmute video' : 'Mute video'}
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
-                background: 'rgba(28, 20, 14, 0.78)',
-                backdropFilter: 'blur(6px)',
-                border: '1px solid rgba(254, 240, 224, 0.35)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#FEF0E0',
-                cursor: 'pointer',
-              }}
+              className="w-[34px] h-[34px] rounded-full bg-[#1C140E]/[0.78] backdrop-blur-[6px] border border-[#FEF0E0]/[0.35] flex items-center justify-center text-[#FEF0E0] cursor-pointer"
             >
               {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
             </button>
@@ -486,19 +319,7 @@ function ReelModal({ reels, activeIndex, onClose, onNavigate }) {
               type="button"
               onClick={onClose}
               aria-label="Close modal"
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
-                background: 'rgba(28, 20, 14, 0.78)',
-                backdropFilter: 'blur(6px)',
-                border: '1px solid rgba(254, 240, 224, 0.35)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#FEF0E0',
-                cursor: 'pointer',
-              }}
+              className="w-[34px] h-[34px] rounded-full bg-[#1C140E]/[0.78] backdrop-blur-[6px] border border-[#FEF0E0]/[0.35] flex items-center justify-center text-[#FEF0E0] cursor-pointer"
             >
               <X size={18} />
             </button>
@@ -508,12 +329,7 @@ function ReelModal({ reels, activeIndex, onClose, onNavigate }) {
         {/* Video Area */}
         <div
           onClick={togglePlay}
-          style={{
-            position: 'relative',
-            flex: 1,
-            cursor: 'pointer',
-            overflow: 'hidden',
-          }}
+          className="relative flex-1 cursor-pointer overflow-hidden"
         >
           <video
             ref={videoRef}
@@ -522,71 +338,41 @@ function ReelModal({ reels, activeIndex, onClose, onNavigate }) {
             playsInline
             muted={isMuted}
             onTimeUpdate={handleTimeUpdate}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block',
-            }}
+            className="w-full h-full object-cover block"
           />
 
           {/* Pause overlay button */}
           {!isPlaying && (
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'rgba(28, 20, 14, 0.35)',
-            }}>
-              <div style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '50%',
-                background: 'rgba(28, 20, 14, 0.85)',
-                backdropFilter: 'blur(6px)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid rgba(254, 240, 224, 0.4)',
-              }}>
-                <Play size={24} fill="#FEF0E0" style={{ color: '#FEF0E0', marginLeft: '3px' }} />
+            <div className="absolute inset-0 flex items-center justify-center bg-[#1C140E]/35">
+              <div className="w-14 h-14 rounded-full bg-[#1C140E]/85 backdrop-blur-[6px] flex items-center justify-center border border-[#FEF0E0]/40">
+                <Play size={24} fill="#FEF0E0" className="text-[#FEF0E0] ml-1" />
               </div>
             </div>
           )}
         </div>
 
         {/* Bottom Product Action Bar */}
-        <div style={{
-          padding: '1rem 1.15rem 1.15rem',
-          background: 'linear-gradient(to top, rgba(28, 20, 14, 0.98) 0%, rgba(28, 20, 14, 0.88) 100%)',
-          borderTop: '1px solid rgba(197, 145, 74, 0.25)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          zIndex: 10,
-        }}>
-          <div style={{ minWidth: 0 }}>
-            <h4 style={{
-              margin: '0 0 0.15rem',
-              color: '#FFF9F2',
-              fontSize: '0.975rem',
-              fontWeight: '600',
-              fontFamily: 'var(--font-serif)',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}>
+        <div
+          className="p-4 px-[1.15rem] pb-[1.15rem] border-t border-[#C5914A]/25 flex items-center justify-between gap-4 z-10"
+          style={{
+            background: 'linear-gradient(to top, rgba(28, 20, 14, 0.98) 0%, rgba(28, 20, 14, 0.88) 100%)',
+          }}
+        >
+          <div className="min-w-0">
+            <h4
+              className="m-0 mb-0.5 text-[#FFF9F2] text-[0.975rem] font-semibold truncate"
+              style={{
+                fontFamily: 'var(--font-serif)',
+              }}
+            >
               {currentReel.title}
             </h4>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ color: '#C5914A', fontWeight: '700', fontSize: '0.95rem' }}>
+            <div className="flex items-center gap-2">
+              <span className="text-[#C5914A] font-bold text-[0.95rem]">
                 {currentReel.price}
               </span>
               {currentReel.originalPrice && (
-                <span style={{ color: '#7A6C60', fontSize: '0.75rem', textDecoration: 'line-through' }}>
+                <span className="text-[#7A6C60] text-[0.75rem] line-through">
                   {currentReel.originalPrice}
                 </span>
               )}
@@ -596,21 +382,7 @@ function ReelModal({ reels, activeIndex, onClose, onNavigate }) {
           <Link
             to={currentReel.link}
             onClick={onClose}
-            className="btn-gold"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.45rem',
-              padding: '0.65rem 1.15rem',
-              borderRadius: '4px',
-              fontSize: '0.75rem',
-              fontWeight: '600',
-              letterSpacing: '1px',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              flexShrink: 0,
-              boxShadow: '0 4px 15px rgba(197, 145, 74, 0.35)',
-            }}
+            className="btn-gold inline-flex items-center gap-1.5 py-[0.65rem] px-[1.15rem] rounded text-[0.75rem] font-semibold tracking-[1px] uppercase no-underline shrink-0 shadow-[0_4px_15px_rgba(197,145,74,0.35)]"
           >
             <ShoppingBag size={14} />
             Shop Now
@@ -625,24 +397,7 @@ function ReelModal({ reels, activeIndex, onClose, onNavigate }) {
             onNavigate((activeIndex - 1 + reels.length) % reels.length);
           }}
           aria-label="Previous reel"
-          style={{
-            position: 'absolute',
-            left: '0.5rem',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            background: 'rgba(28, 20, 14, 0.75)',
-            backdropFilter: 'blur(6px)',
-            border: '1px solid rgba(254, 240, 224, 0.3)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#FEF0E0',
-            cursor: 'pointer',
-            zIndex: 10,
-          }}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#1C140E]/75 backdrop-blur-[6px] border border-[#FEF0E0]/30 flex items-center justify-center text-[#FEF0E0] cursor-pointer z-10"
         >
           <ChevronLeft size={20} />
         </button>
@@ -654,24 +409,7 @@ function ReelModal({ reels, activeIndex, onClose, onNavigate }) {
             onNavigate((activeIndex + 1) % reels.length);
           }}
           aria-label="Next reel"
-          style={{
-            position: 'absolute',
-            right: '0.5rem',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            background: 'rgba(28, 20, 14, 0.75)',
-            backdropFilter: 'blur(6px)',
-            border: '1px solid rgba(254, 240, 224, 0.3)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#FEF0E0',
-            cursor: 'pointer',
-            zIndex: 10,
-          }}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#1C140E]/75 backdrop-blur-[6px] border border-[#FEF0E0]/30 flex items-center justify-center text-[#FEF0E0] cursor-pointer z-10"
         >
           <ChevronRight size={20} />
         </button>
@@ -688,7 +426,7 @@ export default function Home() {
   const necklaceRef = useRef(null);
   const ringRef = useRef(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // Prevent background scroll when reel modal is open
   useEffect(() => {
@@ -782,43 +520,29 @@ export default function Home() {
   // ────────────── PRODUCT CARD ──────────────
   const ProductCard = ({ product }) => (
     <div
-    onClick={()=>navigate("/product/"+product.name)}
+      onClick={() => navigate("/product/" + product.name)}
+      className="min-w-[220px] max-w-[220px] rounded-md overflow-hidden cursor-pointer shrink-0 transition-all duration-300 hover:-translate-y-1.5"
       style={{
-        minWidth: '220px',
-        maxWidth: '220px',
-        borderRadius: '6px',
-        overflow: 'hidden',
         border: '1px solid var(--border-light)',
         boxShadow: 'var(--shadow-sm)',
-        transition: 'box-shadow 0.3s ease, transform 0.3s ease',
-        cursor: 'pointer',
         backgroundColor: 'var(--bg-card)',
-        flexShrink: 0,
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-        e.currentTarget.style.transform = 'translateY(-6px)';
         const img = e.currentTarget.querySelector('img');
         if (img) img.style.transform = 'scale(1.06)';
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-        e.currentTarget.style.transform = 'translateY(0)';
         const img = e.currentTarget.querySelector('img');
         if (img) img.style.transform = 'scale(1)';
       }}
     >
       {/* Image Area */}
       <div
+        className="w-full h-[200px] flex items-center justify-center relative overflow-hidden"
         style={{
-          width: '100%',
-          height: '200px',
           backgroundColor: 'var(--bg-circle-item)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'relative',
-          overflow: 'hidden',
           background: 'linear-gradient(135deg, #FFF9F2 0%, #F7E5D0 100%)',
         }}
       >
@@ -826,93 +550,51 @@ export default function Home() {
           <img
             src={product.image}
             alt={product.name}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block',
-              transition: 'transform 0.4s ease',
-            }}
+            className="w-full h-full object-cover block transition-transform duration-400"
           />
         ) : (
           /* Decorative pattern */
-          <div style={{
-            width: '80px',
-            height: '80px',
-            borderRadius: '50%',
-            border: '2px solid rgba(197, 145, 74, 0.2)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <Gem size={28} style={{ color: '#C5914A', opacity: 0.45 }} />
+          <div className="w-20 h-20 rounded-full border-2 border-[#C5914A]/20 flex items-center justify-center">
+            <Gem size={28} className="text-[#C5914A] opacity-45" />
           </div>
         )}
 
         {/* Wishlist */}
         <button
           aria-label="Add to wishlist"
-          className="product-wishlist-btn"
+          className="product-wishlist-btn absolute top-2.5 right-2.5 border-0 rounded-full w-[34px] h-[34px] flex items-center justify-center cursor-pointer opacity-0 transition-all duration-200"
           style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
             background: 'var(--bg-card)',
-            border: 'none',
-            borderRadius: '50%',
-            width: '34px',
-            height: '34px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            opacity: 0,
-            transition: 'opacity 0.2s ease, transform 0.2s ease',
             boxShadow: 'var(--shadow-md)',
           }}
         >
-          <Heart size={16} style={{ color: '#EF4444' }} />
+          <Heart size={16} className="text-red-500" />
         </button>
 
         {/* Badge */}
         {product.badge && (
-          <span
-            className="badge-925"
-            style={{
-              position: 'absolute',
-              top: '10px',
-              left: '10px',
-              fontSize: '9px',
-              padding: '3px 8px',
-            }}
-          >
+          <span className="badge-925 absolute top-2.5 left-2.5 text-[9px] py-[3px] px-2">
             {product.badge}
           </span>
         )}
       </div>
 
       {/* Info */}
-      <div style={{ padding: '0.875rem 1rem' }}>
+      <div className="py-3.5 px-4">
         <h3
+          className="text-[0.8rem] font-semibold m-0 mb-1.5 truncate"
           style={{
-            fontSize: '0.8rem',
-            fontWeight: '600',
             fontFamily: 'var(--font-sans)',
-            margin: '0 0 0.4rem',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
             color: 'var(--text-primary)',
           }}
         >
           {product.name}
         </h3>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 0.4rem' }}>
+        <div className="flex items-center gap-2 m-0 mb-1.5">
           <span
+            className="text-base font-bold"
             style={{
-              fontSize: '1rem',
-              fontWeight: '700',
               color: 'var(--text-primary)',
               fontFamily: 'var(--font-sans)',
             }}
@@ -920,21 +602,15 @@ export default function Home() {
             {product.price}
           </span>
           {product.originalPrice && (
-            <span
-              style={{
-                fontSize: '0.75rem',
-                color: 'var(--text-secondary)',
-                textDecoration: 'line-through',
-              }}
-            >
+            <span className="text-[0.75rem] line-through" style={{ color: 'var(--text-secondary)' }}>
               {product.originalPrice}
             </span>
           )}
         </div>
 
         {/* Rating */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.7rem' }}>
-          <div style={{ display: 'flex', gap: '1px' }}>
+        <div className="flex items-center gap-1.5 mb-3">
+          <div className="flex gap-px">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
@@ -944,24 +620,12 @@ export default function Home() {
               />
             ))}
           </div>
-          <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+          <span className="text-[0.7rem]" style={{ color: 'var(--text-secondary)' }}>
             ({product.reviews})
           </span>
         </div>
 
-        <button
-          className="btn-slate"
-          style={{
-            width: '100%',
-            padding: '0.55rem 0',
-            borderRadius: '2px',
-            fontSize: '0.7rem',
-            letterSpacing: '1.2px',
-            textTransform: 'uppercase',
-            cursor: 'pointer',
-            fontWeight: '600',
-          }}
-        >
+        <button className="btn-slate w-full py-[0.55rem] rounded-sm text-[0.7rem] tracking-[1.2px] uppercase cursor-pointer font-semibold">
           Add to Cart
         </button>
       </div>
@@ -970,52 +634,37 @@ export default function Home() {
 
   // ────────────── SECTION HEADER ──────────────
   const SectionHeader = ({ title, subtitle, onScrollLeft, onScrollRight, showArrows = true }) => (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: '1.5rem',
-    }}>
+    <div className="flex items-center justify-between mb-6">
       <div>
         <h2
-          className="font-serif"
+          className="font-serif text-[1.75rem] font-bold m-0 tracking-[1px]"
           style={{
-            fontSize: '1.75rem',
-            fontWeight: '700',
             color: 'var(--text-primary)',
-            margin: 0,
-            letterSpacing: '1px',
           }}
         >
           {title}
         </h2>
         {subtitle && (
-          <p style={{
-            fontSize: '0.85rem',
-            color: 'var(--text-secondary)',
-            margin: '0.25rem 0 0',
-            fontFamily: 'var(--font-garamond)',
-            fontSize: '1rem',
-          }}>
+          <p
+            className="text-base m-0 mt-1"
+            style={{
+              color: 'var(--text-secondary)',
+              fontFamily: 'var(--font-garamond)',
+            }}
+          >
             {subtitle}
           </p>
         )}
       </div>
       {showArrows && (
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div className="flex gap-2">
           <button
             onClick={onScrollLeft}
+            className="w-[38px] h-[38px] rounded-full cursor-pointer flex items-center justify-center transition-all duration-200"
             style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
               border: '1px solid var(--border-light)',
               background: 'var(--bg-card)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.2s ease',
+              color: 'var(--text-primary)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'var(--bg-primary)';
@@ -1032,17 +681,11 @@ export default function Home() {
           </button>
           <button
             onClick={onScrollRight}
+            className="w-[38px] h-[38px] rounded-full cursor-pointer flex items-center justify-center transition-all duration-200"
             style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
               border: '1px solid var(--border-light)',
               background: 'var(--bg-card)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.2s ease',
+              color: 'var(--text-primary)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'var(--bg-primary)';
@@ -1065,38 +708,20 @@ export default function Home() {
   return (
     <>
       {/* ═══════════════ HERO BANNER SLIDER ═══════════════ */}
-      <section
-        id="hero-banner"
-        style={{
-          position: 'relative',
-          width: '100%',
-          overflow: 'hidden',
-        }}
-      >
+      <section id="hero-banner" className="relative w-full overflow-hidden">
         {/* Banner Slides */}
-        <div style={{
-          display: 'flex',
-          transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-          transform: `translateX(-${currentBanner * 100}%)`,
-        }}>
+        <div
+          className="flex transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
+          style={{
+            transform: `translateX(-${currentBanner * 100}%)`,
+          }}
+        >
           {banners.map((banner, idx) => (
-            <div
-              key={idx}
-              style={{
-                minWidth: '100%',
-                position: 'relative',
-              }}
-            >
+            <div key={idx} className="min-w-full relative">
               <img
                 src={banner}
                 alt={`Banner ${idx + 1}`}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                  maxHeight: '580px',
-                  objectFit: 'cover',
-                }}
+                className="w-full h-auto block max-h-[580px] object-cover"
               />
             </div>
           ))}
@@ -1105,87 +730,27 @@ export default function Home() {
         {/* Banner Navigation Arrows */}
         <button
           onClick={() => setCurrentBanner((prev) => (prev - 1 + banners.length) % banners.length)}
-          style={{
-            position: 'absolute',
-            left: '20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '44px',
-            height: '44px',
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.15)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.25)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            transition: 'all 0.3s ease',
-            zIndex: 3,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-          }}
+          className="absolute left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 backdrop-blur-[10px] border border-white/25 cursor-pointer flex items-center justify-center text-white transition-all duration-300 hover:bg-white/30 z-[3]"
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={() => setCurrentBanner((prev) => (prev + 1) % banners.length)}
-          style={{
-            position: 'absolute',
-            right: '20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '44px',
-            height: '44px',
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.15)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.25)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            transition: 'all 0.3s ease',
-            zIndex: 3,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.3)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-          }}
+          className="absolute right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/15 backdrop-blur-[10px] border border-white/25 cursor-pointer flex items-center justify-center text-white transition-all duration-300 hover:bg-white/30 z-[3]"
         >
           <ChevronRight size={20} />
         </button>
 
         {/* Dots */}
-        <div style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: '10px',
-          zIndex: 3,
-        }}>
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2.5 z-[3]">
           {banners.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentBanner(idx)}
+              className="h-2.5 rounded-[5px] border-0 cursor-pointer transition-all duration-350"
               style={{
                 width: currentBanner === idx ? '28px' : '10px',
-                height: '10px',
-                borderRadius: '5px',
-                border: 'none',
                 background: currentBanner === idx ? '#fff' : 'rgba(255,255,255,0.45)',
-                cursor: 'pointer',
-                transition: 'all 0.35s ease',
               }}
             />
           ))}
@@ -1193,106 +758,70 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ CATEGORY CIRCLES ═══════════════ */}
-      <section style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '2.5rem 1.5rem 1.5rem',
-      }}>
-
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>COLLECTIONS</span>
+      <section className="max-w-[1280px] mx-auto py-10 px-6 pb-6">
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">COLLECTIONS</span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-1.5 tracking-[1px]"
             style={{
               fontSize: 'clamp(1.85rem, 3.5vw, 2.35rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.35rem',
-              letterSpacing: '1px',
             }}
           >
             Shop By Category
           </h1>
           <p
-            className="font-garamond"
+            className="font-garamond text-[1.05rem] m-0"
             style={{
               color: 'var(--text-secondary)',
-              fontSize: '1.05rem',
-              margin: 0,
             }}
           >
             Explore handcrafted pieces crafted for every celebration
           </p>
         </div>
-        <div style={{
-          display: 'flex',
-          gap: '1.5rem',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}>
+        <div className="flex gap-6 justify-center flex-wrap">
           {categories.map((cat, idx) => (
             <button
               key={idx}
               onClick={() => setActiveCategory(idx)}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '0.5rem',
-                cursor: 'pointer',
-                background: 'none',
-                border: 'none',
-                padding: '0.25rem',
-                transition: 'transform 0.25s ease',
-                transform: activeCategory === idx ? 'scale(1.08)' : 'scale(1)',
-              }}
+              className={`flex flex-col items-center gap-2 cursor-pointer bg-transparent border-0 p-1 transition-transform duration-250 ${
+                activeCategory === idx ? 'scale-108' : 'scale-100'
+              }`}
             >
-              <div style={{
-                width: '120px',
-                height: '120px',
-                borderRadius: '50%',
-                padding: '3px',
-                border: activeCategory === idx
-                  ? '2px solid var(--text-primary)'
-                  : '1.5px solid var(--border-light)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s ease',
-                boxShadow: activeCategory === idx ? '0 0 0 3px rgba(197, 145, 74, 0.25), var(--shadow-md)' : 'none',
-                backgroundColor: 'var(--bg-card)',
-              }}>
-                <div style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  backgroundColor: 'var(--bg-circle-item)',
-                }}>
+              <div
+                className={`w-[120px] h-[120px] rounded-full p-[3px] flex items-center justify-center transition-all duration-300 ${
+                  activeCategory === idx ? 'border-2' : 'border-[1.5px]'
+                }`}
+                style={{
+                  borderColor: activeCategory === idx ? 'var(--text-primary)' : 'var(--border-light)',
+                  boxShadow: activeCategory === idx ? '0 0 0 3px rgba(197, 145, 74, 0.25), var(--shadow-md)' : 'none',
+                  backgroundColor: 'var(--bg-card)',
+                }}
+              >
+                <div
+                  className="w-full h-full rounded-full overflow-hidden"
+                  style={{
+                    backgroundColor: 'var(--bg-circle-item)',
+                  }}
+                >
                   <img
                     src={cat.image}
                     alt={cat.label}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      display: 'block',
-                      transition: 'transform 0.3s ease',
-                    }}
+                    className="w-full h-full object-cover block transition-transform duration-300"
                   />
                 </div>
               </div>
-              <span style={{
-                fontSize: '0.7rem',
-                fontWeight: activeCategory === idx ? '600' : '400',
-                color: activeCategory === idx ? 'var(--text-primary)' : 'var(--text-secondary)',
-                fontFamily: 'var(--font-sans)',
-                letterSpacing: '0.5px',
-                textTransform: 'uppercase',
-                transition: 'color 0.2s ease',
-              }}>
+              <span
+                className={`text-[0.7rem] uppercase tracking-[0.5px] transition-colors duration-200 ${
+                  activeCategory === idx ? 'font-semibold' : 'font-normal'
+                }`}
+                style={{
+                  color: activeCategory === idx ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  fontFamily: 'var(--font-sans)',
+                }}
+              >
                 {cat.label}
               </span>
             </button>
@@ -1301,11 +830,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ EARRINGS SECTION ═══════════════ */}
-      <section style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '2rem 1.5rem 3rem',
-      }}>
+      <section className="max-w-[1280px] mx-auto py-8 px-6 pb-12">
         <SectionHeader
           title="Earrings"
           subtitle="Handcrafted pieces to frame your beauty"
@@ -1315,35 +840,17 @@ export default function Home() {
 
         <div
           ref={earringRef}
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            overflowX: 'auto',
-            scrollBehavior: 'smooth',
-            paddingBottom: '1rem',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
+          className="flex gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {earrings.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+        <div className="text-center mt-6">
           <Link
             to="/earrings"
-            className="btn-outline-dark"
-            style={{
-              padding: '0.7rem 2.5rem',
-              borderRadius: '2px',
-              fontSize: '0.75rem',
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontWeight: '600',
-            }}
+            className="btn-outline-dark py-[0.7rem] px-10 rounded-sm text-[0.75rem] tracking-[1.5px] uppercase no-underline inline-block font-semibold"
           >
             View All Earrings
           </Link>
@@ -1351,38 +858,31 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ WATCH AND BUY ═══════════════ */}
-      <section style={{
-        backgroundColor: '#FFFFFF',
-        borderTop: '1px solid var(--border-light)',
-        borderBottom: '1px solid var(--border-light)',
-        padding: '3.5rem 0',
-      }}>
-        <div style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '0 1.5rem',
-          textAlign: 'center',
-        }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>FEATURED</span>
+      <section
+        className="bg-white py-14"
+        style={{
+          borderTop: '1px solid var(--border-light)',
+          borderBottom: '1px solid var(--border-light)',
+        }}
+      >
+        <div className="max-w-[1280px] mx-auto px-6 text-center">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">FEATURED</span>
           </div>
           <h2
-            className="font-serif"
+            className="font-serif text-[2rem] font-semibold mb-1.5 tracking-[1px]"
             style={{
-              fontSize: '2rem',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.35rem',
-              letterSpacing: '1px',
             }}
           >
             Watch and Buy
           </h2>
-          <p className="font-garamond" style={{
-            color: 'var(--text-secondary)',
-            fontSize: '1.05rem',
-            margin: '0 0 2.5rem',
-          }}>
+          <p
+            className="font-garamond text-[1.05rem] mb-10"
+            style={{
+              color: 'var(--text-secondary)',
+            }}
+          >
             See our collections in action — styled, worn, and loved
           </p>
 
@@ -1400,26 +900,16 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ TIMELESS GRACE BANNER ═══════════════ */}
-      <section style={{ width: '100%' }}>
+      <section className="w-full">
         <img
           src={b2}
           alt="Timeless Grace — Jewellery that celebrates every you"
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            maxHeight: '480px',
-            objectFit: 'cover',
-          }}
+          className="w-full h-auto block max-h-[480px] object-cover"
         />
       </section>
 
       {/* ═══════════════ NECKLACES SECTION ═══════════════ */}
-      <section style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '3rem 1.5rem',
-      }}>
+      <section className="max-w-[1280px] mx-auto py-12 px-6">
         <SectionHeader
           title="Necklaces"
           subtitle="Statement pieces for every occasion"
@@ -1429,35 +919,17 @@ export default function Home() {
 
         <div
           ref={necklaceRef}
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            overflowX: 'auto',
-            scrollBehavior: 'smooth',
-            paddingBottom: '1rem',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
+          className="flex gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {necklaces.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+        <div className="text-center mt-6">
           <Link
             to="/necklaces"
-            className="btn-outline-dark"
-            style={{
-              padding: '0.7rem 2.5rem',
-              borderRadius: '2px',
-              fontSize: '0.75rem',
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontWeight: '600',
-            }}
+            className="btn-outline-dark py-[0.7rem] px-10 rounded-sm text-[0.75rem] tracking-[1.5px] uppercase no-underline inline-block font-semibold"
           >
             View All Necklaces
           </Link>
@@ -1465,26 +937,16 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ TIMELESS RINGS BANNER ═══════════════ */}
-      <section style={{ width: '100%' }}>
+      <section className="w-full">
         <img
           src={b3}
           alt="Timeless Rings — Elegance in every detail"
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            maxHeight: '480px',
-            objectFit: 'cover',
-          }}
+          className="w-full h-auto block max-h-[480px] object-cover"
         />
       </section>
 
       {/* ═══════════════ RINGS SECTION ═══════════════ */}
-      <section style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '3rem 1.5rem',
-      }}>
+      <section className="max-w-[1280px] mx-auto py-12 px-6">
         <SectionHeader
           title="Rings"
           subtitle="Elegance adorning every finger"
@@ -1494,35 +956,17 @@ export default function Home() {
 
         <div
           ref={ringRef}
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            overflowX: 'auto',
-            scrollBehavior: 'smooth',
-            paddingBottom: '1rem',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
+          className="flex gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {rings.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+        <div className="text-center mt-6">
           <Link
             to="/rings"
-            className="btn-outline-dark"
-            style={{
-              padding: '0.7rem 2.5rem',
-              borderRadius: '2px',
-              fontSize: '0.75rem',
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontWeight: '600',
-            }}
+            className="btn-outline-dark py-[0.7rem] px-10 rounded-sm text-[0.75rem] tracking-[1.5px] uppercase no-underline inline-block font-semibold"
           >
             View All Rings
           </Link>
@@ -1530,85 +974,60 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ ABOUT US BANNER ═══════════════ */}
-      <section style={{ width: '100%' }}>
+      <section className="w-full">
         <img
           src={b4}
           alt="About Us — Where Elegance Meets Everyday Style"
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            maxHeight: '480px',
-            objectFit: 'cover',
-          }}
+          className="w-full h-auto block max-h-[480px] object-cover"
         />
       </section>
 
       {/* ═══════════════ TRUST FEATURES ═══════════════ */}
-      <section style={{
-        backgroundColor: 'var(--bg-card)',
-        borderTop: '1px solid var(--border-light)',
-        borderBottom: '1px solid var(--border-light)',
-        padding: '2.5rem 0',
-      }}>
-        <div style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '0 1.5rem',
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gap: '1.5rem',
-          }}>
+      <section
+        className="py-10"
+        style={{
+          backgroundColor: 'var(--bg-card)',
+          borderTop: '1px solid var(--border-light)',
+          borderBottom: '1px solid var(--border-light)',
+        }}
+      >
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
             {trustFeatures.map((feature, idx) => (
               <div
                 key={idx}
-                style={{
-                  textAlign: 'center',
-                  padding: '1.25rem 0.5rem',
-                  borderRadius: '4px',
-                  transition: 'all 0.3s ease',
-                  cursor: 'default',
-                }}
+                className="text-center py-5 px-2 rounded transition-all duration-300 cursor-default hover:-translate-y-1"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
-                  e.currentTarget.style.transform = 'translateY(-3px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #1C140E 0%, #2F2117 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 0.75rem',
-                }}>
-                  <feature.icon size={20} style={{ color: '#FEF0E0' }} />
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"
+                  style={{
+                    background: 'linear-gradient(135deg, #1C140E 0%, #2F2117 100%)',
+                  }}
+                >
+                  <feature.icon size={20} className="text-[#FEF0E0]" />
                 </div>
-                <h4 style={{
-                  fontSize: '0.8rem',
-                  fontWeight: '600',
-                  color: 'var(--text-primary)',
-                  margin: '0 0 0.25rem',
-                  fontFamily: 'var(--font-sans)',
-                  letterSpacing: '0.5px',
-                  textTransform: 'uppercase',
-                }}>
+                <h4
+                  className="text-[0.8rem] font-semibold mb-1 uppercase tracking-[0.5px]"
+                  style={{
+                    color: 'var(--text-primary)',
+                    fontFamily: 'var(--font-sans)',
+                  }}
+                >
                   {feature.label}
                 </h4>
-                <p style={{
-                  fontSize: '0.75rem',
-                  color: 'var(--text-secondary)',
-                  margin: 0,
-                  fontFamily: 'var(--font-sans)',
-                }}>
+                <p
+                  className="text-[0.75rem] m-0"
+                  style={{
+                    color: 'var(--text-secondary)',
+                    fontFamily: 'var(--font-sans)',
+                  }}
+                >
                   {feature.desc}
                 </p>
               </div>
@@ -1618,73 +1037,50 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ CUSTOMER REVIEWS ═══════════════ */}
-      <section style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '4rem 1.5rem',
-      }}>
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)' }}>✦</span>
+      <section className="max-w-[1280px] mx-auto py-16 px-6">
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="text-[1.2rem]" style={{ color: 'var(--text-secondary)' }}>✦</span>
           </div>
           <h2
-            className="font-serif"
+            className="font-serif text-[2rem] font-bold mb-1 tracking-[1px]"
             style={{
-              fontSize: '2rem',
-              fontWeight: '700',
               color: 'var(--text-primary)',
-              margin: '0 0 0.25rem',
-              letterSpacing: '1px',
             }}
           >
             What Our Customers Say
           </h2>
-          <p className="font-garamond" style={{
-            color: 'var(--text-secondary)',
-            fontSize: '1.05rem',
-            margin: 0,
-          }}>
+          <p
+            className="font-garamond text-[1.05rem] m-0"
+            style={{
+              color: 'var(--text-secondary)',
+            }}
+          >
             Real stories from our valued patrons
           </p>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '1.25rem',
-        }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {reviews.map((review, idx) => (
             <div
               key={idx}
+              className="rounded-md p-7 px-6 transition-all duration-300 relative hover:-translate-y-1 hover:shadow-lg"
               style={{
                 backgroundColor: 'var(--bg-card)',
                 border: '1px solid var(--border-light)',
-                borderRadius: '6px',
-                padding: '1.75rem 1.5rem',
-                transition: 'all 0.3s ease',
-                position: 'relative',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-                e.currentTarget.style.transform = 'translateY(-4px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               {/* Quote icon */}
               <Quote
                 size={28}
+                className="rotate-180 mb-3"
                 style={{
                   color: 'var(--border-light)',
-                  marginBottom: '0.75rem',
-                  transform: 'rotate(180deg)',
                 }}
               />
 
               {/* Stars */}
-              <div style={{ display: 'flex', gap: '2px', marginBottom: '0.75rem' }}>
+              <div className="flex gap-0.5 mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
@@ -1695,48 +1091,42 @@ export default function Home() {
                 ))}
               </div>
 
-              <p style={{
-                fontSize: '0.85rem',
-                color: 'var(--text-secondary)',
-                lineHeight: '1.7',
-                margin: '0 0 1.25rem',
-                fontFamily: 'var(--font-sans)',
-              }}>
+              <p
+                className="text-[0.85rem] leading-[1.7] mb-5"
+                style={{
+                  color: 'var(--text-secondary)',
+                  fontFamily: 'var(--font-sans)',
+                }}
+              >
                 {review.text}
               </p>
 
               {/* Author */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <div style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #1C140E 0%, #2F2117 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
-                  color: '#FEF0E0',
-                  letterSpacing: '1px',
-                }}>
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-[0.75rem] font-bold text-[#FEF0E0] tracking-[1px]"
+                  style={{
+                    background: 'linear-gradient(135deg, #1C140E 0%, #2F2117 100%)',
+                  }}
+                >
                   {review.avatar}
                 </div>
                 <div>
-                  <p style={{
-                    fontSize: '0.825rem',
-                    fontWeight: '600',
-                    color: 'var(--text-primary)',
-                    margin: 0,
-                    fontFamily: 'var(--font-sans)',
-                  }}>
+                  <p
+                    className="text-[0.825rem] font-semibold m-0"
+                    style={{
+                      color: 'var(--text-primary)',
+                      fontFamily: 'var(--font-sans)',
+                    }}
+                  >
                     {review.name}
                   </p>
-                  <p style={{
-                    fontSize: '0.7rem',
-                    color: 'var(--text-secondary)',
-                    margin: '0.15rem 0 0',
-                  }}>
+                  <p
+                    className="text-[0.7rem] mt-0.5 m-0"
+                    style={{
+                      color: 'var(--text-secondary)',
+                    }}
+                  >
                     {review.location}
                   </p>
                 </div>
@@ -1747,38 +1137,31 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ FOLLOW US ON INSTAGRAM ═══════════════ */}
-      <section style={{
-        backgroundColor: '#FFFFFF',
-        borderTop: '1px solid var(--border-light)',
-        borderBottom: '1px solid var(--border-light)',
-        padding: '3.5rem 0',
-      }}>
-        <div style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '0 1.5rem',
-          textAlign: 'center',
-        }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <Camera size={18} style={{ color: '#C5914A' }} />
+      <section
+        className="bg-white py-14"
+        style={{
+          borderTop: '1px solid var(--border-light)',
+          borderBottom: '1px solid var(--border-light)',
+        }}
+      >
+        <div className="max-w-[1280px] mx-auto px-6 text-center">
+          <div className="divider-ornament mb-3">
+            <Camera size={18} className="text-[#C5914A]" />
           </div>
           <h2
-            className="font-serif"
+            className="font-serif text-[1.75rem] font-semibold mb-1.5 tracking-[1px]"
             style={{
-              fontSize: '1.75rem',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.35rem',
-              letterSpacing: '1px',
             }}
           >
             Follow Us on Instagram
           </h2>
-          <p className="font-garamond" style={{
-            color: 'var(--text-secondary)',
-            fontSize: '1rem',
-            margin: '0 0 2rem',
-          }}>
+          <p
+            className="font-garamond text-base mb-8"
+            style={{
+              color: 'var(--text-secondary)',
+            }}
+          >
             @jewerkart — Join our community of jewelry lovers
           </p>
 
@@ -1797,29 +1180,17 @@ export default function Home() {
                 href="https://instagram.com/jewerkart"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="aspect-square rounded-md overflow-hidden relative bg-[#FFF9F2] cursor-pointer block transition-all duration-300 no-underline hover:scale-105 hover:shadow-[0_8px_24px_rgba(197,145,74,0.25)]"
                 style={{
-                  aspectRatio: '1',
-                  borderRadius: '6px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  backgroundColor: '#FFF9F2',
                   border: '1px solid var(--border-light)',
-                  cursor: 'pointer',
-                  display: 'block',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  textDecoration: 'none',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(197, 145, 74, 0.25)';
                   const img = e.currentTarget.querySelector('img');
                   if (img) img.style.transform = 'scale(1.08)';
                   const overlay = e.currentTarget.querySelector('.insta-overlay');
                   if (overlay) overlay.style.opacity = '1';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = 'none';
                   const img = e.currentTarget.querySelector('img');
                   if (img) img.style.transform = 'scale(1)';
                   const overlay = e.currentTarget.querySelector('.insta-overlay');
@@ -1830,56 +1201,15 @@ export default function Home() {
                 <img
                   src={item.image}
                   alt={item.alt}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    transition: 'transform 0.4s ease',
-                  }}
+                  className="w-full h-full object-cover block transition-transform duration-400"
                 />
 
                 {/* Hover overlay */}
-                <div
-                  className="insta-overlay"
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(28, 20, 14, 0.65)',
-                    backdropFilter: 'blur(2px)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.4rem',
-                    opacity: 0,
-                    transition: 'opacity 0.3s ease',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '38px',
-                      height: '38px',
-                      borderRadius: '50%',
-                      background: 'rgba(254, 240, 224, 0.95)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#1C140E',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                    }}
-                  >
+                <div className="insta-overlay absolute inset-0 bg-[#1C140E]/65 backdrop-blur-[2px] flex flex-col items-center justify-center gap-1.5 opacity-0 transition-opacity duration-300">
+                  <div className="w-[38px] h-[38px] rounded-full bg-[#FEF0E0]/95 flex items-center justify-center text-[#1C140E] shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
                     <Instagram size={18} />
                   </div>
-                  <span
-                    style={{
-                      color: '#FEF0E0',
-                      fontSize: '0.65rem',
-                      fontWeight: '600',
-                      letterSpacing: '1px',
-                      textTransform: 'uppercase',
-                    }}
-                  >
+                  <span className="text-[#FEF0E0] text-[0.65rem] font-semibold tracking-[1px] uppercase">
                     View Post
                   </span>
                 </div>
@@ -1892,20 +1222,7 @@ export default function Home() {
             href="https://instagram.com/jewerkart"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-gold"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 2rem',
-              borderRadius: '2px',
-              fontSize: '0.75rem',
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              marginTop: '2rem',
-              fontWeight: '600',
-            }}
+            className="btn-gold inline-flex items-center gap-2 py-3 px-8 rounded-sm text-[0.75rem] tracking-[1.5px] uppercase no-underline mt-8 font-semibold"
           >
             <Instagram size={16} />
             Follow @jewerkart

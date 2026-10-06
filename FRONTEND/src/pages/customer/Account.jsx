@@ -24,41 +24,30 @@ const Account = () => {
 
   return (
     <main
+      className="min-h-[calc(100vh-300px)] py-8 px-6"
       style={{
-        minHeight: 'calc(100vh - 300px)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2rem 1.5rem',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-        }}
-      >
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>MY ACCOUNT</span>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">MY ACCOUNT</span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-1.5 tracking-[1px]"
             style={{
               fontSize: 'clamp(1.85rem, 3.5vw, 2.35rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.35rem',
-              letterSpacing: '1px',
             }}
           >
             Account Dashboard
           </h1>
           <p
-            className="font-garamond"
+            className="font-garamond text-[1.05rem] m-0"
             style={{
               color: 'var(--text-secondary)',
-              fontSize: '1.05rem',
-              margin: 0,
             }}
           >
             Manage your profile and preferences
@@ -66,44 +55,26 @@ const Account = () => {
         </div>
 
         {/* Two Column Layout */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '280px 1fr',
-            gap: '2rem',
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-8">
           {/* Left Sidebar */}
           <aside
-            className="bg-theme-card"
+            className="bg-theme-card p-6 rounded-lg h-fit"
             style={{
-              padding: '1.5rem',
-              borderRadius: '8px',
               border: '1px solid var(--border-light)',
-              height: 'fit-content',
             }}
           >
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <nav className="flex flex-col gap-2">
               {menuItems.map((item) => {
                 const Icon = item.icon;
                 return (
                   <button
                     key={item.id}
                     onClick={() => setActiveSection(item.id)}
+                    className="flex items-center gap-3 py-3 px-4 border-none rounded cursor-pointer text-[0.9rem] text-left transition-all duration-200"
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.75rem',
-                      padding: '0.75rem 1rem',
                       background: activeSection === item.id ? 'var(--bg-secondary)' : 'transparent',
-                      border: 'none',
-                      borderRadius: '4px',
                       color: activeSection === item.id ? 'var(--text-gold)' : 'var(--text-primary)',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
                       fontWeight: activeSection === item.id ? '600' : '500',
-                      transition: 'all 0.2s ease',
-                      textAlign: 'left',
                       fontFamily: 'var(--font-sans)',
                     }}
                     onMouseEnter={(e) => {
@@ -124,24 +95,14 @@ const Account = () => {
               })}
             </nav>
 
-            <div style={{ borderTop: '1px solid var(--border-light)', margin: '1rem 0', paddingTop: '1rem' }}>
+            <div
+              className="my-4 pt-4"
+              style={{ borderTop: '1px solid var(--border-light)' }}
+            >
               <button
                 onClick={handleLogoutClick}
+                className="flex items-center gap-3 w-full py-3 px-4 bg-transparent border-none rounded text-[#C41E3A] cursor-pointer text-[0.9rem] font-semibold transition-all duration-200 text-left"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  background: 'transparent',
-                  border: 'none',
-                  borderRadius: '4px',
-                  color: '#C41E3A',
-                  cursor: 'pointer',
-                  fontSize: '0.9rem',
-                  fontWeight: '600',
-                  transition: 'all 0.2s ease',
-                  textAlign: 'left',
                   fontFamily: 'var(--font-sans)',
                 }}
                 onMouseEnter={(e) => {
@@ -161,49 +122,37 @@ const Account = () => {
           <div>
             {activeSection === 'profile' && (
               <div
-                className="bg-theme-card"
+                className="bg-theme-card p-8 rounded-lg"
                 style={{
-                  padding: '2rem',
-                  borderRadius: '8px',
                   border: '1px solid var(--border-light)',
                   boxShadow: 'var(--shadow-sm)',
                 }}
               >
                 <h2
-                  className="font-serif"
+                  className="font-serif text-[1.5rem] font-semibold mb-6"
                   style={{
-                    fontSize: '1.5rem',
-                    fontWeight: '600',
                     color: 'var(--text-primary)',
-                    margin: '0 0 1.5rem',
                   }}
                 >
                   Profile Information
                 </h2>
 
-                <div style={{ display: 'grid', gap: '1.5rem' }}>
+                <div className="grid gap-6">
                   <div>
                     <label
+                      className="block text-[0.85rem] font-semibold mb-2 uppercase tracking-[0.5px]"
                       style={{
-                        display: 'block',
-                        fontSize: '0.85rem',
-                        fontWeight: '600',
                         color: 'var(--text-secondary)',
-                        marginBottom: '0.5rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.5px',
                       }}
                     >
                       Full Name
                     </label>
                     <div
+                      className="py-3 px-4 rounded text-base"
                       style={{
-                        padding: '0.75rem 1rem',
                         backgroundColor: 'var(--bg-secondary)',
                         border: '1px solid var(--border-light)',
-                        borderRadius: '4px',
                         color: 'var(--text-primary)',
-                        fontSize: '1rem',
                       }}
                     >
                       {user?.name || 'Not provided'}
@@ -212,26 +161,19 @@ const Account = () => {
 
                   <div>
                     <label
+                      className="block text-[0.85rem] font-semibold mb-2 uppercase tracking-[0.5px]"
                       style={{
-                        display: 'block',
-                        fontSize: '0.85rem',
-                        fontWeight: '600',
                         color: 'var(--text-secondary)',
-                        marginBottom: '0.5rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.5px',
                       }}
                     >
                       Email Address
                     </label>
                     <div
+                      className="py-3 px-4 rounded text-base"
                       style={{
-                        padding: '0.75rem 1rem',
                         backgroundColor: 'var(--bg-secondary)',
                         border: '1px solid var(--border-light)',
-                        borderRadius: '4px',
                         color: 'var(--text-primary)',
-                        fontSize: '1rem',
                       }}
                     >
                       {user?.email || 'Not provided'}
@@ -240,26 +182,19 @@ const Account = () => {
 
                   <div>
                     <label
+                      className="block text-[0.85rem] font-semibold mb-2 uppercase tracking-[0.5px]"
                       style={{
-                        display: 'block',
-                        fontSize: '0.85rem',
-                        fontWeight: '600',
                         color: 'var(--text-secondary)',
-                        marginBottom: '0.5rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.5px',
                       }}
                     >
                       Member Since
                     </label>
                     <div
+                      className="py-3 px-4 rounded text-base"
                       style={{
-                        padding: '0.75rem 1rem',
                         backgroundColor: 'var(--bg-secondary)',
                         border: '1px solid var(--border-light)',
-                        borderRadius: '4px',
                         color: 'var(--text-primary)',
-                        fontSize: '1rem',
                       }}
                     >
                       {new Date().toLocaleDateString()}
@@ -271,32 +206,29 @@ const Account = () => {
 
             {activeSection === 'orders' && (
               <div
-                className="bg-theme-card"
+                className="bg-theme-card p-8 rounded-lg text-center"
                 style={{
-                  padding: '2rem',
-                  borderRadius: '8px',
                   border: '1px solid var(--border-light)',
                   boxShadow: 'var(--shadow-sm)',
-                  textAlign: 'center',
                 }}
               >
-                <Package size={48} style={{ color: 'var(--border-light)', margin: '0 auto 1rem', display: 'block' }} />
+                <Package
+                  size={48}
+                  className="mx-auto mb-4 block"
+                  style={{ color: 'var(--border-light)' }}
+                />
                 <h2
-                  className="font-serif"
+                  className="font-serif text-[1.5rem] mb-2"
                   style={{
-                    fontSize: '1.5rem',
                     color: 'var(--text-primary)',
-                    margin: '0 0 0.5rem',
                   }}
                 >
                   No Orders Yet
                 </h2>
                 <p
-                  className="font-garamond"
+                  className="font-garamond text-base m-0"
                   style={{
                     color: 'var(--text-secondary)',
-                    fontSize: '1rem',
-                    margin: 0,
                   }}
                 >
                   Your order history will appear here once you make a purchase.
@@ -306,32 +238,29 @@ const Account = () => {
 
             {activeSection === 'addresses' && (
               <div
-                className="bg-theme-card"
+                className="bg-theme-card p-8 rounded-lg text-center"
                 style={{
-                  padding: '2rem',
-                  borderRadius: '8px',
                   border: '1px solid var(--border-light)',
                   boxShadow: 'var(--shadow-sm)',
-                  textAlign: 'center',
                 }}
               >
-                <MapPin size={48} style={{ color: 'var(--border-light)', margin: '0 auto 1rem', display: 'block' }} />
+                <MapPin
+                  size={48}
+                  className="mx-auto mb-4 block"
+                  style={{ color: 'var(--border-light)' }}
+                />
                 <h2
-                  className="font-serif"
+                  className="font-serif text-[1.5rem] mb-2"
                   style={{
-                    fontSize: '1.5rem',
                     color: 'var(--text-primary)',
-                    margin: '0 0 0.5rem',
                   }}
                 >
                   No Addresses Saved
                 </h2>
                 <p
-                  className="font-garamond"
+                  className="font-garamond text-base m-0"
                   style={{
                     color: 'var(--text-secondary)',
-                    fontSize: '1rem',
-                    margin: 0,
                   }}
                 >
                   Add delivery addresses during checkout for quick ordering.

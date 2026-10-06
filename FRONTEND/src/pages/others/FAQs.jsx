@@ -108,42 +108,30 @@ const FAQs = () => {
 
   return (
     <main
+      className="min-h-[calc(100vh-250px)] pt-12 px-6 pb-20"
       style={{
-        minHeight: 'calc(100vh - 250px)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '3rem 1.5rem 5rem',
       }}
     >
-      <div
-        style={{
-          maxWidth: '960px',
-          margin: '0 auto',
-        }}
-      >
+      <div className="max-w-[960px] mx-auto">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>HELP & ADVICE</span>
+        <div className="text-center mb-12">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">HELP & ADVICE</span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2 tracking-[1px]"
             style={{
               fontSize: 'clamp(2rem, 3.8vw, 2.75rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
-              letterSpacing: '1px',
             }}
           >
             Frequently Asked Questions
           </h1>
           <p
-            className="font-garamond"
+            className="font-garamond text-[1.15rem] mx-auto max-w-[620px]"
             style={{
               color: 'var(--text-secondary)',
-              fontSize: '1.15rem',
-              margin: '0 auto',
-              maxWidth: '620px',
             }}
           >
             Everything you need to know about our heirloom craftsmanship, hallmark certification, insured delivery, and lifetime care.
@@ -151,31 +139,23 @@ const FAQs = () => {
         </div>
 
         {/* Search Bar */}
-        <div style={{ maxWidth: '640px', margin: '0 auto 2.5rem' }}>
+        <div className="max-w-[640px] mx-auto mb-10">
           <div
+            className="relative rounded-full flex items-center py-2.5 px-5"
             style={{
-              position: 'relative',
               backgroundColor: 'var(--bg-card)',
-              borderRadius: '30px',
               border: '1px solid var(--border-light)',
               boxShadow: 'var(--shadow-sm)',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0.6rem 1.25rem',
             }}
           >
-            <Search size={18} style={{ color: 'var(--text-secondary)', marginRight: '0.75rem' }} />
+            <Search size={18} className="mr-3" style={{ color: 'var(--text-secondary)' }} />
             <input
               type="text"
               placeholder="Search by topic (e.g. hallmarking, delivery time, return policy)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full border-none outline-none text-[0.95rem] bg-transparent"
               style={{
-                width: '100%',
-                border: 'none',
-                outline: 'none',
-                fontSize: '0.95rem',
-                backgroundColor: 'transparent',
                 color: 'var(--text-primary)',
                 fontFamily: 'var(--font-sans)',
               }}
@@ -183,13 +163,9 @@ const FAQs = () => {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
+                className="bg-transparent border-none text-[0.8rem] cursor-pointer py-0.5 px-1.5"
                 style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '0.8rem',
                   color: 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  padding: '2px 6px',
                 }}
               >
                 Clear
@@ -199,32 +175,20 @@ const FAQs = () => {
         </div>
 
         {/* Category Pills */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '0.6rem',
-            flexWrap: 'wrap',
-            marginBottom: '2.5rem',
-          }}
-        >
+        <div className="flex justify-center gap-2.5 flex-wrap mb-10">
           {CATEGORIES.map((cat) => {
             const isSelected = activeCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
+                className={`py-2 px-4.5 rounded-full text-[0.8rem] cursor-pointer transition-all duration-200 ${
+                  isSelected ? 'font-semibold shadow-[0_2px_8px_rgba(28,20,14,0.15)]' : 'font-medium'
+                }`}
                 style={{
-                  padding: '0.55rem 1.15rem',
-                  borderRadius: '20px',
                   border: isSelected ? '1px solid var(--theme-gold)' : '1px solid var(--border-light)',
                   backgroundColor: isSelected ? 'var(--text-primary)' : 'var(--bg-card)',
                   color: isSelected ? '#FEF0E0' : 'var(--text-primary)',
-                  fontSize: '0.8rem',
-                  fontWeight: isSelected ? '600' : '500',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  boxShadow: isSelected ? '0 2px 8px rgba(28,20,14,0.15)' : 'none',
                 }}
               >
                 {cat.label}
@@ -234,60 +198,39 @@ const FAQs = () => {
         </div>
 
         {/* Accordion Questions List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3.5rem' }}>
+        <div className="flex flex-col gap-4 mb-14">
           {filteredFaqs.length > 0 ? (
             filteredFaqs.map((faq) => {
               const isOpen = openIds.includes(faq.id);
               return (
                 <div
                   key={faq.id}
+                  className="rounded-lg overflow-hidden transition-[border-color] duration-200"
                   style={{
                     backgroundColor: 'var(--bg-card)',
-                    borderRadius: '8px',
                     border: '1px solid var(--border-light)',
-                    overflow: 'hidden',
                     boxShadow: 'var(--shadow-sm)',
-                    transition: 'border-color 0.2s ease',
                   }}
                 >
                   <button
                     onClick={() => toggleAccordion(faq.id)}
-                    style={{
-                      width: '100%',
-                      padding: '1.25rem 1.5rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      gap: '1rem',
-                    }}
+                    className="w-full py-5 px-6 flex items-center justify-between bg-transparent border-none cursor-pointer text-left gap-4"
                   >
                     <span
+                      className="text-base font-semibold leading-[1.5]"
                       style={{
-                        fontSize: '1rem',
-                        fontWeight: '600',
                         color: isOpen ? 'var(--theme-gold)' : 'var(--text-primary)',
                         fontFamily: 'var(--font-sans)',
-                        lineHeight: '1.5',
                       }}
                     >
                       {faq.question}
                     </span>
                     <div
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-250 ${
+                        isOpen ? 'rotate-180' : 'rotate-0'
+                      }`}
                       style={{
-                        width: '28px',
-                        height: '28px',
-                        borderRadius: '50%',
                         backgroundColor: isOpen ? 'var(--theme-champagne)' : 'transparent',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.25s ease',
                         color: isOpen ? 'var(--theme-gold)' : 'var(--text-secondary)',
                       }}
                     >
@@ -297,18 +240,16 @@ const FAQs = () => {
 
                   {isOpen && (
                     <div
+                      className="px-6 pb-5 pt-0"
                       style={{
-                        padding: '0 1.5rem 1.35rem',
                         borderTop: '1px solid var(--border-light)',
                         backgroundColor: 'var(--theme-champagne-light)',
                       }}
                     >
                       <p
+                        className="mt-4 mb-0 text-[0.9rem] leading-[1.7]"
                         style={{
-                          margin: '1rem 0 0',
-                          fontSize: '0.9rem',
                           color: 'var(--text-secondary)',
-                          lineHeight: '1.7',
                           fontFamily: 'var(--font-sans)',
                         }}
                       >
@@ -321,19 +262,17 @@ const FAQs = () => {
             })
           ) : (
             <div
+              className="text-center py-12 px-6 rounded-lg"
               style={{
-                textAlign: 'center',
-                padding: '3rem 1.5rem',
                 backgroundColor: 'var(--bg-card)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
               }}
             >
-              <HelpCircle size={40} style={{ color: 'var(--border-light)', margin: '0 auto 0.75rem', display: 'block' }} />
-              <h3 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--text-primary)' }}>
+              <HelpCircle size={40} className="mx-auto mb-3 block" style={{ color: 'var(--border-light)' }} />
+              <h3 className="font-serif text-[1.25rem] m-0 mb-2" style={{ color: 'var(--text-primary)' }}>
                 No matching answers found
               </h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+              <p className="text-[0.9rem] m-0" style={{ color: 'var(--text-secondary)' }}>
                 Try searching for other keywords or speak directly to our atelier concierge.
               </p>
             </div>
@@ -342,60 +281,32 @@ const FAQs = () => {
 
         {/* Bottom Help Banner */}
         <div
+          className="rounded-xl py-10 px-8 text-center relative"
           style={{
-            backgroundColor: 'var(--bg-card)',
-            borderRadius: '12px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem 2rem',
-            textAlign: 'center',
             boxShadow: 'var(--shadow-md)',
-            position: 'relative',
             background: 'linear-gradient(135deg, #FFFDF9 0%, #FEF0E0 100%)',
           }}
         >
-          <Sparkles size={28} style={{ color: 'var(--theme-gold)', margin: '0 auto 0.75rem' }} />
-          <h3 className="font-serif" style={{ fontSize: '1.5rem', margin: '0 0 0.5rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+          <Sparkles size={28} className="mx-auto mb-3" style={{ color: 'var(--theme-gold)' }} />
+          <h3 className="font-serif text-[1.5rem] m-0 mb-2 font-bold" style={{ color: 'var(--text-primary)' }}>
             Still have questions? We are here to help.
           </h3>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', maxWidth: '540px', margin: '0 auto 1.5rem' }}>
+          <p className="text-[0.95rem] max-w-[540px] mx-auto mb-6" style={{ color: 'var(--text-secondary)' }}>
             Our team of certified gemologists and jewellery stylists are available Monday to Saturday, 10 AM to 7 PM IST.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="flex justify-center gap-4 flex-wrap">
             <Link
               to="/contact"
-              className="btn-slate"
-              style={{
-                padding: '0.75rem 1.75rem',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-              }}
+              className="btn-slate py-3 px-7 text-[0.85rem] font-semibold tracking-[1px] uppercase rounded no-underline inline-flex items-center gap-2"
             >
               <MessageCircle size={16} /> Contact Concierge
             </Link>
 
             <a
               href="tel:+919876543210"
-              className="btn-gold"
-              style={{
-                padding: '0.75rem 1.75rem',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-              }}
+              className="btn-gold py-3 px-7 text-[0.85rem] font-semibold tracking-[1px] uppercase rounded no-underline inline-flex items-center gap-2"
             >
               <Phone size={16} /> Call +91 98765 43210
             </a>

@@ -78,93 +78,73 @@ const Cart = () => {
 
   return (
     <main
+      className="min-h-screen py-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div className="max-w-[1200px] mx-auto">
         
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               YOUR SELECTIONS
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2"
             style={{
               fontSize: 'clamp(2rem, 3.8vw, 2.75rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             Shopping Bag
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0 }}>
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             {cartItems.length} handcrafted creation{cartItems.length !== 1 ? 's' : ''} in your royal bag
           </p>
         </div>
 
         {cartItems.length === 0 ? (
           <div
-            className="bg-theme-card"
+            className="bg-theme-card p-16 px-8 rounded-2xl text-center"
             style={{
-              padding: '4rem 2rem',
-              borderRadius: '16px',
               border: '1px solid var(--border-light)',
-              textAlign: 'center',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
-            <ShoppingBag size={48} style={{ color: 'var(--theme-gold)', margin: '0 auto 1.25rem' }} />
-            <h2 className="font-serif" style={{ fontSize: '1.75rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+            <ShoppingBag size={48} className="mx-auto mb-5" style={{ color: 'var(--theme-gold)' }} />
+            <h2 className="font-serif text-[1.75rem] mb-2" style={{ color: 'var(--text-primary)' }}>
               Your Bag is Currently Empty
             </h2>
-            <p style={{ color: 'var(--text-secondary)', maxWidth: '440px', margin: '0 auto 2rem' }}>
+            <p className="max-w-[440px] mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
               Discover timeless hallmark 925 sterling silver and 22K gold vermeil treasures designed to be cherished forever.
             </p>
             <Link
               to="/shop"
-              className="btn-slate"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '0.85rem 2rem',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontWeight: '600',
-              }}
+              className="btn-slate inline-flex items-center gap-2 py-[0.85rem] px-8 rounded-md no-underline font-semibold"
             >
               Explore Fine Jewellery <ArrowRight size={16} />
             </Link>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '2.5rem' }}>
+          <div className="grid grid-cols-12 gap-10">
             
             {/* Left: Cart Items List */}
-            <div style={{ gridColumn: 'span 12' }} className="md:col-span-8">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div className="col-span-12 md:col-span-8">
+              <div className="flex flex-col gap-5">
                 
                 {/* Armored Free Delivery Notice */}
                 <div
+                  className="py-[0.85rem] px-5 rounded-lg flex items-center gap-2.5 text-[0.85rem]"
                   style={{
                     backgroundColor: 'var(--theme-champagne-light)',
                     border: '1px solid var(--border-light)',
-                    padding: '0.85rem 1.25rem',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
                     color: 'var(--text-primary)',
-                    fontSize: '0.85rem',
                   }}
                 >
-                  <Truck size={18} style={{ color: 'var(--theme-gold)', flexShrink: 0 }} />
+                  <Truck size={18} className="shrink-0" style={{ color: 'var(--theme-gold)' }} />
                   <span>
                     Your order qualifies for <strong>Complimentary Armored Transit</strong> with tamper-evident seal and delivery OTP.
                   </span>
@@ -173,53 +153,41 @@ const Cart = () => {
                 {cartItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-theme-card"
+                    className="bg-theme-card rounded-xl p-5 flex gap-6 items-center"
                     style={{
-                      borderRadius: '12px',
                       border: '1px solid var(--border-light)',
-                      padding: '1.25rem',
-                      display: 'flex',
-                      gap: '1.5rem',
                       boxShadow: 'var(--shadow-sm)',
-                      alignItems: 'center',
                     }}
                   >
                     {/* Item Image */}
                     <div
+                      className="w-[100px] h-[100px] rounded-lg overflow-hidden shrink-0"
                       style={{
-                        width: '100px',
-                        height: '100px',
-                        borderRadius: '8px',
                         backgroundColor: 'var(--bg-circle-item)',
-                        overflow: 'hidden',
-                        flexShrink: 0,
                       }}
                     >
-                      <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
 
                     {/* Details */}
-                    <div style={{ flexGrow: 1 }}>
+                    <div className="grow">
                       <h3
-                        className="font-serif"
+                        className="font-serif text-[1.1rem] font-semibold mb-[0.35rem]"
                         style={{
-                          fontSize: '1.1rem',
-                          fontWeight: '600',
                           color: 'var(--text-primary)',
-                          margin: '0 0 0.35rem',
                         }}
                       >
                         {item.name}
                       </h3>
-                      <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: '0 0 0.75rem' }}>
+                      <p className="text-[0.8rem] mb-3" style={{ color: 'var(--text-secondary)' }}>
                         {item.purity}
                       </p>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                        <span style={{ fontSize: '1.15rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-[1.15rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                           ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                         </span>
                         {item.originalPrice && (
-                          <span style={{ fontSize: '0.85rem', color: '#9CA3AF', textDecoration: 'line-through' }}>
+                          <span className="text-[0.85rem] text-gray-400 line-through">
                             ₹{(item.originalPrice * item.quantity).toLocaleString('en-IN')}
                           </span>
                         )}
@@ -227,17 +195,13 @@ const Cart = () => {
                     </div>
 
                     {/* Stepper & Remove */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1rem' }}>
+                    <div className="flex flex-col items-end gap-4">
                       <button
                         onClick={() => handleRemove(item.id)}
                         aria-label="Remove item"
+                        className="bg-transparent border-0 cursor-pointer p-1 transition-colors duration-200"
                         style={{
-                          background: 'none',
-                          border: 'none',
                           color: 'var(--text-secondary)',
-                          cursor: 'pointer',
-                          padding: '4px',
-                          transition: 'color 0.2s',
                         }}
                         onMouseEnter={(e) => (e.currentTarget.style.color = '#EF4444')}
                         onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
@@ -246,36 +210,28 @@ const Cart = () => {
                       </button>
 
                       <div
+                        className="flex items-center rounded-md"
                         style={{
-                          display: 'flex',
-                          alignItems: 'center',
                           border: '1px solid var(--border-light)',
-                          borderRadius: '6px',
                           backgroundColor: 'var(--bg-card-warm)',
                         }}
                       >
                         <button
                           onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                          className="py-[0.35rem] px-[0.65rem] bg-transparent border-0 cursor-pointer"
                           style={{
-                            padding: '0.35rem 0.65rem',
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
                             color: 'var(--text-primary)',
                           }}
                         >
                           <Minus size={13} />
                         </button>
-                        <span style={{ padding: '0 0.5rem', fontSize: '0.85rem', fontWeight: '600' }}>
+                        <span className="px-2 text-[0.85rem] font-semibold">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                          className="py-[0.35rem] px-[0.65rem] bg-transparent border-0 cursor-pointer"
                           style={{
-                            padding: '0.35rem 0.65rem',
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
                             color: 'var(--text-primary)',
                           }}
                         >
@@ -289,100 +245,80 @@ const Cart = () => {
             </div>
 
             {/* Right: Order Summary Sidebar */}
-            <div style={{ gridColumn: 'span 12' }} className="md:col-span-4">
+            <div className="col-span-12 md:col-span-4">
               <div
-                className="bg-theme-card"
+                className="bg-theme-card rounded-xl p-8 sticky top-8"
                 style={{
-                  borderRadius: '12px',
                   border: '1px solid var(--border-light)',
-                  padding: '2rem',
                   boxShadow: 'var(--shadow-sm)',
-                  position: 'sticky',
-                  top: '2rem',
                 }}
               >
-                <h2 className="font-serif" style={{ fontSize: '1.35rem', margin: '0 0 1.25rem', color: 'var(--text-primary)' }}>
+                <h2 className="font-serif text-[1.35rem] mb-5" style={{ color: 'var(--text-primary)' }}>
                   Order Summary
                 </h2>
 
                 {/* Promo Code Form */}
-                <form onSubmit={applyPromo} style={{ marginBottom: '1.5rem' }}>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>
+                <form onSubmit={applyPromo} className="mb-6">
+                  <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-secondary)' }}>
                     Privilege Coupon / Voucher
                   </label>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div className="flex gap-2">
                     <input
                       type="text"
                       placeholder="e.g. ROYAL10"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
+                      className="flex-1 py-[0.6rem] px-[0.85rem] rounded-md text-[0.85rem] uppercase outline-none"
                       style={{
-                        flex: 1,
-                        padding: '0.6rem 0.85rem',
-                        borderRadius: '6px',
                         border: '1px solid var(--border-light)',
                         backgroundColor: 'var(--bg-card-warm)',
-                        fontSize: '0.85rem',
-                        textTransform: 'uppercase',
-                        outline: 'none',
                       }}
                     />
                     <button
                       type="submit"
-                      className="btn-gold"
-                      style={{
-                        padding: '0.6rem 1rem',
-                        borderRadius: '6px',
-                        fontSize: '0.85rem',
-                        cursor: 'pointer',
-                      }}
+                      className="btn-gold py-[0.6rem] px-4 rounded-md text-[0.85rem] cursor-pointer"
                     >
                       Apply
                     </button>
                   </div>
                   {couponApplied && (
-                    <div style={{ marginTop: '0.5rem', color: '#065F46', fontSize: '0.8rem', fontWeight: '500' }}>
+                    <div className="mt-2 text-emerald-800 text-[0.8rem] font-medium">
                       ✓ {couponApplied}
                     </div>
                   )}
                   {promoError && (
-                    <div style={{ marginTop: '0.5rem', color: '#991B1B', fontSize: '0.8rem' }}>
+                    <div className="mt-2 text-red-800 text-[0.8rem]">
                       {promoError}
                     </div>
                   )}
                 </form>
 
                 {/* Totals Breakdown */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', borderTop: '1px solid var(--border-light)', paddingTop: '1.25rem', marginBottom: '1.5rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                <div className="flex flex-col gap-[0.85rem] pt-5 mb-6" style={{ borderTop: '1px solid var(--border-light)' }}>
+                  <div className="flex justify-between text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
                     <span>Bag Subtotal</span>
                     <span style={{ color: 'var(--text-primary)' }}>₹{subtotal.toLocaleString('en-IN')}</span>
                   </div>
                   {discount > 0 && (
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#065F46' }}>
+                    <div className="flex justify-between text-[0.9rem] text-emerald-800">
                       <span>Royal Privilege Discount</span>
                       <span>-₹{discount.toLocaleString('en-IN')}</span>
                     </div>
                   )}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                  <div className="flex justify-between text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
                     <span>Insured Armored Shipping</span>
-                    <span style={{ color: '#065F46', fontWeight: '600' }}>FREE</span>
+                    <span className="text-emerald-800 font-semibold">FREE</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                  <div className="flex justify-between text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
                     <span>GST (3% Fine Jewellery)</span>
                     <span style={{ color: 'var(--text-primary)' }}>Included</span>
                   </div>
 
                   <div
+                    className="flex justify-between text-[1.25rem] font-bold pt-4 mt-2"
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      fontSize: '1.25rem',
-                      fontWeight: '700',
                       color: 'var(--text-primary)',
                       borderTop: '1px solid var(--border-light)',
-                      paddingTop: '1rem',
-                      marginTop: '0.5rem',
                     }}
                   >
                     <span>Total Amount</span>
@@ -393,44 +329,26 @@ const Cart = () => {
                 {/* Proceed Button */}
                 <button
                   onClick={() => navigate('/checkout')}
-                  className="btn-slate"
-                  style={{
-                    width: '100%',
-                    padding: '0.95rem',
-                    borderRadius: '8px',
-                    fontSize: '1rem',
-                    fontWeight: '600',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    cursor: 'pointer',
-                    marginBottom: '1rem',
-                  }}
+                  className="btn-slate w-full p-[0.95rem] rounded-lg text-base font-semibold flex items-center justify-center gap-2 cursor-pointer mb-4"
                 >
                   <Lock size={16} /> Proceed to Secure Checkout
                 </button>
 
-                <div style={{ textAlign: 'center' }}>
-                  <Link to="/shop" style={{ color: 'var(--theme-gold)', fontSize: '0.85rem', textDecoration: 'none', fontWeight: '500' }}>
+                <div className="text-center">
+                  <Link to="/shop" className="text-[0.85rem] no-underline font-medium" style={{ color: 'var(--theme-gold)' }}>
                     ← Continue Exploring Collections
                   </Link>
                 </div>
 
                 {/* Trust Footer */}
                 <div
+                  className="mt-6 pt-5 flex items-center gap-2.5 text-[0.8rem]"
                   style={{
-                    marginTop: '1.5rem',
-                    paddingTop: '1.25rem',
                     borderTop: '1px solid var(--border-light)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    fontSize: '0.8rem',
                     color: 'var(--text-secondary)',
                   }}
                 >
-                  <ShieldCheck size={20} style={{ color: 'var(--theme-gold)', flexShrink: 0 }} />
+                  <ShieldCheck size={20} className="shrink-0" style={{ color: 'var(--theme-gold)' }} />
                   <span>256-Bit SSL Encrypted Checkout & 100% Genuine BIS Hallmark Guarantee</span>
                 </div>
               </div>

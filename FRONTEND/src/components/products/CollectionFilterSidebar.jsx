@@ -107,71 +107,44 @@ const CollectionFilterSidebar = ({
 
   const content = (
     <aside
-      className="bg-theme-card"
+      className="bg-theme-card w-full rounded-xl overflow-hidden"
       style={{
-        width: "100%",
-        borderRadius: "12px",
         border: "1px solid var(--border-light)",
         boxShadow: "var(--shadow-sm)",
-        overflow: "hidden",
       }}
     >
       {/* Header */}
       <div
+        className="flex items-center justify-between px-6 py-5"
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "1.25rem 1.5rem",
           borderBottom: "1px solid var(--border-light)",
           backgroundColor: "var(--bg-primary)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div className="flex items-center gap-2">
           <SlidersHorizontal size={18} style={{ color: "var(--theme-gold)" }} />
           <h2
-            className="font-serif"
-            style={{
-              fontSize: "1.1rem",
-              fontWeight: "600",
-              color: "var(--text-primary)",
-              margin: 0,
-            }}
+            className="font-serif text-[1.1rem] font-semibold m-0"
+            style={{ color: "var(--text-primary)" }}
           >
             Refine Edit
           </h2>
           {activeCount > 0 && (
             <span
-              style={{
-                backgroundColor: "var(--theme-gold)",
-                color: "#FFFFFF",
-                fontSize: "0.7rem",
-                fontWeight: "700",
-                padding: "2px 7px",
-                borderRadius: "10px",
-              }}
+              className="text-white text-[0.7rem] font-bold px-[7px] py-[2px] rounded-[10px]"
+              style={{ backgroundColor: "var(--theme-gold)" }}
             >
               {activeCount}
             </span>
           )}
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div className="flex items-center gap-[10px]">
           {activeCount > 0 && (
             <button
               onClick={onResetFilters}
-              style={{
-                background: "none",
-                border: "none",
-                color: "var(--theme-gold)",
-                fontSize: "0.8rem",
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-                cursor: "pointer",
-                padding: "4px 8px",
-                borderRadius: "4px",
-              }}
+              className="bg-transparent border-none text-[0.8rem] flex items-center gap-1 cursor-pointer px-2 py-1 rounded"
+              style={{ color: "var(--theme-gold)" }}
               title="Reset all filters"
             >
               <RotateCcw size={13} />
@@ -182,15 +155,8 @@ const CollectionFilterSidebar = ({
           {onClose && (
             <button
               onClick={onClose}
-              style={{
-                background: "none",
-                border: "none",
-                color: "var(--text-secondary)",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                padding: "4px",
-              }}
+              className="bg-transparent border-none cursor-pointer flex items-center p-1"
+              style={{ color: "var(--text-secondary)" }}
               aria-label="Close filters"
             >
               <X size={20} />
@@ -200,47 +166,27 @@ const CollectionFilterSidebar = ({
       </div>
 
       {/* Filter Sections */}
-      <div style={{ padding: "1rem 1.5rem", maxHeight: "calc(100vh - 180px)", overflowY: "auto" }}>
-        
+      <div className="px-6 py-4 max-h-[calc(100vh-180px)] overflow-y-auto">
+
         {/* Price Range Section */}
         <div
-          style={{
-            borderBottom: "1px solid var(--border-light)",
-            paddingBottom: "1.25rem",
-            marginBottom: "1rem",
-          }}
+          className="pb-5 mb-4"
+          style={{ borderBottom: "1px solid var(--border-light)" }}
         >
           <button
             onClick={() => toggleSection("price")}
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "0.5rem 0",
-              color: "var(--text-primary)",
-              fontWeight: "600",
-              fontSize: "0.9rem",
-            }}
+            className="w-full flex items-center justify-between bg-transparent border-none cursor-pointer py-2 font-semibold text-[0.9rem]"
+            style={{ color: "var(--text-primary)" }}
           >
             <span>Price Range</span>
             {openSections.price ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </button>
 
           {openSections.price && (
-            <div style={{ marginTop: "0.75rem" }}>
+            <div className="mt-3">
               <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: "0.75rem",
-                  fontSize: "0.85rem",
-                  color: "var(--text-secondary)",
-                }}
+                className="flex items-center justify-between mb-3 text-[0.85rem]"
+                style={{ color: "var(--text-secondary)" }}
               >
                 <span>₹{(filters.minPrice || 0).toLocaleString("en-IN")}</span>
                 <span>to</span>
@@ -254,29 +200,15 @@ const CollectionFilterSidebar = ({
                 step="2000"
                 value={filters.maxPrice || 150000}
                 onChange={(e) => onPriceRangeChange(filters.minPrice || 0, Number(e.target.value))}
-                style={{
-                  width: "100%",
-                  accentColor: "var(--theme-gold)",
-                  cursor: "pointer",
-                }}
+                className="w-full cursor-pointer"
+                style={{ accentColor: "var(--theme-gold)" }}
               />
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "10px",
-                  marginTop: "0.75rem",
-                }}
-              >
+              <div className="grid grid-cols-2 gap-[10px] mt-3">
                 <div>
                   <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.7rem",
-                      color: "var(--text-secondary)",
-                      marginBottom: "4px",
-                    }}
+                    className="block text-[0.7rem] mb-1"
+                    style={{ color: "var(--text-secondary)" }}
                   >
                     Min (₹)
                   </label>
@@ -286,25 +218,18 @@ const CollectionFilterSidebar = ({
                     onChange={(e) =>
                       onPriceRangeChange(Number(e.target.value), filters.maxPrice || 150000)
                     }
+                    className="w-full px-2 py-[6px] rounded-[6px] text-[0.8rem]"
                     style={{
-                      width: "100%",
-                      padding: "6px 8px",
-                      borderRadius: "6px",
                       border: "1px solid var(--border-light)",
                       backgroundColor: "var(--bg-primary)",
                       color: "var(--text-primary)",
-                      fontSize: "0.8rem",
                     }}
                   />
                 </div>
                 <div>
                   <label
-                    style={{
-                      display: "block",
-                      fontSize: "0.7rem",
-                      color: "var(--text-secondary)",
-                      marginBottom: "4px",
-                    }}
+                    className="block text-[0.7rem] mb-1"
+                    style={{ color: "var(--text-secondary)" }}
                   >
                     Max (₹)
                   </label>
@@ -314,14 +239,11 @@ const CollectionFilterSidebar = ({
                     onChange={(e) =>
                       onPriceRangeChange(filters.minPrice || 0, Number(e.target.value))
                     }
+                    className="w-full px-2 py-[6px] rounded-[6px] text-[0.8rem]"
                     style={{
-                      width: "100%",
-                      padding: "6px 8px",
-                      borderRadius: "6px",
                       border: "1px solid var(--border-light)",
                       backgroundColor: "var(--bg-primary)",
                       color: "var(--text-primary)",
-                      fontSize: "0.8rem",
                     }}
                   />
                 </div>
@@ -349,38 +271,18 @@ const CollectionFilterSidebar = ({
           return (
             <div
               key={section.key}
-              style={{
-                borderBottom: "1px solid var(--border-light)",
-                paddingBottom: "1.25rem",
-                marginBottom: "1rem",
-              }}
+              className="pb-5 mb-4"
+              style={{ borderBottom: "1px solid var(--border-light)" }}
             >
               <button
                 onClick={() => toggleSection(section.key)}
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: "0.5rem 0",
-                  color: "var(--text-primary)",
-                  fontWeight: "600",
-                  fontSize: "0.9rem",
-                }}
+                className="w-full flex items-center justify-between bg-transparent border-none cursor-pointer py-2 font-semibold text-[0.9rem]"
+                style={{ color: "var(--text-primary)" }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div className="flex items-center gap-[6px]">
                   <span>{section.title}</span>
                   {selectedValues.length > 0 && (
-                    <span
-                      style={{
-                        fontSize: "0.7rem",
-                        color: "var(--theme-gold)",
-                        fontWeight: "700",
-                      }}
-                    >
+                    <span className="text-[0.7rem] font-bold" style={{ color: "var(--theme-gold)" }}>
                       ({selectedValues.length})
                     </span>
                   )}
@@ -389,58 +291,37 @@ const CollectionFilterSidebar = ({
               </button>
 
               {isOpenSection && (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "8px",
-                    marginTop: "0.5rem",
-                  }}
-                >
+                <div className="flex flex-col gap-2 mt-2">
                   {section.options.map((opt) => {
                     const isChecked = selectedValues.includes(opt.value);
 
                     return (
                       <label
                         key={opt.value}
+                        className="flex items-center gap-[10px] text-[0.85rem] cursor-pointer select-none py-1 transition-colors duration-200"
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          fontSize: "0.85rem",
                           color: isChecked ? "var(--text-primary)" : "var(--text-secondary)",
-                          cursor: "pointer",
-                          userSelect: "none",
-                          padding: "4px 0",
-                          transition: "color 0.2s ease",
                         }}
                       >
                         <input
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => onFilterChange(filterStateKey, opt.value)}
-                          style={{
-                            accentColor: "var(--theme-gold)",
-                            width: "16px",
-                            height: "16px",
-                            cursor: "pointer",
-                          }}
+                          className="w-4 h-4 cursor-pointer"
+                          style={{ accentColor: "var(--theme-gold)" }}
                         />
 
                         {opt.swatch && (
                           <span
+                            className="w-3 h-3 rounded-full inline-block"
                             style={{
-                              width: "12px",
-                              height: "12px",
-                              borderRadius: "50%",
                               backgroundColor: opt.swatch,
-                              display: "inline-block",
                               border: "1px solid rgba(0,0,0,0.15)",
                             }}
                           />
                         )}
 
-                        <span style={{ fontWeight: isChecked ? "600" : "400" }}>{opt.label}</span>
+                        <span className={isChecked ? "font-semibold" : "font-normal"}>{opt.label}</span>
                       </label>
                     );
                   })}
@@ -456,31 +337,21 @@ const CollectionFilterSidebar = ({
   return (
     <>
       {/* Desktop view */}
-      <div className="hidden lg:block" style={{ width: "280px", flexShrink: 0 }}>
-        <div style={{ position: "sticky", top: "90px" }}>{content}</div>
+      <div className="hidden lg:block w-[280px] shrink-0">
+        <div className="sticky top-[90px]">{content}</div>
       </div>
 
       {/* Mobile view Drawer */}
       {isOpen && (
         <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 9999,
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            backdropFilter: "blur(4px)",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
+          className="fixed inset-0 z-[9999] flex justify-end"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.6)", backdropFilter: "blur(4px)" }}
           onClick={onClose}
         >
           <div
+            className="w-[85%] max-w-[360px] h-full overflow-y-auto"
             style={{
-              width: "85%",
-              maxWidth: "360px",
-              height: "100%",
               backgroundColor: "var(--bg-primary)",
-              overflowY: "auto",
               boxShadow: "var(--shadow-xl)",
             }}
             onClick={(e) => e.stopPropagation()}

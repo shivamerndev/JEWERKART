@@ -114,218 +114,140 @@ const Collection = () => {
 
   return (
     <main
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "var(--bg-secondary)",
-        padding: "2rem 1.5rem 5rem",
-      }}
+      className="min-h-screen px-6 pt-8 pb-20"
+      style={{ backgroundColor: "var(--bg-secondary)" }}
     >
-      <div style={{ maxWidth: "1380px", margin: "0 auto" }}>
+      <div className="max-w-[1380px] mx-auto">
         {/* Breadcrumb */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            marginBottom: "1.5rem",
-            fontSize: "0.85rem",
-          }}
-        >
-          <Link to="/" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>
+        <div className="flex items-center gap-2 mb-6 text-[0.85rem]">
+          <Link to="/" className="no-underline" style={{ color: "var(--text-secondary)" }}>
             Home
           </Link>
           <span style={{ color: "var(--border-light)" }}>/</span>
-          <Link to="/collections" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>
+          <Link to="/collections" className="no-underline" style={{ color: "var(--text-secondary)" }}>
             Collections
           </Link>
           <span style={{ color: "var(--border-light)" }}>/</span>
-          <span style={{ color: "var(--text-primary)", fontWeight: "600" }}>
+          <span className="font-semibold" style={{ color: "var(--text-primary)" }}>
             {collection.name}
           </span>
         </div>
 
         {/* Editorial Story Header */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl overflow-hidden mb-10"
           style={{
-            borderRadius: "16px",
             border: "1px solid var(--border-light)",
-            overflow: "hidden",
-            marginBottom: "2.5rem",
             boxShadow: "var(--shadow-md)",
           }}
         >
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)" }}>
+          <div className="grid grid-cols-12">
             <div
-              style={{
-                gridColumn: "span 12",
-                padding: "3.5rem 2.5rem",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
-              className="md:col-span-7"
+              className="col-span-12 md:col-span-7 px-10 py-14 flex flex-col justify-center"
             >
-              <div
-                className="divider-ornament"
-                style={{ justifyContent: "flex-start", marginBottom: "0.75rem" }}
-              >
-                <span className="badge-925" style={{ fontSize: "9px", letterSpacing: "2px" }}>
+              <div className="divider-ornament mb-3 justify-start">
+                <span className="badge-925 text-[9px] tracking-[2px]">
                   {collection.badge || "EDITORIAL CURATION"}
                 </span>
               </div>
               <h1
-                className="font-serif"
+                className="font-serif font-semibold m-0 mb-2 leading-[1.2]"
                 style={{
                   fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
-                  fontWeight: "600",
                   color: "var(--text-primary)",
-                  margin: "0 0 0.5rem",
-                  lineHeight: "1.2",
                 }}
               >
                 {collection.name}
               </h1>
               <p
-                className="font-garamond"
-                style={{
-                  color: "var(--theme-gold)",
-                  fontSize: "1.3rem",
-                  fontStyle: "italic",
-                  margin: "0 0 1.25rem",
-                }}
+                className="font-garamond text-[1.3rem] italic m-0 mb-5"
+                style={{ color: "var(--theme-gold)" }}
               >
                 {collection.tagline}
               </p>
               <p
-                style={{
-                  color: "var(--text-secondary)",
-                  fontSize: "0.95rem",
-                  lineHeight: "1.7",
-                  marginBottom: "2rem",
-                }}
+                className="text-[0.95rem] leading-[1.7] mb-8"
+                style={{ color: "var(--text-secondary)" }}
               >
                 {collection.description}
               </p>
-              <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.85rem" }}>
+              <div className="flex gap-6 flex-wrap">
+                <div className="flex items-center gap-2 text-[0.85rem]">
                   <ShieldCheck size={18} style={{ color: "var(--theme-gold)" }} />
-                  <span>Assayed & BIS 925 Hallmarked</span>
+                  <span>Assayed &amp; BIS 925 Hallmarked</span>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.85rem" }}>
+                <div className="flex items-center gap-2 text-[0.85rem]">
                   <Sparkles size={18} style={{ color: "var(--theme-gold)" }} />
                   <span>Artisanal Hand Setting</span>
                 </div>
               </div>
             </div>
 
-            <div
-              style={{
-                gridColumn: "span 12",
-                height: "360px",
-                position: "relative",
-              }}
-              className="md:col-span-5"
-            >
+            <div className="col-span-12 md:col-span-5 h-[360px] relative">
               <img
                 src={collection.image}
                 alt={collection.name}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
         </div>
 
-        {/* Toolbar: Filter Toggle (Mobile), Total Results, and Sort Controls */}
+        {/* Toolbar */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-[10px] px-6 py-4 mb-7 flex items-center justify-between flex-wrap gap-4"
           style={{
-            borderRadius: "10px",
             border: "1px solid var(--border-light)",
-            padding: "1rem 1.5rem",
-            marginBottom: "1.75rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "1rem",
             boxShadow: "var(--shadow-sm)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div className="flex items-center gap-4">
             {/* Mobile Filter Button */}
             <button
               onClick={() => setMobileFilterOpen(true)}
-              className="lg:hidden"
+              className="lg:hidden inline-flex items-center gap-2 px-[14px] py-2 rounded-[6px] text-[0.85rem] font-semibold cursor-pointer"
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "8px 14px",
-                borderRadius: "6px",
                 backgroundColor: "var(--bg-primary)",
                 border: "1px solid var(--border-light)",
                 color: "var(--text-primary)",
-                fontSize: "0.85rem",
-                fontWeight: "600",
-                cursor: "pointer",
               }}
             >
               <Filter size={16} style={{ color: "var(--theme-gold)" }} />
               Filters {activeFilterTags.length > 0 && `(${activeFilterTags.length})`}
             </button>
 
-            <span style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}>
+            <span className="text-[0.9rem]" style={{ color: "var(--text-secondary)" }}>
               Showing <strong style={{ color: "var(--text-primary)" }}>{products.length}</strong> of{" "}
               <strong style={{ color: "var(--text-primary)" }}>{totalCount}</strong> pieces
             </span>
           </div>
 
           {/* Sort By Dropdown */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <label
-              htmlFor="sort-select"
-              style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}
-            >
+          <div className="flex items-center gap-[10px]">
+            <label htmlFor="sort-select" className="text-[0.85rem]" style={{ color: "var(--text-secondary)" }}>
               Sort by:
             </label>
-            <div style={{ position: "relative" }}>
+            <div className="relative">
               <select
                 id="sort-select"
                 value={filters.sortBy}
                 onChange={(e) => handleSortChange(e.target.value)}
+                className="appearance-none px-3 py-2 pr-8 rounded-[6px] text-[0.85rem] font-medium cursor-pointer outline-none"
                 style={{
-                  appearance: "none",
-                  padding: "8px 32px 8px 12px",
-                  borderRadius: "6px",
                   border: "1px solid var(--border-light)",
                   backgroundColor: "var(--bg-primary)",
                   color: "var(--text-primary)",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                  cursor: "pointer",
-                  outline: "none",
                 }}
               >
-                <option value="newest">Featured & Newest</option>
+                <option value="newest">Featured &amp; Newest</option>
                 <option value="price_asc">Price: Low to High</option>
                 <option value="price_desc">Price: High to Low</option>
                 <option value="rating">Customer Rating</option>
               </select>
               <ChevronDown
                 size={14}
-                style={{
-                  position: "absolute",
-                  right: "10px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  pointerEvents: "none",
-                  color: "var(--text-secondary)",
-                }}
+                className="absolute right-[10px] top-1/2 -translate-y-1/2 pointer-events-none"
+                style={{ color: "var(--text-secondary)" }}
               />
             </div>
           </div>
@@ -333,33 +255,19 @@ const Collection = () => {
 
         {/* Active Filter Chips */}
         {activeFilterTags.length > 0 && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: "8px",
-              marginBottom: "1.75rem",
-            }}
-          >
-            <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+          <div className="flex items-center flex-wrap gap-2 mb-7">
+            <span className="text-[0.8rem]" style={{ color: "var(--text-secondary)" }}>
               Active Filters:
             </span>
             {activeFilterTags.map((tag, idx) => (
               <span
                 key={idx}
+                className="inline-flex items-center gap-[6px] px-[10px] py-1 rounded-[20px] text-[0.75rem] capitalize"
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
                   backgroundColor: "var(--bg-primary)",
                   border: "1px solid var(--border-light)",
-                  padding: "4px 10px",
-                  borderRadius: "20px",
-                  fontSize: "0.75rem",
                   color: "var(--text-primary)",
                   boxShadow: "var(--shadow-sm)",
-                  textTransform: "capitalize",
                 }}
               >
                 {tag.label}
@@ -371,15 +279,8 @@ const Collection = () => {
                       handleFilterChange(tag.key, tag.value);
                     }
                   }}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    color: "var(--text-secondary)",
-                  }}
+                  className="bg-transparent border-none cursor-pointer p-0 flex items-center"
+                  style={{ color: "var(--text-secondary)" }}
                   aria-label={`Remove filter ${tag.label}`}
                 >
                   <X size={13} />
@@ -389,18 +290,8 @@ const Collection = () => {
 
             <button
               onClick={handleResetFilters}
-              style={{
-                background: "none",
-                border: "none",
-                color: "var(--theme-gold)",
-                fontSize: "0.8rem",
-                cursor: "pointer",
-                padding: "4px 8px",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "4px",
-                fontWeight: "600",
-              }}
+              className="bg-transparent border-none text-[0.8rem] cursor-pointer px-2 py-1 inline-flex items-center gap-1 font-semibold"
+              style={{ color: "var(--theme-gold)" }}
             >
               <RotateCcw size={12} />
               Clear All
@@ -409,7 +300,7 @@ const Collection = () => {
         )}
 
         {/* Two-Column Main Layout: Filter Sidebar + Products Grid */}
-        <div style={{ display: "flex", gap: "2rem", alignItems: "flex-start" }}>
+        <div className="flex gap-8 items-start">
           {/* Filter Sidebar */}
           <CollectionFilterSidebar
             filters={filters}
@@ -421,83 +312,50 @@ const Collection = () => {
           />
 
           {/* Product Gallery Area */}
-          <div style={{ flexGrow: 1, minWidth: 0 }}>
+          <div className="flex-grow min-w-0">
             {loading ? (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "5rem 0",
-                  gap: "1rem",
-                }}
-              >
+              <div className="flex flex-col items-center justify-center py-20 gap-4">
                 <div
+                  className="w-10 h-10 rounded-full animate-spin"
                   style={{
-                    width: "40px",
-                    height: "40px",
                     border: "3px solid var(--border-light)",
                     borderTopColor: "var(--theme-gold)",
-                    borderRadius: "50%",
-                    animation: "spin 1s linear infinite",
                   }}
                 />
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
+                <p className="text-[0.9rem]" style={{ color: "var(--text-secondary)" }}>
                   Curating jewellery edit...
                 </p>
-                <style>{`
-                  @keyframes spin {
-                    to { transform: rotate(360deg); }
-                  }
-                `}</style>
               </div>
             ) : products.length === 0 ? (
               /* Empty State */
               <div
-                className="bg-theme-card"
+                className="bg-theme-card rounded-xl text-center px-8 py-16"
                 style={{
-                  borderRadius: "12px",
                   border: "1px solid var(--border-light)",
-                  padding: "4rem 2rem",
-                  textAlign: "center",
                   boxShadow: "var(--shadow-sm)",
                 }}
               >
                 <SlidersHorizontal
                   size={42}
-                  style={{ color: "var(--theme-gold)", margin: "0 auto 1.25rem", opacity: 0.8 }}
+                  className="mx-auto mb-5 opacity-80"
+                  style={{ color: "var(--theme-gold)" }}
                 />
                 <h3
-                  className="font-serif"
-                  style={{ fontSize: "1.4rem", margin: "0 0 0.5rem", color: "var(--text-primary)" }}
+                  className="font-serif text-[1.4rem] m-0 mb-2"
+                  style={{ color: "var(--text-primary)" }}
                 >
                   No pieces matched your selected filters
                 </h3>
                 <p
-                  style={{
-                    color: "var(--text-secondary)",
-                    fontSize: "0.9rem",
-                    maxWidth: "420px",
-                    margin: "0 auto 1.75rem",
-                  }}
+                  className="text-[0.9rem] max-w-[420px] mx-auto m-0 mb-7"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   Try expanding your price range or adjusting product type, purity, and gemstone
                   filters to view more curated designs.
                 </p>
                 <button
                   onClick={handleResetFilters}
-                  className="btn-gold"
-                  style={{
-                    padding: "0.75rem 1.75rem",
-                    borderRadius: "6px",
-                    fontSize: "0.85rem",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                  }}
+                  className="btn-gold px-7 py-3 rounded-[6px] text-[0.85rem] font-semibold cursor-pointer inline-flex items-center gap-2"
                 >
                   <RotateCcw size={16} />
                   Reset All Filters
@@ -506,30 +364,20 @@ const Collection = () => {
             ) : (
               /* Products Grid */
               <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                  gap: "1.5rem",
-                }}
+                className="grid gap-6"
+                style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}
               >
                 {products.map((product) => (
                   <Link
                     key={product.id || product._id || product.slug}
                     to={`/product/${product.slug}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
+                    className="no-underline text-inherit"
                   >
                     <div
-                      className="bg-theme-card"
+                      className="bg-theme-card rounded-lg overflow-hidden relative flex flex-col h-full transition-[transform,box-shadow] duration-300"
                       style={{
-                        borderRadius: "8px",
-                        overflow: "hidden",
                         border: "1px solid var(--border-light)",
                         boxShadow: "var(--shadow-sm)",
-                        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                        position: "relative",
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "100%",
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = "translateY(-4px)";
@@ -541,27 +389,18 @@ const Collection = () => {
                       }}
                     >
                       <div
-                        style={{
-                          height: "240px",
-                          backgroundColor: "var(--bg-circle-item)",
-                          position: "relative",
-                          overflow: "hidden",
-                        }}
+                        className="h-[240px] relative overflow-hidden"
+                        style={{ backgroundColor: "var(--bg-circle-item)" }}
                       >
                         <img
                           src={product.image || product.images?.[0] || "/showcase_necklace.jpg"}
                           alt={product.name}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            transition: "transform 0.5s ease",
-                          }}
+                          className="w-full h-full object-cover transition-transform duration-500"
                         />
 
                         {/* Hallmark / Status Badge */}
-                        <div style={{ position: "absolute", top: "10px", left: "10px" }}>
-                          <span className="badge-925" style={{ fontSize: "9px" }}>
+                        <div className="absolute top-[10px] left-[10px]">
+                          <span className="badge-925 text-[9px]">
                             {product.badge || `${product.metal || "925"} HALLMARKED`}
                           </span>
                         </div>
@@ -570,21 +409,8 @@ const Collection = () => {
                         <button
                           onClick={(e) => toggleWishlist(product.id || product._id, e)}
                           aria-label="Add to Wishlist"
-                          style={{
-                            position: "absolute",
-                            top: "10px",
-                            right: "10px",
-                            backgroundColor: "rgba(255, 255, 255, 0.9)",
-                            border: "none",
-                            borderRadius: "50%",
-                            width: "32px",
-                            height: "32px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                            boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-                          }}
+                          className="absolute top-[10px] right-[10px] border-none rounded-full w-8 h-8 flex items-center justify-center cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
+                          style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}
                         >
                           <Heart
                             size={16}
@@ -598,43 +424,22 @@ const Collection = () => {
                         </button>
                       </div>
 
-                      <div
-                        style={{
-                          padding: "1.25rem",
-                          display: "flex",
-                          flexDirection: "column",
-                          flexGrow: 1,
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            marginBottom: "0.35rem",
-                          }}
-                        >
+                      <div className="p-5 flex flex-col flex-grow">
+                        <div className="flex items-center justify-between mb-[0.35rem]">
                           <span
-                            style={{
-                              fontSize: "0.75rem",
-                              color: "var(--text-secondary)",
-                              textTransform: "uppercase",
-                              letterSpacing: "0.5px",
-                            }}
+                            className="text-[0.75rem] uppercase tracking-[0.5px]"
+                            style={{ color: "var(--text-secondary)" }}
                           >
                             {product.categoryName || product.productType || "Jewellery"}
                           </span>
-                          <div style={{ display: "flex", alignItems: "center", gap: "3px" }}>
+                          <div className="flex items-center gap-[3px]">
                             <Star
                               size={12}
                               style={{ color: "var(--theme-gold)", fill: "var(--theme-gold)" }}
                             />
                             <span
-                              style={{
-                                fontSize: "0.75rem",
-                                fontWeight: "600",
-                                color: "var(--text-primary)",
-                              }}
+                              className="text-[0.75rem] font-semibold"
+                              style={{ color: "var(--text-primary)" }}
                             >
                               {product.rating || "4.8"}
                             </span>
@@ -642,43 +447,21 @@ const Collection = () => {
                         </div>
 
                         <h3
-                          className="font-serif"
-                          style={{
-                            fontSize: "1rem",
-                            fontWeight: "600",
-                            color: "var(--text-primary)",
-                            margin: "0 0 0.5rem",
-                            lineHeight: "1.35",
-                          }}
+                          className="font-serif text-base font-semibold m-0 mb-2 leading-[1.35]"
+                          style={{ color: "var(--text-primary)" }}
                         >
                           {product.name}
                         </h3>
 
-                        <div
-                          style={{
-                            marginTop: "auto",
-                            display: "flex",
-                            alignItems: "baseline",
-                            gap: "8px",
-                          }}
-                        >
+                        <div className="mt-auto flex items-baseline gap-2">
                           <span
-                            style={{
-                              fontSize: "1.15rem",
-                              fontWeight: "700",
-                              color: "var(--text-primary)",
-                            }}
+                            className="text-[1.15rem] font-bold"
+                            style={{ color: "var(--text-primary)" }}
                           >
                             ₹{Number(product.price).toLocaleString("en-IN")}
                           </span>
                           {product.originalPrice && (
-                            <span
-                              style={{
-                                fontSize: "0.85rem",
-                                color: "#9CA3AF",
-                                textDecoration: "line-through",
-                              }}
-                            >
+                            <span className="text-[0.85rem] line-through text-[#9CA3AF]">
                               ₹{Number(product.originalPrice).toLocaleString("en-IN")}
                             </span>
                           )}

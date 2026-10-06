@@ -19,144 +19,115 @@ const ExchangeOrder = () => {
 
   return (
     <main
+      className="min-h-screen pt-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+      <div className="max-w-[720px] mx-auto">
         
         {/* Breadcrumb */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.85rem' }}>
-          <Link to="/account/orders" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Orders</Link>
+        <div className="flex items-center gap-2 mb-8 text-[0.85rem]">
+          <Link to="/account/orders" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Orders</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <Link to={`/order/${orderId}`} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>{orderId}</Link>
+          <Link to={`/order/${orderId}`} className="no-underline" style={{ color: 'var(--text-secondary)' }}>{orderId}</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>Exchange & Resizing</span>
+          <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>Exchange & Resizing</span>
         </div>
 
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               BESPOKE ADJUSTMENT
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2"
             style={{
               fontSize: 'clamp(1.8rem, 3.5vw, 2.3rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             Hassle-Free Exchange for #{orderId}
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0 }}>
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Complimentary doorstep size alteration and replacement within 15 days of delivery.
           </p>
         </div>
 
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl p-10"
           style={{
-            borderRadius: '16px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem',
             boxShadow: 'var(--shadow-sm)',
           }}
         >
           {submitted ? (
-            <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+            <div className="text-center py-4">
               <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
                 style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '50%',
                   backgroundColor: 'var(--theme-champagne)',
                   color: 'var(--theme-gold)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 1.25rem',
                   border: '1px solid var(--border-light)',
                 }}
               >
                 <CheckCircle2 size={32} />
               </div>
-              <h3 className="font-serif" style={{ fontSize: '1.45rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              <h3 className="font-serif text-[1.45rem] mb-2" style={{ color: 'var(--text-primary)' }}>
                 Exchange Request Confirmed
               </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '1.75rem' }}>
+              <p className="text-[0.92rem] leading-[1.6] mb-7" style={{ color: 'var(--text-secondary)' }}>
                 Our artisan team has reserved your replacement piece. An armored executive will arrive with the new piece and collect the original in a single doorstep swap.
               </p>
               <Link
                 to="/account/orders"
-                className="btn-slate"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '0.8rem 1.75rem',
-                  borderRadius: '6px',
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                }}
+                className="btn-slate inline-flex items-center gap-2 py-3 px-7 rounded-md no-underline font-semibold"
               >
                 <ArrowLeft size={16} /> Return to Orders
               </Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+              <div className="mb-6">
+                <label className="block text-[0.85rem] font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
                   Select Piece to Exchange
                 </label>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div className="flex flex-col gap-3">
                   {order.items.map((item) => (
                     <div
                       key={item.id}
                       onClick={() => setSelectedItem(item.id)}
+                      className="flex items-center gap-3 p-4 rounded-lg cursor-pointer"
                       style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '1rem',
-                        borderRadius: '8px',
                         border: selectedItem === item.id ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
                         backgroundColor: selectedItem === item.id ? 'var(--theme-champagne)' : 'var(--bg-card-warm)',
-                        cursor: 'pointer',
                       }}
                     >
-                      <img src={item.image} alt={item.name} style={{ width: '48px', height: '48px', borderRadius: '4px', objectFit: 'cover' }} />
-                      <div style={{ flexGrow: 1 }}>
-                        <div style={{ fontWeight: '600', fontSize: '0.95rem', color: 'var(--text-primary)' }}>{item.name}</div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>₹{item.price.toLocaleString('en-IN')}</div>
+                      <img src={item.image} alt={item.name} className="w-12 h-12 rounded object-cover" />
+                      <div className="grow">
+                        <div className="font-semibold text-[0.95rem]" style={{ color: 'var(--text-primary)' }}>{item.name}</div>
+                        <div className="text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>₹{item.price.toLocaleString('en-IN')}</div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+              <div className="mb-6">
+                <label className="block text-[0.85rem] font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
                   Exchange Preference
                 </label>
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div className="flex gap-4">
                   <button
                     type="button"
                     onClick={() => setExchangeType('resize')}
+                    className="flex-1 p-3 rounded-lg cursor-pointer text-[0.9rem]"
                     style={{
-                      flex: 1,
-                      padding: '0.75rem',
-                      borderRadius: '8px',
                       border: exchangeType === 'resize' ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
                       backgroundColor: exchangeType === 'resize' ? 'var(--theme-champagne)' : 'var(--bg-card-warm)',
                       fontWeight: exchangeType === 'resize' ? '600' : '400',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
                     }}
                   >
                     Size / Dimension Adjustment
@@ -164,15 +135,11 @@ const ExchangeOrder = () => {
                   <button
                     type="button"
                     onClick={() => setExchangeType('alternate')}
+                    className="flex-1 p-3 rounded-lg cursor-pointer text-[0.9rem]"
                     style={{
-                      flex: 1,
-                      padding: '0.75rem',
-                      borderRadius: '8px',
                       border: exchangeType === 'alternate' ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
                       backgroundColor: exchangeType === 'alternate' ? 'var(--theme-champagne)' : 'var(--bg-card-warm)',
                       fontWeight: exchangeType === 'alternate' ? '600' : '400',
-                      cursor: 'pointer',
-                      fontSize: '0.9rem',
                     }}
                   >
                     Different Jewellery Design
@@ -181,29 +148,26 @@ const ExchangeOrder = () => {
               </div>
 
               {exchangeType === 'resize' && (
-                <div style={{ marginBottom: '2rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                    <label style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                <div className="mb-8">
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="text-[0.85rem] font-semibold" style={{ color: 'var(--text-primary)' }}>
                       Select Required Size (Indian Standard)
                     </label>
-                    <Link to="/size-guide" style={{ fontSize: '0.8rem', color: 'var(--theme-gold)', textDecoration: 'none' }}>
-                      <Ruler size={12} style={{ display: 'inline', marginRight: '4px' }} /> View Size Chart
+                    <Link to="/size-guide" className="text-[0.8rem] no-underline" style={{ color: 'var(--theme-gold)' }}>
+                      <Ruler size={12} className="inline mr-1" /> View Size Chart
                     </Link>
                   </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div className="flex gap-2">
                     {['10', '12', '14', '16', '18', '20', '22'].map((sz) => (
                       <button
                         key={sz}
                         type="button"
                         onClick={() => setNewSize(sz)}
+                        className="w-[42px] h-[42px] rounded-md cursor-pointer"
                         style={{
-                          width: '42px',
-                          height: '42px',
-                          borderRadius: '6px',
                           border: newSize === sz ? '2px solid var(--text-primary)' : '1px solid var(--border-light)',
                           backgroundColor: newSize === sz ? 'var(--theme-champagne)' : 'var(--bg-card-warm)',
                           fontWeight: newSize === sz ? '700' : '400',
-                          cursor: 'pointer',
                         }}
                       >
                         {sz}
@@ -213,11 +177,11 @@ const ExchangeOrder = () => {
                 </div>
               )}
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
-                <Link to={`/order/${orderId}`} className="btn-outline-dark" style={{ padding: '0.75rem 1.5rem', borderRadius: '6px', textDecoration: 'none' }}>
+              <div className="flex justify-end gap-4">
+                <Link to={`/order/${orderId}`} className="btn-outline-dark py-3 px-6 rounded-md no-underline">
                   Cancel
                 </Link>
-                <button type="submit" className="btn-slate" style={{ padding: '0.75rem 1.75rem', borderRadius: '6px', cursor: 'pointer' }}>
+                <button type="submit" className="btn-slate py-3 px-7 rounded-md cursor-pointer">
                   Schedule Doorstep Swap
                 </button>
               </div>

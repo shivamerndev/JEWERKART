@@ -128,31 +128,19 @@ const Payment = () => {
 
   return (
     <main
+      className="min-h-[calc(100vh-250px)] py-10 px-6 pb-16"
       style={{
-        minHeight: 'calc(100vh - 250px)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 4rem',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1240px',
-          margin: '0 auto',
-        }}
-      >
+      <div className="max-w-[1240px] mx-auto">
         {/* Navigation Breadcrumb / Back button */}
-        <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="mb-6 flex items-center justify-between">
           <Link
             to="/cart"
+            className="inline-flex items-center gap-2 no-underline text-[0.85rem] font-medium transition-colors duration-200"
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
               color: 'var(--text-secondary)',
-              textDecoration: 'none',
-              fontSize: '0.85rem',
-              fontWeight: '500',
-              transition: 'color 0.2s ease',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-gold)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
@@ -160,140 +148,95 @@ const Payment = () => {
             <ArrowLeft size={16} /> Back to Bag
           </Link>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            <Lock size={14} style={{ color: '#C5914A' }} />
+          <div className="flex items-center gap-2 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
+            <Lock size={14} className="text-[#C5914A]" />
             <span>256-Bit SSL Luxury Encrypted Checkout</span>
           </div>
         </div>
 
         {/* Checkout Steps Progress Bar */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '3rem',
-            gap: '1rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div className="flex items-center justify-center mb-12 gap-4">
+          <div className="flex items-center gap-2">
             <div
+              className="w-7 h-7 rounded-full text-[#FEF0E0] flex items-center justify-center text-[0.8rem] font-semibold"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--text-primary)',
-                color: '#FEF0E0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.8rem',
-                fontWeight: '600',
               }}
             >
               <Check size={16} />
             </div>
-            <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>Shopping Bag</span>
+            <span className="text-[0.85rem] font-semibold" style={{ color: 'var(--text-primary)' }}>Shopping Bag</span>
           </div>
 
-          <div style={{ width: '40px', height: '2px', backgroundColor: 'var(--theme-gold)' }} />
+          <div className="w-10 h-0.5" style={{ backgroundColor: 'var(--theme-gold)' }} />
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div className="flex items-center gap-2">
             <div
+              className="w-7 h-7 rounded-full text-white flex items-center justify-center text-[0.8rem] font-bold"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--theme-gold)',
-                color: '#FFFFFF',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.8rem',
-                fontWeight: '700',
               }}
             >
               2
             </div>
-            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--theme-gold)' }}>Payment & Delivery</span>
+            <span className="text-[0.85rem] font-bold" style={{ color: 'var(--theme-gold)' }}>Payment & Delivery</span>
           </div>
 
-          <div style={{ width: '40px', height: '2px', backgroundColor: 'var(--border-light)' }} />
+          <div className="w-10 h-0.5" style={{ backgroundColor: 'var(--border-light)' }} />
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: 0.6 }}>
+          <div className="flex items-center gap-2 opacity-60">
             <div
+              className="w-7 h-7 rounded-full bg-[#EED8C3] flex items-center justify-center text-[0.8rem] font-semibold"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
-                backgroundColor: '#EED8C3',
                 color: 'var(--text-primary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.8rem',
-                fontWeight: '600',
               }}
             >
               3
             </div>
-            <span style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)' }}>Order Confirmation</span>
+            <span className="text-[0.85rem] font-medium" style={{ color: 'var(--text-secondary)' }}>Order Confirmation</span>
           </div>
         </div>
 
         {/* Main Grid: Forms Left, Summary Right */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.5fr) minmax(320px, 1fr)',
-            gap: '2.5rem',
-            alignItems: 'start',
-          }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.5fr)_minmax(320px,1fr)] gap-10 items-start">
           {/* LEFT: Shipping Details + Payment Selection */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <div className="flex flex-col gap-8">
             
             {/* Step 1: Shipping Address Form */}
             <div
+              className="rounded-lg p-8"
               style={{
                 backgroundColor: 'var(--bg-card)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '2rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '1px solid var(--border-light)' }}>
+                <div className="flex items-center gap-3">
                   <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center"
                     style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
                       backgroundColor: 'var(--theme-champagne)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
                       color: 'var(--theme-gold)',
                     }}
                   >
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <h2 className="font-serif" style={{ fontSize: '1.25rem', margin: 0, fontWeight: '600', color: 'var(--text-primary)' }}>
+                    <h2 className="font-serif text-[1.25rem] m-0 font-semibold" style={{ color: 'var(--text-primary)' }}>
                       Delivery Destination
                     </h2>
-                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                    <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                       Insured luxury transit by armored logistics
                     </p>
                   </div>
                 </div>
-                <span className="badge-925" style={{ fontSize: '9px' }}>ARMORED LOGISTICS</span>
+                <span className="badge-925 text-[9px]">ARMORED LOGISTICS</span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                  <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                     Recipient Full Name *
                   </label>
                   <input
@@ -301,21 +244,16 @@ const Payment = () => {
                     value={shippingDetails.fullName}
                     onChange={(e) => handleInputChange('fullName', e.target.value)}
                     required
+                    className="w-full py-[0.65rem] px-[0.85rem] rounded bg-[#FFFDF9] text-[0.9rem] outline-none"
                     style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: '4px',
                       border: '1px solid var(--border-light)',
-                      backgroundColor: '#FFFDF9',
-                      fontSize: '0.9rem',
                       color: 'var(--text-primary)',
-                      outline: 'none',
                     }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                  <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                     Contact Phone *
                   </label>
                   <input
@@ -323,21 +261,16 @@ const Payment = () => {
                     value={shippingDetails.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
                     required
+                    className="w-full py-[0.65rem] px-[0.85rem] rounded bg-[#FFFDF9] text-[0.9rem] outline-none"
                     style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: '4px',
                       border: '1px solid var(--border-light)',
-                      backgroundColor: '#FFFDF9',
-                      fontSize: '0.9rem',
                       color: 'var(--text-primary)',
-                      outline: 'none',
                     }}
                   />
                 </div>
 
-                <div style={{ gridColumn: 'span 2' }}>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                <div className="sm:col-span-2">
+                  <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                     Street Address & Apartment / Villa *
                   </label>
                   <input
@@ -345,21 +278,16 @@ const Payment = () => {
                     value={shippingDetails.address}
                     onChange={(e) => handleInputChange('address', e.target.value)}
                     required
+                    className="w-full py-[0.65rem] px-[0.85rem] rounded bg-[#FFFDF9] text-[0.9rem] outline-none"
                     style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: '4px',
                       border: '1px solid var(--border-light)',
-                      backgroundColor: '#FFFDF9',
-                      fontSize: '0.9rem',
                       color: 'var(--text-primary)',
-                      outline: 'none',
                     }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                  <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                     City *
                   </label>
                   <input
@@ -367,21 +295,16 @@ const Payment = () => {
                     value={shippingDetails.city}
                     onChange={(e) => handleInputChange('city', e.target.value)}
                     required
+                    className="w-full py-[0.65rem] px-[0.85rem] rounded bg-[#FFFDF9] text-[0.9rem] outline-none"
                     style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: '4px',
                       border: '1px solid var(--border-light)',
-                      backgroundColor: '#FFFDF9',
-                      fontSize: '0.9rem',
                       color: 'var(--text-primary)',
-                      outline: 'none',
                     }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                  <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                     PIN Code *
                   </label>
                   <input
@@ -389,15 +312,10 @@ const Payment = () => {
                     value={shippingDetails.pincode}
                     onChange={(e) => handleInputChange('pincode', e.target.value)}
                     required
+                    className="w-full py-[0.65rem] px-[0.85rem] rounded bg-[#FFFDF9] text-[0.9rem] outline-none"
                     style={{
-                      width: '100%',
-                      padding: '0.65rem 0.85rem',
-                      borderRadius: '4px',
                       border: '1px solid var(--border-light)',
-                      backgroundColor: '#FFFDF9',
-                      fontSize: '0.9rem',
                       color: 'var(--text-primary)',
-                      outline: 'none',
                     }}
                   />
                 </div>
@@ -406,46 +324,40 @@ const Payment = () => {
 
             {/* Step 2: Payment Mode Selection */}
             <div
+              className="rounded-lg p-8"
               style={{
                 backgroundColor: 'var(--bg-card)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '2rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '1rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div className="flex items-center justify-between mb-6 pb-4" style={{ borderBottom: '1px solid var(--border-light)' }}>
+                <div className="flex items-center gap-3">
                   <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center"
                     style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
                       backgroundColor: 'var(--theme-champagne)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
                       color: 'var(--theme-gold)',
                     }}
                   >
                     <CreditCard size={18} />
                   </div>
                   <div>
-                    <h2 className="font-serif" style={{ fontSize: '1.25rem', margin: 0, fontWeight: '600', color: 'var(--text-primary)' }}>
+                    <h2 className="font-serif text-[1.25rem] m-0 font-semibold" style={{ color: 'var(--text-primary)' }}>
                       Payment Method
                     </h2>
-                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                    <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                       Choose your preferred luxury payment channel
                     </p>
                   </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#10B981', fontSize: '0.8rem', fontWeight: '600' }}>
+                <div className="flex items-center gap-1.5 text-emerald-500 text-[0.8rem] font-semibold">
                   <ShieldCheck size={16} /> Verified Secure
                 </div>
               </div>
 
               {/* Payment Tabs / Radio selector */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem', marginBottom: '1.75rem' }}>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7">
                 {[
                   { id: 'upi', label: 'UPI / QR', icon: Smartphone, subtitle: 'GPay, PhonePe, Paytm' },
                   { id: 'card', label: 'Cards', icon: CreditCard, subtitle: 'Visa, Master, RuPay' },
@@ -459,24 +371,17 @@ const Payment = () => {
                       key={item.id}
                       type="button"
                       onClick={() => setPaymentMethod(item.id)}
+                      className="py-4 px-2 rounded flex flex-col items-center gap-1.5 cursor-pointer transition-all duration-200"
                       style={{
-                        padding: '1rem 0.5rem',
-                        borderRadius: '6px',
                         border: isSelected ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
                         backgroundColor: isSelected ? 'var(--theme-champagne-light)' : '#FFFDF9',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '0.35rem',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
                       }}
                     >
                       <Icon size={22} style={{ color: isSelected ? 'var(--theme-gold)' : 'var(--text-secondary)' }} />
-                      <span style={{ fontSize: '0.85rem', fontWeight: isSelected ? '700' : '600', color: 'var(--text-primary)' }}>
+                      <span className={`text-[0.85rem] ${isSelected ? 'font-bold' : 'font-semibold'}`} style={{ color: 'var(--text-primary)' }}>
                         {item.label}
                       </span>
-                      <span style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                      <span className="text-[0.65rem] text-center" style={{ color: 'var(--text-secondary)' }}>
                         {item.subtitle}
                       </span>
                     </button>
@@ -486,88 +391,60 @@ const Payment = () => {
 
               {/* Tab 1: UPI Form */}
               {paymentMethod === 'upi' && (
-                <div style={{ backgroundColor: 'var(--theme-champagne-light)', padding: '1.5rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                <div className="p-6 rounded-md" style={{ backgroundColor: 'var(--theme-champagne-light)', border: '1px solid var(--border-light)' }}>
+                  <div className="flex justify-between items-center mb-5">
                     <div>
-                      <h4 style={{ margin: '0 0 0.25rem', fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                      <h4 className="m-0 mb-1 text-[0.95rem] font-semibold" style={{ color: 'var(--text-primary)' }}>
                         Scan QR Code or Enter VPA / UPI ID
                       </h4>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                         Instant verification with Google Pay, PhonePe, Paytm or BHIM
                       </p>
                     </div>
-                    <span className="badge-gold" style={{ fontSize: '9px' }}>INSTANT REFUND ELIGIBLE</span>
+                    <span className="badge-gold text-[9px]">INSTANT REFUND ELIGIBLE</span>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <div className="flex gap-6 items-center flex-wrap">
                     <div
+                      className="bg-white p-[0.85rem] rounded-md text-center"
                       style={{
-                        backgroundColor: '#FFFFFF',
-                        padding: '0.85rem',
-                        borderRadius: '6px',
                         border: '1px solid var(--border-light)',
-                        textAlign: 'center',
                       }}
                     >
                       {/* Simulated QR Code */}
-                      <div
-                        style={{
-                          width: '110px',
-                          height: '110px',
-                          backgroundColor: '#1C140E',
-                          borderRadius: '4px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: '#FEF0E0',
-                          fontSize: '0.75rem',
-                          fontWeight: '600',
-                          position: 'relative',
-                        }}
-                      >
-                        <div style={{ position: 'absolute', inset: '6px', border: '2px dashed #C5914A', borderRadius: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <span style={{ fontSize: '0.65rem', letterSpacing: '0.5px', color: '#FFF' }}>JEWERKART QR</span>
+                      <div className="w-[110px] h-[110px] bg-[#1C140E] rounded flex items-center justify-center text-[#FEF0E0] text-[0.75rem] font-semibold relative">
+                        <div className="absolute inset-1.5 border-2 border-dashed border-[#C5914A] rounded-sm flex items-center justify-center">
+                          <span className="text-[0.65rem] tracking-[0.5px] text-white">JEWERKART QR</span>
                         </div>
                       </div>
-                      <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--text-secondary)', marginTop: '0.4rem', fontWeight: '600' }}>
+                      <span className="block text-[0.7rem] mt-1.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>
                         Scan & Pay ₹{totalAmount.toLocaleString()}
                       </span>
                     </div>
 
-                    <div style={{ flex: 1, minWidth: '220px' }}>
-                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                    <div className="flex-1 min-w-[220px]">
+                      <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                         Enter UPI ID / VPA
                       </label>
-                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <div className="flex gap-2">
                         <input
                           type="text"
                           placeholder="e.g. mobileNumber@upi or name@okhdfcbank"
                           value={upiId}
                           onChange={(e) => setUpiId(e.target.value)}
+                          className="flex-1 py-[0.65rem] px-[0.85rem] rounded bg-white text-[0.85rem] outline-none"
                           style={{
-                            flex: 1,
-                            padding: '0.65rem 0.85rem',
-                            borderRadius: '4px',
                             border: '1px solid var(--border-light)',
-                            backgroundColor: '#FFFFFF',
-                            fontSize: '0.85rem',
-                            outline: 'none',
                           }}
                         />
                         <button
                           type="button"
-                          className="btn-gold"
-                          style={{
-                            padding: '0.65rem 1rem',
-                            borderRadius: '4px',
-                            fontSize: '0.8rem',
-                            cursor: 'pointer',
-                          }}
+                          className="btn-gold py-[0.65rem] px-4 rounded text-[0.8rem] cursor-pointer"
                         >
                           Verify
                         </button>
                       </div>
-                      <p style={{ margin: '0.6rem 0 0', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                      <p className="mt-2.5 mb-0 text-[0.75rem]" style={{ color: 'var(--text-secondary)' }}>
                         Supported apps: Google Pay, PhonePe, Paytm, CRED, Amazon Pay, BHIM
                       </p>
                     </div>
@@ -577,48 +454,42 @@ const Payment = () => {
 
               {/* Tab 2: Card Form */}
               {paymentMethod === 'card' && (
-                <div style={{ backgroundColor: 'var(--theme-champagne-light)', padding: '1.5rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
+                <div className="p-6 rounded-md" style={{ backgroundColor: 'var(--theme-champagne-light)', border: '1px solid var(--border-light)' }}>
                   {/* Luxury Card Graphic */}
                   <div
+                    className="max-w-[340px] rounded-[10px] p-5 text-[#FEF0E0] mb-6 border border-[#C5914A] shadow-[0_8px_24px_rgba(28,20,14,0.25)]"
                     style={{
-                      maxWidth: '340px',
                       background: 'linear-gradient(135deg, #1C140E 0%, #38291C 60%, #5B4028 100%)',
-                      borderRadius: '10px',
-                      padding: '1.25rem',
-                      color: '#FEF0E0',
-                      marginBottom: '1.5rem',
-                      boxShadow: '0 8px 24px rgba(28,20,14,0.25)',
-                      border: '1px solid #C5914A',
                     }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-                      <span className="font-serif" style={{ fontSize: '1rem', letterSpacing: '2px', fontWeight: '700', color: '#FEF0E0' }}>
+                    <div className="flex justify-between items-center mb-5">
+                      <span className="font-serif text-base tracking-[2px] font-bold text-[#FEF0E0]">
                         JEWERKART ELITE
                       </span>
-                      <Sparkles size={18} style={{ color: '#C5914A' }} />
+                      <Sparkles size={18} className="text-[#C5914A]" />
                     </div>
 
-                    <div style={{ width: '36px', height: '26px', backgroundColor: '#D4A373', borderRadius: '4px', marginBottom: '1rem', opacity: 0.9 }} />
+                    <div className="w-9 h-[26px] bg-[#D4A373] rounded mb-4 opacity-90" />
 
-                    <div style={{ fontSize: '1.1rem', letterSpacing: '3px', fontFamily: 'monospace', marginBottom: '1rem' }}>
+                    <div className="text-[1.1rem] tracking-[3px] font-mono mb-4">
                       {cardDetails.number || '•••• •••• •••• ••••'}
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem' }}>
+                    <div className="flex justify-between text-[0.75rem]">
                       <div>
-                        <div style={{ fontSize: '0.6rem', color: '#D8BF9F', textTransform: 'uppercase' }}>CARDHOLDER</div>
-                        <div style={{ fontWeight: '600' }}>{cardDetails.name || 'YOUR NAME'}</div>
+                        <div className="text-[0.6rem] text-[#D8BF9F] uppercase">CARDHOLDER</div>
+                        <div className="font-semibold">{cardDetails.name || 'YOUR NAME'}</div>
                       </div>
                       <div>
-                        <div style={{ fontSize: '0.6rem', color: '#D8BF9F', textTransform: 'uppercase' }}>EXPIRES</div>
-                        <div style={{ fontWeight: '600' }}>{cardDetails.expiry || 'MM/YY'}</div>
+                        <div className="text-[0.6rem] text-[#D8BF9F] uppercase">EXPIRES</div>
+                        <div className="font-semibold">{cardDetails.expiry || 'MM/YY'}</div>
                       </div>
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                    <div style={{ gridColumn: 'span 2' }}>
-                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="sm:col-span-2">
+                      <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                         Card Number *
                       </label>
                       <input
@@ -626,20 +497,15 @@ const Payment = () => {
                         placeholder="4532 0000 0000 8821"
                         value={cardDetails.number}
                         onChange={(e) => setCardDetails((p) => ({ ...p, number: e.target.value }))}
+                        className="w-full py-[0.65rem] px-[0.85rem] rounded bg-white text-[0.9rem] outline-none"
                         style={{
-                          width: '100%',
-                          padding: '0.65rem 0.85rem',
-                          borderRadius: '4px',
                           border: '1px solid var(--border-light)',
-                          backgroundColor: '#FFFFFF',
-                          fontSize: '0.9rem',
-                          outline: 'none',
                         }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                      <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                         Name on Card *
                       </label>
                       <input
@@ -647,21 +513,16 @@ const Payment = () => {
                         placeholder="Priya Sharma"
                         value={cardDetails.name}
                         onChange={(e) => setCardDetails((p) => ({ ...p, name: e.target.value }))}
+                        className="w-full py-[0.65rem] px-[0.85rem] rounded bg-white text-[0.9rem] outline-none"
                         style={{
-                          width: '100%',
-                          padding: '0.65rem 0.85rem',
-                          borderRadius: '4px',
                           border: '1px solid var(--border-light)',
-                          backgroundColor: '#FFFFFF',
-                          fontSize: '0.9rem',
-                          outline: 'none',
                         }}
                       />
                     </div>
 
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                    <div className="flex gap-2">
+                      <div className="flex-1">
+                        <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                           Valid Thru *
                         </label>
                         <input
@@ -669,19 +530,14 @@ const Payment = () => {
                           placeholder="MM/YY"
                           value={cardDetails.expiry}
                           onChange={(e) => setCardDetails((p) => ({ ...p, expiry: e.target.value }))}
+                          className="w-full py-[0.65rem] px-[0.85rem] rounded bg-white text-[0.9rem] outline-none"
                           style={{
-                            width: '100%',
-                            padding: '0.65rem 0.85rem',
-                            borderRadius: '4px',
                             border: '1px solid var(--border-light)',
-                            backgroundColor: '#FFFFFF',
-                            fontSize: '0.9rem',
-                            outline: 'none',
                           }}
                         />
                       </div>
-                      <div style={{ width: '80px' }}>
-                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.4rem', color: 'var(--text-primary)' }}>
+                      <div className="w-20">
+                        <label className="block text-[0.8rem] font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>
                           CVV *
                         </label>
                         <input
@@ -690,14 +546,9 @@ const Payment = () => {
                           placeholder="•••"
                           value={cardDetails.cvv}
                           onChange={(e) => setCardDetails((p) => ({ ...p, cvv: e.target.value }))}
+                          className="w-full py-[0.65rem] px-[0.85rem] rounded bg-white text-[0.9rem] outline-none"
                           style={{
-                            width: '100%',
-                            padding: '0.65rem 0.85rem',
-                            borderRadius: '4px',
                             border: '1px solid var(--border-light)',
-                            backgroundColor: '#FFFFFF',
-                            fontSize: '0.9rem',
-                            outline: 'none',
                           }}
                         />
                       </div>
@@ -708,26 +559,22 @@ const Payment = () => {
 
               {/* Tab 3: Net Banking */}
               {paymentMethod === 'netbanking' && (
-                <div style={{ backgroundColor: 'var(--theme-champagne-light)', padding: '1.5rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
-                  <p style={{ margin: '0 0 1rem', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                <div className="p-6 rounded-md" style={{ backgroundColor: 'var(--theme-champagne-light)', border: '1px solid var(--border-light)' }}>
+                  <p className="m-0 mb-4 text-[0.85rem] font-semibold" style={{ color: 'var(--text-primary)' }}>
                     Select Your Bank:
                   </p>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', marginBottom: '1rem' }}>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
                     {['HDFC Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra', 'Punjab National'].map((bank) => (
                       <button
                         key={bank}
                         type="button"
                         onClick={() => setSelectedBank(bank)}
+                        className="p-3 rounded text-[0.8rem] cursor-pointer text-center"
                         style={{
-                          padding: '0.75rem',
-                          borderRadius: '4px',
                           border: selectedBank === bank ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
                           backgroundColor: selectedBank === bank ? '#FFFFFF' : '#FFFDF9',
-                          fontSize: '0.8rem',
                           fontWeight: selectedBank === bank ? '700' : '500',
                           color: 'var(--text-primary)',
-                          cursor: 'pointer',
-                          textAlign: 'center',
                         }}
                       >
                         {bank}
@@ -739,14 +586,14 @@ const Payment = () => {
 
               {/* Tab 4: Cash on Delivery */}
               {paymentMethod === 'cod' && (
-                <div style={{ backgroundColor: 'var(--theme-champagne-light)', padding: '1.5rem', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                    <Truck size={22} style={{ color: 'var(--theme-gold)', flexShrink: 0, marginTop: '2px' }} />
+                <div className="p-6 rounded-md" style={{ backgroundColor: 'var(--theme-champagne-light)', border: '1px solid var(--border-light)' }}>
+                  <div className="flex items-start gap-3">
+                    <Truck size={22} className="shrink-0 mt-0.5" style={{ color: 'var(--theme-gold)' }} />
                     <div>
-                      <h4 style={{ margin: '0 0 0.35rem', fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                      <h4 className="m-0 mb-1.5 text-[0.95rem] font-semibold" style={{ color: 'var(--text-primary)' }}>
                         Pay Upon Insured Delivery
                       </h4>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                      <p className="m-0 text-[0.8rem] leading-[1.5]" style={{ color: 'var(--text-secondary)' }}>
                         You can pay with Cash or UPI directly to our delivery courier partner at your doorstep. Please keep the exact amount ready upon delivery.
                       </p>
                     </div>
@@ -755,32 +602,17 @@ const Payment = () => {
               )}
 
               {/* Submit Payment button */}
-              <div style={{ marginTop: '2rem' }}>
+              <div className="mt-8">
                 <button
                   type="button"
                   onClick={handlePaymentSubmit}
                   disabled={isProcessing}
-                  className="btn-slate"
-                  style={{
-                    width: '100%',
-                    padding: '1.1rem',
-                    fontSize: '0.95rem',
-                    fontWeight: '700',
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.75rem',
-                    borderRadius: '4px',
-                    cursor: isProcessing ? 'not-allowed' : 'pointer',
-                    opacity: isProcessing ? 0.75 : 1,
-                  }}
+                  className="btn-slate w-full p-[1.1rem] text-[0.95rem] font-bold tracking-[1.5px] uppercase flex items-center justify-center gap-3 rounded cursor-pointer disabled:cursor-not-allowed disabled:opacity-75"
                 >
                   <Lock size={18} />
                   {isProcessing ? 'Verifying & Securing Order...' : `Pay ₹${totalAmount.toLocaleString()} Securely`}
                 </button>
-                <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '0.75rem 0 0' }}>
+                <p className="text-center text-[0.75rem] mt-3 mb-0" style={{ color: 'var(--text-secondary)' }}>
                   By completing payment, you agree to Jewerkart’s Terms of Service & Hallmarking Purity Assurance.
                 </p>
               </div>
@@ -788,48 +620,44 @@ const Payment = () => {
           </div>
 
           {/* RIGHT: Order Summary Sidebar */}
-          <div style={{ position: 'sticky', top: '90px' }}>
+          <div className="sticky top-[90px]">
             <div
+              className="rounded-lg p-7"
               style={{
                 backgroundColor: 'var(--bg-card)',
-                borderRadius: '8px',
                 border: '1px solid var(--border-light)',
-                padding: '1.75rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.75rem' }}>
-                <h3 className="font-serif" style={{ fontSize: '1.2rem', margin: 0, fontWeight: '600', color: 'var(--text-primary)' }}>
+              <div className="flex justify-between items-center mb-5 pb-3" style={{ borderBottom: '1px solid var(--border-light)' }}>
+                <h3 className="font-serif text-[1.2rem] m-0 font-semibold" style={{ color: 'var(--text-primary)' }}>
                   Order Bag Summary
                 </h3>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                <span className="text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                   {orderItems.length} Handcrafted Items
                 </span>
               </div>
 
               {/* Items preview list */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem', maxHeight: '240px', overflowY: 'auto' }}>
+              <div className="flex flex-col gap-4 mb-6 max-h-[240px] overflow-y-auto">
                 {orderItems.map((item) => (
-                  <div key={item.id} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                  <div key={item.id} className="flex gap-3 items-center">
                     <img
                       src={item.image}
                       alt={item.name}
+                      className="w-14 h-14 object-cover rounded"
                       style={{
-                        width: '56px',
-                        height: '56px',
-                        objectFit: 'cover',
-                        borderRadius: '4px',
                         border: '1px solid var(--border-light)',
                       }}
                     />
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ margin: '0 0 0.2rem', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <div className="flex-1 min-w-0">
+                      <p className="m-0 mb-1 text-[0.85rem] font-semibold whitespace-nowrap overflow-hidden text-ellipsis" style={{ color: 'var(--text-primary)' }}>
                         {item.name}
                       </p>
-                      <p style={{ margin: '0 0 0.2rem', fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 mb-1 text-[0.7rem]" style={{ color: 'var(--text-secondary)' }}>
                         Qty: {item.quantity} • {item.subtitle}
                       </p>
-                      <span style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                      <span className="text-[0.85rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                         ₹{item.price.toLocaleString()}
                       </span>
                     </div>
@@ -838,100 +666,88 @@ const Payment = () => {
               </div>
 
               {/* Promo Code section */}
-              <form onSubmit={handleApplyCoupon} style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.4rem', color: 'var(--text-secondary)' }}>
+              <form onSubmit={handleApplyCoupon} className="mb-6">
+                <label className="block text-[0.75rem] font-semibold uppercase tracking-[0.5px] mb-1.5" style={{ color: 'var(--text-secondary)' }}>
                   Gift Voucher / Royal Coupon
                 </label>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <div style={{ position: 'relative', flex: 1 }}>
-                    <Tag size={14} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <Tag size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-secondary)' }} />
                     <input
                       type="text"
                       placeholder="e.g. ROYAL10"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
+                      className="w-full py-[0.55rem] pr-3 pl-8 text-[0.8rem] rounded bg-[#FFFDF9] outline-none uppercase"
                       style={{
-                        width: '100%',
-                        padding: '0.55rem 0.75rem 0.55rem 2rem',
-                        fontSize: '0.8rem',
-                        borderRadius: '4px',
                         border: '1px solid var(--border-light)',
-                        backgroundColor: '#FFFDF9',
-                        outline: 'none',
-                        textTransform: 'uppercase',
                       }}
                     />
                   </div>
                   <button
                     type="submit"
-                    className="btn-gold"
-                    style={{
-                      padding: '0.55rem 1rem',
-                      borderRadius: '4px',
-                      fontSize: '0.75rem',
-                      cursor: 'pointer',
-                    }}
+                    className="btn-gold py-[0.55rem] px-4 rounded text-[0.75rem] cursor-pointer"
                   >
                     Apply
                   </button>
                 </div>
                 {couponSuccess && (
-                  <p style={{ margin: '0.4rem 0 0', fontSize: '0.75rem', color: '#059669', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <p className="mt-1.5 mb-0 text-[0.75rem] text-emerald-600 flex items-center gap-1">
                     <CheckCircle2 size={12} /> {couponSuccess}
                   </p>
                 )}
                 {couponError && (
-                  <p style={{ margin: '0.4rem 0 0', fontSize: '0.75rem', color: '#DC2626' }}>
+                  <p className="mt-1.5 mb-0 text-[0.75rem] text-red-600">
                     {couponError}
                   </p>
                 )}
               </form>
 
               {/* Price Breakdown */}
-              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              <div className="pt-4 flex flex-col gap-[0.65rem]" style={{ borderTop: '1px solid var(--border-light)' }}>
+                <div className="flex justify-between text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>
                   <span>Cart Subtotal</span>
-                  <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>₹{subtotal.toLocaleString()}</span>
+                  <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>₹{subtotal.toLocaleString()}</span>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                <div className="flex justify-between text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>
                   <span>Luxury Velvet Packaging</span>
-                  <span style={{ color: '#059669', fontWeight: '600' }}>FREE</span>
+                  <span className="text-emerald-600 font-semibold">FREE</span>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                <div className="flex justify-between text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>
                   <span>Armored Insured Shipping</span>
-                  <span style={{ color: '#059669', fontWeight: '600' }}>FREE</span>
+                  <span className="text-emerald-600 font-semibold">FREE</span>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                <div className="flex justify-between text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>
                   <span>GST (3% fine jewellery)</span>
-                  <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>₹{tax.toLocaleString()}</span>
+                  <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>₹{tax.toLocaleString()}</span>
                 </div>
 
                 {appliedDiscount > 0 && (
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#059669' }}>
+                  <div className="flex justify-between text-[0.85rem] text-emerald-600">
                     <span>Coupon Discount</span>
-                    <span style={{ fontWeight: '600' }}>- ₹{appliedDiscount.toLocaleString()}</span>
+                    <span className="font-semibold">- ₹{appliedDiscount.toLocaleString()}</span>
                   </div>
                 )}
 
-                <div style={{ borderTop: '1px solid var(--border-light)', marginTop: '0.5rem', paddingTop: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                  <span style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)' }}>Total Amount</span>
-                  <span style={{ fontSize: '1.35rem', fontWeight: '700', color: 'var(--theme-gold)' }}>
+                <div className="mt-2 pt-3 flex justify-between items-baseline" style={{ borderTop: '1px solid var(--border-light)' }}>
+                  <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>Total Amount</span>
+                  <span className="text-[1.35rem] font-bold" style={{ color: 'var(--theme-gold)' }}>
                     ₹{totalAmount.toLocaleString()}
                   </span>
                 </div>
               </div>
 
               {/* Assurances */}
-              <div style={{ marginTop: '1.5rem', borderTop: '1px dashed var(--border-light)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                  <ShieldCheck size={14} style={{ color: '#C5914A' }} />
+              <div className="mt-6 pt-4 flex flex-col gap-2" style={{ borderTop: '1px dashed var(--border-light)' }}>
+                <div className="flex items-center gap-2 text-[0.75rem]" style={{ color: 'var(--text-secondary)' }}>
+                  <ShieldCheck size={14} className="text-[#C5914A]" />
                   <span>100% Certified 925 Hallmark Jewellery</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                  <Truck size={14} style={{ color: '#C5914A' }} />
+                <div className="flex items-center gap-2 text-[0.75rem]" style={{ color: 'var(--text-secondary)' }}>
+                  <Truck size={14} className="text-[#C5914A]" />
                   <span>Tamper-evident transit seal & full insurance</span>
                 </div>
               </div>

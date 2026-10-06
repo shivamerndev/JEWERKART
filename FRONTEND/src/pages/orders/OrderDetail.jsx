@@ -71,61 +71,49 @@ const OrderDetail = () => {
 
   return (
     <main
+      className="min-h-screen pt-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '1080px', margin: '0 auto' }}>
+      <div className="max-w-[1080px] mx-auto">
         
         {/* Breadcrumb */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.85rem' }}>
-          <Link to="/account" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Account</Link>
+        <div className="flex items-center gap-2 mb-8 text-[0.85rem]">
+          <Link to="/account" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Account</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <Link to="/account/orders" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Orders</Link>
+          <Link to="/account/orders" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Orders</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{order.orderId}</span>
+          <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{order.orderId}</span>
         </div>
 
         {/* Section Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
           <div>
-            <div className="divider-ornament" style={{ justifyContent: 'flex-start', marginBottom: '0.5rem' }}>
-              <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+            <div className="divider-ornament justify-start mb-2">
+              <span className="badge-925 text-[9px] tracking-[2px]">
                 CONSIGNMENT DOSSIER
               </span>
             </div>
             <h1
-              className="font-serif"
+              className="font-serif font-semibold mb-1"
               style={{
                 fontSize: 'clamp(1.8rem, 3vw, 2.3rem)',
-                fontWeight: '600',
                 color: 'var(--text-primary)',
-                margin: '0 0 0.35rem',
               }}
             >
               Order #{order.orderId}
             </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
+            <p className="m-0 text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>
               Placed on {order.date} • Hand-finished at Jewerkart Flagship Atelier
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div className="flex gap-2.5">
             <button
               onClick={handleDownloadInvoice}
               disabled={downloading}
-              className="btn-gold"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '0.65rem 1.25rem',
-                borderRadius: '6px',
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-              }}
+              className="btn-gold inline-flex items-center gap-2 py-2.5 px-5 rounded-md text-[0.85rem] cursor-pointer"
             >
               <Download size={15} />
               {downloading ? 'Generating...' : 'Tax Invoice (PDF)'}
@@ -133,77 +121,55 @@ const OrderDetail = () => {
 
             <Link
               to={`/track-order/${order.orderId}`}
-              className="btn-slate"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '0.65rem 1.25rem',
-                borderRadius: '6px',
-                fontSize: '0.85rem',
-                textDecoration: 'none',
-                fontWeight: '600',
-              }}
+              className="btn-slate inline-flex items-center gap-2 py-2.5 px-5 rounded-md text-[0.85rem] no-underline font-semibold"
             >
               <Truck size={15} /> Live Armored Tracking
             </Link>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '2rem' }}>
+        <div className="grid grid-cols-12 gap-8">
           
           {/* Left Column: Items & Return/Exchange Quick Actions */}
-          <div style={{ gridColumn: 'span 12' }} className="md:col-span-8">
+          <div className="col-span-12 md:col-span-8">
             <div
-              className="bg-theme-card"
+              className="bg-theme-card rounded-2xl p-8 mb-8"
               style={{
-                borderRadius: '16px',
                 border: '1px solid var(--border-light)',
-                padding: '2rem',
                 boxShadow: 'var(--shadow-sm)',
-                marginBottom: '2rem',
               }}
             >
-              <h2 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 1.5rem', color: 'var(--text-primary)' }}>
+              <h2 className="font-serif text-[1.25rem] m-0 mb-6" style={{ color: 'var(--text-primary)' }}>
                 Ordered Heirloom Pieces
               </h2>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div className="flex flex-col gap-6">
                 {order.items.map((item) => (
                   <div
                     key={item.id}
+                    className="flex gap-5 pb-6 items-center"
                     style={{
-                      display: 'flex',
-                      gap: '1.25rem',
-                      paddingBottom: '1.5rem',
                       borderBottom: '1px solid var(--border-light)',
-                      alignItems: 'center',
                     }}
                   >
                     <div
-                      style={{
-                        width: '80px',
-                        height: '80px',
-                        borderRadius: '8px',
-                        backgroundColor: 'var(--bg-circle-item)',
-                        overflow: 'hidden',
-                        flexShrink: 0,
-                      }}
+                      className="w-20 h-20 rounded-lg overflow-hidden shrink-0"
+                      style={{ backgroundColor: 'var(--bg-circle-item)' }}
                     >
-                      <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
-                    <div style={{ flexGrow: 1 }}>
-                      <h3 className="font-serif" style={{ fontSize: '1.1rem', margin: '0 0 0.35rem', color: 'var(--text-primary)' }}>
+                    <div className="grow">
+                      <h3 className="font-serif text-[1.1rem] m-0 mb-1" style={{ color: 'var(--text-primary)' }}>
                         {item.name}
                       </h3>
-                      <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 text-[0.82rem]" style={{ color: 'var(--text-secondary)' }}>
                         {item.purity}
                       </p>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                      <div className="text-[0.8rem] mt-1" style={{ color: 'var(--text-secondary)' }}>
                         Qty: <strong>{item.quantity}</strong> • Unit Price: ₹{item.price.toLocaleString('en-IN')}
                       </div>
                     </div>
-                    <div style={{ fontSize: '1.15rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    <div className="text-[1.15rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                       ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                     </div>
                   </div>
@@ -212,26 +178,13 @@ const OrderDetail = () => {
 
               {/* Order Actions Links */}
               <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginTop: '1.5rem',
-                  flexWrap: 'wrap',
-                  gap: '1rem',
-                }}
+                className="flex items-center justify-between mt-6 flex-wrap gap-4"
               >
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div className="flex gap-4">
                   <Link
                     to={`/order/${order.orderId}/return`}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      color: 'var(--text-secondary)',
-                      fontSize: '0.85rem',
-                      textDecoration: 'none',
-                    }}
+                    className="inline-flex items-center gap-1.5 text-[0.85rem] no-underline"
+                    style={{ color: 'var(--text-secondary)' }}
                   >
                     <RotateCcw size={14} style={{ color: 'var(--theme-gold)' }} />
                     15-Day Return
@@ -239,14 +192,8 @@ const OrderDetail = () => {
 
                   <Link
                     to={`/order/${order.orderId}/exchange`}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      color: 'var(--text-secondary)',
-                      fontSize: '0.85rem',
-                      textDecoration: 'none',
-                    }}
+                    className="inline-flex items-center gap-1.5 text-[0.85rem] no-underline"
+                    style={{ color: 'var(--text-secondary)' }}
                   >
                     <RefreshCw size={14} style={{ color: 'var(--theme-gold)' }} />
                     Size Exchange
@@ -255,14 +202,7 @@ const OrderDetail = () => {
 
                 <Link
                   to={`/order/${order.orderId}/cancel`}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    color: '#991B1B',
-                    fontSize: '0.85rem',
-                    textDecoration: 'none',
-                  }}
+                  className="inline-flex items-center gap-1.5 text-[#991B1B] text-[0.85rem] no-underline"
                 >
                   <XCircle size={14} />
                   Cancel Consignment
@@ -272,53 +212,48 @@ const OrderDetail = () => {
           </div>
 
           {/* Right Column: Address & Payment Info */}
-          <div style={{ gridColumn: 'span 12' }} className="md:col-span-4">
+          <div className="col-span-12 md:col-span-4">
             
             {/* Delivery Address */}
             <div
-              className="bg-theme-card"
+              className="bg-theme-card rounded-2xl p-7 mb-6"
               style={{
-                borderRadius: '16px',
                 border: '1px solid var(--border-light)',
-                padding: '1.75rem',
                 boxShadow: 'var(--shadow-sm)',
-                marginBottom: '1.5rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+              <div className="flex items-center gap-2 mb-4">
                 <MapPin size={18} style={{ color: 'var(--theme-gold)' }} />
-                <h3 className="font-serif" style={{ fontSize: '1.15rem', margin: 0, color: 'var(--text-primary)' }}>
+                <h3 className="font-serif text-[1.15rem] m-0" style={{ color: 'var(--text-primary)' }}>
                   Delivery Destination
                 </h3>
               </div>
-              <p style={{ fontWeight: '600', fontSize: '0.95rem', margin: '0 0 0.35rem', color: 'var(--text-primary)' }}>
+              <p className="font-semibold text-[0.95rem] m-0 mb-1" style={{ color: 'var(--text-primary)' }}>
                 {order.shippingAddress.fullName}
               </p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5', margin: '0 0 0.5rem' }}>
+              <p className="text-[0.85rem] leading-[1.5] m-0 mb-2" style={{ color: 'var(--text-secondary)' }}>
                 {order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.pincode}
               </p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', margin: 0 }}>
+              <p className="text-[0.82rem] m-0" style={{ color: 'var(--text-secondary)' }}>
                 Mobile: <strong style={{ color: 'var(--text-primary)' }}>{order.shippingAddress.phone}</strong>
               </p>
             </div>
 
             {/* Payment & Purity Guarantees */}
             <div
-              className="bg-theme-card"
+              className="bg-theme-card rounded-2xl p-7"
               style={{
-                borderRadius: '16px',
                 border: '1px solid var(--border-light)',
-                padding: '1.75rem',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+              <div className="flex items-center gap-2 mb-4">
                 <ShieldCheck size={18} style={{ color: 'var(--theme-gold)' }} />
-                <h3 className="font-serif" style={{ fontSize: '1.15rem', margin: 0, color: 'var(--text-primary)' }}>
+                <h3 className="font-serif text-[1.15rem] m-0" style={{ color: 'var(--text-primary)' }}>
                   Patron Safeguards
                 </h3>
               </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+              <ul className="list-none p-0 m-0 flex flex-col gap-3 text-[0.82rem]" style={{ color: 'var(--text-secondary)' }}>
                 <li>✓ BIS Hallmarked 925 Certification Included</li>
                 <li>✓ Tamper-evident Holographic Security Seal</li>
                 <li>✓ Transit Insured by Sequel Armored Services</li>

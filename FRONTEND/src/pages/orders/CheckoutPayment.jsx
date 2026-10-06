@@ -31,144 +31,115 @@ const CheckoutPayment = () => {
 
   return (
     <main
+      className="min-h-screen py-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <div className="max-w-[1100px] mx-auto">
         
         {/* Stepper */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-          <Link to="/checkout" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="flex justify-center items-center gap-4 mb-12 flex-wrap">
+          <Link to="/checkout" className="no-underline flex items-center gap-2">
             <span
+              className="w-7 h-7 rounded-full flex items-center justify-center text-[0.85rem]"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--bg-card)',
                 color: 'var(--text-secondary)',
                 border: '1px solid var(--border-light)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.85rem',
               }}
             >
               ✓
             </span>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Review Bag</span>
+            <span className="text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>Review Bag</span>
           </Link>
           <ChevronRight size={16} style={{ color: 'var(--border-light)' }} />
-          <Link to="/checkout/address" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Link to="/checkout/address" className="no-underline flex items-center gap-2">
             <span
+              className="w-7 h-7 rounded-full flex items-center justify-center text-[0.85rem]"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--bg-card)',
                 color: 'var(--text-secondary)',
                 border: '1px solid var(--border-light)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.85rem',
               }}
             >
               ✓
             </span>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Shipping Address</span>
+            <span className="text-[0.9rem]" style={{ color: 'var(--text-secondary)' }}>Shipping Address</span>
           </Link>
           <ChevronRight size={16} style={{ color: 'var(--border-light)' }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="flex items-center gap-2">
             <span
+              className="w-7 h-7 rounded-full text-[#FEF0E0] flex items-center justify-center text-[0.85rem] font-bold"
               style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--accent-slate)',
-                color: '#FEF0E0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.85rem',
-                fontWeight: '700',
               }}
             >
               3
             </span>
-            <span style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.9rem' }}>Payment</span>
+            <span className="font-semibold text-[0.9rem]" style={{ color: 'var(--text-primary)' }}>Payment</span>
           </div>
         </div>
 
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               STEP 3 OF 3
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2"
             style={{
               fontSize: 'clamp(2rem, 3.5vw, 2.5rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             Payment Selection
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0 }}>
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Encrypted payment gateway with instant transaction settlement.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '2.5rem' }}>
+        <div className="grid grid-cols-12 gap-10">
           
           {/* Payment Methods */}
-          <div style={{ gridColumn: 'span 12' }} className="md:col-span-7">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="col-span-12 md:col-span-7">
+            <div className="flex flex-col gap-4">
               
               {/* UPI Option */}
               <div
                 onClick={() => setPaymentMethod('upi')}
-                className="bg-theme-card"
+                className="bg-theme-card rounded-xl p-6 cursor-pointer"
                 style={{
-                  borderRadius: '12px',
                   border: paymentMethod === 'upi' ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
-                  padding: '1.5rem',
-                  cursor: 'pointer',
                   boxShadow: 'var(--shadow-sm)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: paymentMethod === 'upi' ? '1rem' : '0' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div className={`flex items-center justify-between ${paymentMethod === 'upi' ? 'mb-4' : 'mb-0'}`}>
+                  <div className="flex items-center gap-3">
                     <Smartphone size={22} style={{ color: 'var(--theme-gold)' }} />
                     <div>
-                      <h3 className="font-serif" style={{ fontSize: '1.05rem', margin: 0, color: 'var(--text-primary)' }}>
+                      <h3 className="font-serif text-[1.05rem] m-0" style={{ color: 'var(--text-primary)' }}>
                         UPI / Instant QR
                       </h3>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                         Google Pay, PhonePe, Paytm, BHIM UPI
                       </p>
                     </div>
                   </div>
                   <div
+                    className="w-5 h-5 rounded-full bg-white shrink-0"
                     style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
                       border: paymentMethod === 'upi' ? '6px solid var(--theme-gold)' : '2px solid var(--border-light)',
-                      backgroundColor: '#FFF',
                     }}
                   />
                 </div>
 
                 {paymentMethod === 'upi' && (
-                  <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '1rem' }}>
-                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.35rem' }}>
+                  <div className="pt-4" style={{ borderTop: '1px solid var(--border-light)' }}>
+                    <label className="block text-[0.8rem] font-semibold mb-1.5">
                       Enter your UPI ID / VPA
                     </label>
                     <input
@@ -176,13 +147,10 @@ const CheckoutPayment = () => {
                       value={upiId}
                       onChange={(e) => setUpiId(e.target.value)}
                       placeholder="e.g. yourname@oksbi"
+                      className="w-full p-[0.65rem] rounded-md box-border outline-none"
                       style={{
-                        width: '100%',
-                        padding: '0.65rem',
-                        borderRadius: '6px',
                         border: '1px solid var(--border-light)',
                         backgroundColor: 'var(--bg-card-warm)',
-                        boxSizing: 'border-box',
                       }}
                     />
                   </div>
@@ -192,63 +160,69 @@ const CheckoutPayment = () => {
               {/* Cards Option */}
               <div
                 onClick={() => setPaymentMethod('card')}
-                className="bg-theme-card"
+                className="bg-theme-card rounded-xl p-6 cursor-pointer"
                 style={{
-                  borderRadius: '12px',
                   border: paymentMethod === 'card' ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
-                  padding: '1.5rem',
-                  cursor: 'pointer',
                   boxShadow: 'var(--shadow-sm)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: paymentMethod === 'card' ? '1rem' : '0' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div className={`flex items-center justify-between ${paymentMethod === 'card' ? 'mb-4' : 'mb-0'}`}>
+                  <div className="flex items-center gap-3">
                     <CreditCard size={22} style={{ color: 'var(--theme-gold)' }} />
                     <div>
-                      <h3 className="font-serif" style={{ fontSize: '1.05rem', margin: 0, color: 'var(--text-primary)' }}>
+                      <h3 className="font-serif text-[1.05rem] m-0" style={{ color: 'var(--text-primary)' }}>
                         Credit or Debit Card
                       </h3>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                         Visa, MasterCard, RuPay, American Express
                       </p>
                     </div>
                   </div>
                   <div
+                    className="w-5 h-5 rounded-full bg-white shrink-0"
                     style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
                       border: paymentMethod === 'card' ? '6px solid var(--theme-gold)' : '2px solid var(--border-light)',
-                      backgroundColor: '#FFF',
                     }}
                   />
                 </div>
 
                 {paymentMethod === 'card' && (
-                  <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div className="pt-4 flex flex-col gap-3" style={{ borderTop: '1px solid var(--border-light)' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.25rem' }}>Card Number</label>
+                      <label className="block text-[0.8rem] font-semibold mb-1">Card Number</label>
                       <input
                         type="text"
                         defaultValue="4111 2222 3333 4444"
-                        style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid var(--border-light)', backgroundColor: 'var(--bg-card-warm)', boxSizing: 'border-box' }}
+                        className="w-full p-2.5 rounded-md box-border outline-none"
+                        style={{
+                          border: '1px solid var(--border-light)',
+                          backgroundColor: 'var(--bg-card-warm)',
+                        }}
                       />
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                    <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.25rem' }}>Expiry (MM/YY)</label>
+                        <label className="block text-[0.8rem] font-semibold mb-1">Expiry (MM/YY)</label>
                         <input
                           type="text"
                           defaultValue="08/29"
-                          style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid var(--border-light)', backgroundColor: 'var(--bg-card-warm)', boxSizing: 'border-box' }}
+                          className="w-full p-2.5 rounded-md box-border outline-none"
+                          style={{
+                            border: '1px solid var(--border-light)',
+                            backgroundColor: 'var(--bg-card-warm)',
+                          }}
                         />
                       </div>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.25rem' }}>CVV</label>
+                        <label className="block text-[0.8rem] font-semibold mb-1">CVV</label>
                         <input
                           type="password"
                           defaultValue="789"
-                          style={{ width: '100%', padding: '0.6rem', borderRadius: '6px', border: '1px solid var(--border-light)', backgroundColor: 'var(--bg-card-warm)', boxSizing: 'border-box' }}
+                          className="w-full p-2.5 rounded-md box-border outline-none"
+                          style={{
+                            border: '1px solid var(--border-light)',
+                            backgroundColor: 'var(--bg-card-warm)',
+                          }}
                         />
                       </div>
                     </div>
@@ -259,34 +233,28 @@ const CheckoutPayment = () => {
               {/* Netbanking Option */}
               <div
                 onClick={() => setPaymentMethod('netbanking')}
-                className="bg-theme-card"
+                className="bg-theme-card rounded-xl p-6 cursor-pointer"
                 style={{
-                  borderRadius: '12px',
                   border: paymentMethod === 'netbanking' ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
-                  padding: '1.5rem',
-                  cursor: 'pointer',
                   boxShadow: 'var(--shadow-sm)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
                     <Building2 size={22} style={{ color: 'var(--theme-gold)' }} />
                     <div>
-                      <h3 className="font-serif" style={{ fontSize: '1.05rem', margin: 0, color: 'var(--text-primary)' }}>
+                      <h3 className="font-serif text-[1.05rem] m-0" style={{ color: 'var(--text-primary)' }}>
                         Net Banking
                       </h3>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                         All Major Indian Banks Supported
                       </p>
                     </div>
                   </div>
                   <div
+                    className="w-5 h-5 rounded-full bg-white shrink-0"
                     style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
                       border: paymentMethod === 'netbanking' ? '6px solid var(--theme-gold)' : '2px solid var(--border-light)',
-                      backgroundColor: '#FFF',
                     }}
                   />
                 </div>
@@ -295,34 +263,28 @@ const CheckoutPayment = () => {
               {/* Cash On Delivery */}
               <div
                 onClick={() => setPaymentMethod('cod')}
-                className="bg-theme-card"
+                className="bg-theme-card rounded-xl p-6 cursor-pointer"
                 style={{
-                  borderRadius: '12px',
                   border: paymentMethod === 'cod' ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
-                  padding: '1.5rem',
-                  cursor: 'pointer',
                   boxShadow: 'var(--shadow-sm)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
                     <Banknote size={22} style={{ color: 'var(--theme-gold)' }} />
                     <div>
-                      <h3 className="font-serif" style={{ fontSize: '1.05rem', margin: 0, color: 'var(--text-primary)' }}>
+                      <h3 className="font-serif text-[1.05rem] m-0" style={{ color: 'var(--text-primary)' }}>
                         Cash on Delivery (Armored COD)
                       </h3>
-                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                      <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                         Pay cash or UPI upon secret OTP verification at delivery
                       </p>
                     </div>
                   </div>
                   <div
+                    className="w-5 h-5 rounded-full bg-white shrink-0"
                     style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
                       border: paymentMethod === 'cod' ? '6px solid var(--theme-gold)' : '2px solid var(--border-light)',
-                      backgroundColor: '#FFF',
                     }}
                   />
                 </div>
@@ -332,23 +294,19 @@ const CheckoutPayment = () => {
           </div>
 
           {/* Right Action Summary */}
-          <div style={{ gridColumn: 'span 12' }} className="md:col-span-5">
+          <div className="col-span-12 md:col-span-5">
             <div
-              className="bg-theme-card"
+              className="bg-theme-card rounded-2xl p-8 sticky top-8"
               style={{
-                borderRadius: '16px',
                 border: '1px solid var(--border-light)',
-                padding: '2rem',
                 boxShadow: 'var(--shadow-sm)',
-                position: 'sticky',
-                top: '2rem',
               }}
             >
-              <h2 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 1.25rem', color: 'var(--text-primary)' }}>
+              <h2 className="font-serif text-[1.25rem] mb-5" style={{ color: 'var(--text-primary)' }}>
                 Final Payable
               </h2>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.35rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
+              <div className="flex justify-between text-[1.35rem] font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
                 <span>Total Amount:</span>
                 <span>₹{amount.toLocaleString('en-IN')}</span>
               </div>
@@ -356,44 +314,26 @@ const CheckoutPayment = () => {
               <button
                 onClick={handleCompleteOrder}
                 disabled={processing}
-                className="btn-slate"
-                style={{
-                  width: '100%',
-                  padding: '1rem',
-                  borderRadius: '8px',
-                  fontWeight: '600',
-                  fontSize: '1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  cursor: processing ? 'not-allowed' : 'pointer',
-                  marginBottom: '1rem',
-                }}
+                className="btn-slate w-full p-4 rounded-lg font-semibold text-base flex items-center justify-center gap-2 mb-4 cursor-pointer disabled:cursor-not-allowed"
               >
                 <Lock size={16} />
                 {processing ? 'Securing Transaction...' : `Pay ₹${amount.toLocaleString('en-IN')} & Confirm`}
               </button>
 
-              <div style={{ textAlign: 'center' }}>
-                <Link to="/checkout/address" style={{ color: 'var(--theme-gold)', fontSize: '0.85rem', textDecoration: 'none' }}>
+              <div className="text-center">
+                <Link to="/checkout/address" className="text-[0.85rem] no-underline" style={{ color: 'var(--theme-gold)' }}>
                   ← Modify Shipping Address
                 </Link>
               </div>
 
               <div
+                className="mt-6 pt-5 flex items-center gap-2 text-[0.8rem]"
                 style={{
-                  marginTop: '1.5rem',
-                  paddingTop: '1.25rem',
                   borderTop: '1px solid var(--border-light)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.8rem',
                   color: 'var(--text-secondary)',
                 }}
               >
-                <ShieldCheck size={18} style={{ color: 'var(--theme-gold)', flexShrink: 0 }} />
+                <ShieldCheck size={18} className="shrink-0" style={{ color: 'var(--theme-gold)' }} />
                 <span>PCI-DSS Level 1 Compliant 256-Bit SSL Payment Shield</span>
               </div>
             </div>

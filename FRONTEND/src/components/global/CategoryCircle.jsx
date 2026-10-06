@@ -4,42 +4,19 @@ const CategoryCircle = ({ label, isActive, onClick }) => {
   return (
     <button
       onClick={onClick}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '0.5rem',
-        cursor: 'pointer',
-        background: 'none',
-        border: 'none',
-        padding: '0.25rem',
-        transition: 'transform 0.2s ease',
-        transform: isActive ? 'scale(1.05)' : 'scale(1)',
-        flexShrink: 0,
-      }}
+      className={`flex flex-col items-center gap-2 cursor-pointer bg-transparent border-none p-1 transition-transform duration-200 shrink-0 ${isActive ? 'scale-105' : 'scale-100'}`}
     >
       <div
+        className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-[250ms]`}
         style={{
-          width: '64px',
-          height: '64px',
-          borderRadius: '50%',
           backgroundColor: isActive ? 'var(--bg-primary)' : 'var(--bg-circle-item)',
-          border: isActive
-            ? '2px solid var(--text-primary)'
-            : '1px solid var(--border-light)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'all 0.25s ease',
+          border: isActive ? '2px solid var(--text-primary)' : '1px solid var(--border-light)',
           boxShadow: isActive ? 'var(--shadow-md)' : 'none',
         }}
       >
         <span
+          className="text-[0.65rem] font-semibold tracking-[0.5px] uppercase"
           style={{
-            fontSize: '0.65rem',
-            fontWeight: '600',
-            letterSpacing: '0.5px',
-            textTransform: 'uppercase',
             color: isActive ? 'var(--text-light)' : 'var(--text-secondary)',
             fontFamily: 'var(--font-sans)',
           }}
@@ -49,12 +26,11 @@ const CategoryCircle = ({ label, isActive, onClick }) => {
       </div>
 
       <span
+        className="text-[0.7rem] transition-colors duration-200"
         style={{
-          fontSize: '0.7rem',
           fontWeight: isActive ? '600' : '400',
           color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
           fontFamily: 'var(--font-sans)',
-          transition: 'color 0.2s ease',
         }}
       >
         {label}

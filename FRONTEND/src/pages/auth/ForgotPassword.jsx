@@ -28,59 +28,44 @@ const ForgotPassword = () => {
 
   return (
     <main
+      className="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-6"
       style={{
-        minHeight: 'calc(100vh - 200px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '3rem 1.5rem',
         backgroundColor: 'var(--bg-secondary)',
       }}
     >
       <div
-        className="bg-theme-card"
+        className="bg-theme-card w-full max-w-[440px] p-10 rounded-xl relative"
         style={{
-          width: '100%',
-          maxWidth: '440px',
-          padding: '2.5rem',
-          borderRadius: '12px',
           border: '1px solid var(--border-light)',
           boxShadow: 'var(--shadow-md)',
-          position: 'relative',
         }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-8">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               SECURITY & ACCESS
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif text-[1.75rem] font-semibold mb-2"
             style={{
-              fontSize: '1.75rem',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             Forgot Password
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', margin: 0 }}>
+          <p
+            className="font-garamond text-[1.05rem] m-0"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             Enter your registered email address to receive password reset instructions.
           </p>
         </div>
 
         {error && (
           <div
+            className="bg-[rgba(239,68,68,0.08)] border border-[rgba(239,68,68,0.2)] rounded py-3 px-4 mb-5 text-[#DC2626] text-[0.825rem]"
             style={{
-              background: 'rgba(239, 68, 68, 0.08)',
-              border: '1px solid rgba(239, 68, 68, 0.2)',
-              borderRadius: '4px',
-              padding: '0.75rem 1rem',
-              marginBottom: '1.25rem',
-              color: '#DC2626',
-              fontSize: '0.825rem',
               fontFamily: 'var(--font-sans)',
             }}
           >
@@ -89,49 +74,36 @@ const ForgotPassword = () => {
         )}
 
         {submitted ? (
-          <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+          <div className="text-center py-4">
             <div
+              className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
               style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--theme-champagne)',
                 color: 'var(--theme-gold)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 1.25rem',
                 border: '1px solid var(--border-light)',
               }}
             >
               <CheckCircle2 size={32} />
             </div>
-            <h3 className="font-serif" style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+            <h3
+              className="font-serif text-[1.25rem] mb-2"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Reset Link Dispatched
             </h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5', marginBottom: '1.75rem' }}>
+            <p
+              className="text-[0.9rem] leading-[1.5] mb-7"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               We have processed your request for <strong style={{ color: 'var(--text-primary)' }}>{email}</strong>.
               Please check your inbox or proceed to update your password with the recovery session below.
             </p>
 
             {resetToken && (
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div className="mb-6">
                 <Link
                   to={`/reset-password/${resetToken}`}
-                  className="btn-gold"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    width: '100%',
-                    padding: '0.875rem',
-                    borderRadius: '6px',
-                    textDecoration: 'none',
-                    fontWeight: '600',
-                    fontSize: '0.9rem',
-                    marginBottom: '0.75rem',
-                  }}
+                  className="btn-gold inline-flex items-center justify-center gap-2 w-full p-3.5 rounded-md no-underline font-semibold text-[0.9rem] mb-3"
                 >
                   <KeyRound size={16} /> Proceed to Reset Password
                 </Link>
@@ -140,45 +112,27 @@ const ForgotPassword = () => {
 
             <Link
               to="/login"
-              className="btn-slate"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                width: '100%',
-                padding: '0.875rem',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontWeight: '600',
-                fontSize: '0.95rem',
-              }}
+              className="btn-slate inline-flex items-center justify-center gap-2 w-full p-3.5 rounded-md no-underline font-semibold text-[0.95rem]"
             >
               <ArrowLeft size={16} /> Back to Sign In
             </Link>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div>
               <label
+                className="block text-[0.85rem] font-semibold mb-2"
                 style={{
-                  display: 'block',
-                  fontSize: '0.85rem',
-                  fontWeight: '600',
                   color: 'var(--text-primary)',
-                  marginBottom: '0.5rem',
                 }}
               >
                 Registered Email Address
               </label>
-              <div style={{ position: 'relative' }}>
+              <div className="relative">
                 <Mail
                   size={18}
+                  className="absolute left-3 top-1/2 -translate-y-1/2"
                   style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
                     color: 'var(--text-secondary)',
                   }}
                 />
@@ -188,16 +142,11 @@ const ForgotPassword = () => {
                   placeholder="e.g. yourname@domain.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="w-full py-3 pr-4 pl-10 rounded-md text-[0.9rem] outline-none box-border"
                   style={{
-                    width: '100%',
-                    padding: '0.75rem 1rem 0.75rem 2.5rem',
-                    borderRadius: '6px',
                     border: '1px solid var(--border-light)',
                     backgroundColor: 'var(--bg-card-warm)',
                     color: 'var(--text-primary)',
-                    fontSize: '0.9rem',
-                    outline: 'none',
-                    boxSizing: 'border-box',
                   }}
                 />
               </div>
@@ -206,31 +155,20 @@ const ForgotPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className="btn-slate"
-              style={{
-                width: '100%',
-                padding: '0.875rem',
-                borderRadius: '6px',
-                fontWeight: '600',
-                fontSize: '0.95rem',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                marginTop: '0.5rem',
-              }}
+              className="btn-slate w-full p-3.5 rounded-md font-semibold text-[0.95rem] mt-2 cursor-pointer disabled:cursor-not-allowed"
             >
               {loading ? 'Transmitting Instructions...' : 'Send Recovery Instructions'}
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: '1rem', borderTop: '1px solid var(--border-light)', paddingTop: '1.25rem' }}>
+            <div
+              className="text-center mt-4 pt-5"
+              style={{ borderTop: '1px solid var(--border-light)' }}
+            >
               <Link
                 to="/login"
+                className="inline-flex items-center gap-1.5 text-[0.9rem] font-medium no-underline"
                 style={{
                   color: 'var(--theme-gold)',
-                  textDecoration: 'none',
-                  fontSize: '0.9rem',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  fontWeight: '500',
                 }}
               >
                 <ArrowLeft size={14} /> Back to Sign In
@@ -240,20 +178,14 @@ const ForgotPassword = () => {
         )}
 
         <div
+          className="mt-8 p-3 rounded-md flex items-center gap-2 text-[0.8rem]"
           style={{
-            marginTop: '2rem',
-            padding: '0.75rem',
-            borderRadius: '6px',
             backgroundColor: 'var(--theme-champagne-light)',
             border: '1px dashed var(--border-light)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
             color: 'var(--text-secondary)',
-            fontSize: '0.8rem',
           }}
         >
-          <ShieldCheck size={18} style={{ color: 'var(--theme-gold)', flexShrink: 0 }} />
+          <ShieldCheck size={18} className="shrink-0" style={{ color: 'var(--theme-gold)' }} />
           <span>256-Bit TLS Bank Grade Security for all patron credentials.</span>
         </div>
       </div>

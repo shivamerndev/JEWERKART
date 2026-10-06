@@ -5,40 +5,33 @@ import { Truck, ShieldCheck, Lock, Clock, MapPin, CheckCircle2, ArrowRight } fro
 const ShippingInformation = () => {
   return (
     <main
+      className="min-h-screen pt-12 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '3rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <div className="max-w-[1000px] mx-auto">
         
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-14">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               SECURED TRANSIT
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2 tracking-[1px]"
             style={{
               fontSize: 'clamp(2.2rem, 4vw, 3rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
-              letterSpacing: '1px',
             }}
           >
             Armored Shipping & Delivery
           </h1>
           <p
-            className="font-garamond"
+            className="font-garamond text-[1.2rem] max-w-[620px] mx-auto"
             style={{
               color: 'var(--text-secondary)',
-              fontSize: '1.2rem',
-              maxWidth: '620px',
-              margin: '0 auto',
             }}
           >
             How every handcrafted consignment travels safely from our Mumbai atelier vault straight to your doorstep.
@@ -46,102 +39,78 @@ const ShippingInformation = () => {
         </div>
 
         {/* 3 Pillars */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginBottom: '3.5rem' }}>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 mb-14">
           <div
-            className="bg-theme-card"
+            className="bg-theme-card rounded-2xl p-8"
             style={{
-              borderRadius: '16px',
               border: '1px solid var(--border-light)',
-              padding: '2rem',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
             <div
+              className="w-12 h-12 rounded-full flex items-center justify-center mb-5"
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--theme-champagne)',
                 color: 'var(--theme-gold)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem',
                 border: '1px solid var(--border-light)',
               }}
             >
               <Truck size={22} />
             </div>
-            <h3 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--text-primary)' }}>
+            <h3 className="font-serif text-[1.25rem] m-0 mb-2" style={{ color: 'var(--text-primary)' }}>
               Armored Logistics Fleet
             </h3>
-            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6' }}>
+            <p className="m-0 text-[0.88rem] leading-[1.6]" style={{ color: 'var(--text-secondary)' }}>
               We partner exclusively with Sequel Secure Logistics and BlueDart Apex High-Value Services to guarantee tamper-proof armored vehicle transport.
             </p>
           </div>
 
           <div
-            className="bg-theme-card"
+            className="bg-theme-card rounded-2xl p-8"
             style={{
-              borderRadius: '16px',
               border: '1px solid var(--border-light)',
-              padding: '2rem',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
             <div
+              className="w-12 h-12 rounded-full flex items-center justify-center mb-5"
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--theme-champagne)',
                 color: 'var(--theme-gold)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem',
                 border: '1px solid var(--border-light)',
               }}
             >
               <ShieldCheck size={22} />
             </div>
-            <h3 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--text-primary)' }}>
+            <h3 className="font-serif text-[1.25rem] m-0 mb-2" style={{ color: 'var(--text-primary)' }}>
               100% Transit Insurance
             </h3>
-            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6' }}>
+            <p className="m-0 text-[0.88rem] leading-[1.6]" style={{ color: 'var(--text-secondary)' }}>
               Your jewellery is completely transit-insured from the moment it leaves our atelier until you physically verify the tamper seal and provide the OTP.
             </p>
           </div>
 
           <div
-            className="bg-theme-card"
+            className="bg-theme-card rounded-2xl p-8"
             style={{
-              borderRadius: '16px',
               border: '1px solid var(--border-light)',
-              padding: '2rem',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
             <div
+              className="w-12 h-12 rounded-full flex items-center justify-center mb-5"
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
                 backgroundColor: 'var(--theme-champagne)',
                 color: 'var(--theme-gold)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem',
                 border: '1px solid var(--border-light)',
               }}
             >
               <Lock size={22} />
             </div>
-            <h3 className="font-serif" style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--text-primary)' }}>
+            <h3 className="font-serif text-[1.25rem] m-0 mb-2" style={{ color: 'var(--text-primary)' }}>
               Secret OTP Verification
             </h3>
-            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6' }}>
+            <p className="m-0 text-[0.88rem] leading-[1.6]" style={{ color: 'var(--text-secondary)' }}>
               Handover requires a confidential one-time password sent directly to your registered patron mobile. Never handed to third parties or left unattended.
             </p>
           </div>
@@ -149,51 +118,57 @@ const ShippingInformation = () => {
 
         {/* Timelines Table */}
         <div
-          className="bg-theme-card"
+          className="bg-theme-card rounded-2xl p-10 mb-12"
           style={{
-            borderRadius: '16px',
             border: '1px solid var(--border-light)',
-            padding: '2.5rem',
             boxShadow: 'var(--shadow-sm)',
-            marginBottom: '3rem',
           }}
         >
-          <h2 className="font-serif" style={{ fontSize: '1.5rem', margin: '0 0 1.25rem', color: 'var(--text-primary)' }}>
+          <h2 className="font-serif text-[1.5rem] m-0 mb-5" style={{ color: 'var(--text-primary)' }}>
             Estimated Dispatch & Delivery Timelines
           </h2>
 
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.9rem' }}>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-left text-[0.9rem]">
               <thead>
-                <tr style={{ backgroundColor: 'var(--bg-card-warm)', borderBottom: '2px solid var(--border-light)' }}>
-                  <th style={{ padding: '0.85rem 1rem', color: 'var(--text-primary)', fontWeight: '600' }}>Destination Region</th>
-                  <th style={{ padding: '0.85rem 1rem', color: 'var(--text-primary)', fontWeight: '600' }}>Estimated Delivery Time</th>
-                  <th style={{ padding: '0.85rem 1rem', color: 'var(--text-primary)', fontWeight: '600' }}>Delivery Charge</th>
+                <tr
+                  className="border-b-2"
+                  style={{
+                    backgroundColor: 'var(--bg-card-warm)',
+                    borderColor: 'var(--border-light)',
+                  }}
+                >
+                  <th className="py-3.5 px-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Destination Region</th>
+                  <th className="py-3.5 px-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Estimated Delivery Time</th>
+                  <th className="py-3.5 px-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Delivery Charge</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                  <td style={{ padding: '0.85rem 1rem', fontWeight: '600', color: 'var(--text-primary)' }}>Metro Cities (Mumbai, Delhi NCR, Bengaluru, Hyderabad, Chennai)</td>
-                  <td style={{ padding: '0.85rem 1rem', color: 'var(--text-secondary)' }}>2 - 3 Business Days</td>
-                  <td style={{ padding: '0.85rem 1rem', color: '#065F46', fontWeight: '600' }}>Complimentary</td>
+                <tr className="border-b" style={{ borderColor: 'var(--border-light)' }}>
+                  <td className="py-3.5 px-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Metro Cities (Mumbai, Delhi NCR, Bengaluru, Hyderabad, Chennai)</td>
+                  <td className="py-3.5 px-4" style={{ color: 'var(--text-secondary)' }}>2 - 3 Business Days</td>
+                  <td className="py-3.5 px-4 text-[#065F46] font-semibold">Complimentary</td>
                 </tr>
-                <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                  <td style={{ padding: '0.85rem 1rem', fontWeight: '600', color: 'var(--text-primary)' }}>Tier 2 & Tier 3 Regional Capitals</td>
-                  <td style={{ padding: '0.85rem 1rem', color: 'var(--text-secondary)' }}>3 - 5 Business Days</td>
-                  <td style={{ padding: '0.85rem 1rem', color: '#065F46', fontWeight: '600' }}>Complimentary</td>
+                <tr className="border-b" style={{ borderColor: 'var(--border-light)' }}>
+                  <td className="py-3.5 px-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Tier 2 & Tier 3 Regional Capitals</td>
+                  <td className="py-3.5 px-4" style={{ color: 'var(--text-secondary)' }}>3 - 5 Business Days</td>
+                  <td className="py-3.5 px-4 text-[#065F46] font-semibold">Complimentary</td>
                 </tr>
-                <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                  <td style={{ padding: '0.85rem 1rem', fontWeight: '600', color: 'var(--text-primary)' }}>Custom Engraved & Bespoke Bridal Suites</td>
-                  <td style={{ padding: '0.85rem 1rem', color: 'var(--text-secondary)' }}>7 - 10 Business Days (Hand-finished)</td>
-                  <td style={{ padding: '0.85rem 1rem', color: '#065F46', fontWeight: '600' }}>Complimentary</td>
+                <tr className="border-b" style={{ borderColor: 'var(--border-light)' }}>
+                  <td className="py-3.5 px-4 font-semibold" style={{ color: 'var(--text-primary)' }}>Custom Engraved & Bespoke Bridal Suites</td>
+                  <td className="py-3.5 px-4" style={{ color: 'var(--text-secondary)' }}>7 - 10 Business Days (Hand-finished)</td>
+                  <td className="py-3.5 px-4 text-[#065F46] font-semibold">Complimentary</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <div style={{ textAlign: 'center' }}>
-          <Link to="/track-order" className="btn-slate" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '0.85rem 2rem', borderRadius: '6px', textDecoration: 'none', fontWeight: '600' }}>
+        <div className="text-center">
+          <Link
+            to="/track-order"
+            className="btn-slate inline-flex items-center gap-2 py-3.5 px-8 rounded-md no-underline font-semibold"
+          >
             Track Existing Consignment <ArrowRight size={16} />
           </Link>
         </div>

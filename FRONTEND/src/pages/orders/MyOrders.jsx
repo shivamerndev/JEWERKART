@@ -6,92 +6,82 @@ import { MOCK_ORDERS } from '../../utils/mockData';
 const MyOrders = () => {
   return (
     <main
+      className="min-h-screen pt-10 px-6 pb-20"
       style={{
-        minHeight: '100vh',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2.5rem 1.5rem 5rem',
       }}
     >
-      <div style={{ maxWidth: '980px', margin: '0 auto' }}>
+      <div className="max-w-[980px] mx-auto">
         
         {/* Breadcrumb */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.85rem' }}>
-          <Link to="/account" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Account</Link>
+        <div className="flex items-center gap-2 mb-8 text-[0.85rem]">
+          <Link to="/account" className="no-underline" style={{ color: 'var(--text-secondary)' }}>Account</Link>
           <span style={{ color: 'var(--border-light)' }}>/</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>Orders</span>
+          <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>Orders</span>
         </div>
 
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">
               ATELIER ACQUISITIONS
             </span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold mb-2"
             style={{
               fontSize: 'clamp(2rem, 3.5vw, 2.5rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.5rem',
             }}
           >
             My Orders & Consignments
           </h1>
-          <p className="font-garamond" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0 }}>
+          <p className="font-garamond text-[1.1rem] m-0" style={{ color: 'var(--text-secondary)' }}>
             Track the status of your handcrafted fine jewellery dispatches and access certificates.
           </p>
         </div>
 
         {/* Orders List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+        <div className="flex flex-col gap-7">
           {MOCK_ORDERS.map((order) => (
             <div
               key={order.orderId}
-              className="bg-theme-card"
+              className="bg-theme-card rounded-2xl overflow-hidden"
               style={{
-                borderRadius: '16px',
                 border: '1px solid var(--border-light)',
-                overflow: 'hidden',
                 boxShadow: 'var(--shadow-sm)',
               }}
             >
               {/* Order Card Header */}
               <div
+                className="py-5 px-7 flex justify-between items-center flex-wrap gap-4"
                 style={{
                   backgroundColor: 'var(--bg-card-warm)',
-                  padding: '1.25rem 1.75rem',
                   borderBottom: '1px solid var(--border-light)',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  flexWrap: 'wrap',
-                  gap: '1rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+                <div className="flex items-center gap-6 flex-wrap">
                   <div>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    <span className="text-[0.75rem] uppercase tracking-[0.5px]" style={{ color: 'var(--text-secondary)' }}>
                       Consignment ID
                     </span>
-                    <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    <div className="text-[0.95rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                       {order.orderId}
                     </div>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    <span className="text-[0.75rem] uppercase tracking-[0.5px]" style={{ color: 'var(--text-secondary)' }}>
                       Order Placed
                     </span>
-                    <div style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>
+                    <div className="text-[0.9rem]" style={{ color: 'var(--text-primary)' }}>
                       {order.date}
                     </div>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    <span className="text-[0.75rem] uppercase tracking-[0.5px]" style={{ color: 'var(--text-secondary)' }}>
                       Total Amount
                     </span>
-                    <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    <div className="text-[0.95rem] font-bold" style={{ color: 'var(--text-primary)' }}>
                       ₹{order.total.toLocaleString('en-IN')}
                     </div>
                   </div>
@@ -100,14 +90,8 @@ const MyOrders = () => {
                 {/* Status Badge */}
                 <div>
                   <span
+                    className="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-[0.8rem] font-semibold"
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '0.35rem 0.85rem',
-                      borderRadius: '20px',
-                      fontSize: '0.8rem',
-                      fontWeight: '600',
                       backgroundColor: order.status === 'Delivered' ? '#ECFDF5' : 'var(--theme-champagne)',
                       color: order.status === 'Delivered' ? '#065F46' : 'var(--text-primary)',
                       border: `1px solid ${order.status === 'Delivered' ? '#A7F3D0' : 'var(--border-light)'}`,
@@ -120,31 +104,25 @@ const MyOrders = () => {
               </div>
 
               {/* Order Items */}
-              <div style={{ padding: '1.75rem' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '1.5rem' }}>
+              <div className="p-7">
+                <div className="flex flex-col gap-5 mb-6">
                   {order.items.map((item) => (
-                    <div key={item.id} style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                    <div key={item.id} className="flex gap-5 items-center">
                       <div
-                        style={{
-                          width: '70px',
-                          height: '70px',
-                          borderRadius: '8px',
-                          backgroundColor: 'var(--bg-circle-item)',
-                          overflow: 'hidden',
-                          flexShrink: 0,
-                        }}
+                        className="w-[70px] h-[70px] rounded-lg overflow-hidden shrink-0"
+                        style={{ backgroundColor: 'var(--bg-circle-item)' }}
                       >
-                        <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                       </div>
-                      <div style={{ flexGrow: 1 }}>
-                        <h4 className="font-serif" style={{ fontSize: '1.05rem', margin: '0 0 0.25rem', color: 'var(--text-primary)' }}>
+                      <div className="grow">
+                        <h4 className="font-serif text-[1.05rem] m-0 mb-1" style={{ color: 'var(--text-primary)' }}>
                           {item.name}
                         </h4>
-                        <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                        <p className="m-0 text-[0.8rem]" style={{ color: 'var(--text-secondary)' }}>
                           {item.purity} • Qty: {item.quantity}
                         </p>
                       </div>
-                      <div style={{ fontWeight: '700', fontSize: '1rem', color: 'var(--text-primary)' }}>
+                      <div className="font-bold text-base" style={{ color: 'var(--text-primary)' }}>
                         ₹{item.price.toLocaleString('en-IN')}
                       </div>
                     </div>
@@ -153,51 +131,24 @@ const MyOrders = () => {
 
                 {/* Actions Footer */}
                 <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    borderTop: '1px solid var(--border-light)',
-                    paddingTop: '1.25rem',
-                    flexWrap: 'wrap',
-                    gap: '1rem',
-                  }}
+                  className="flex justify-between items-center pt-5 flex-wrap gap-4"
+                  style={{ borderTop: '1px solid var(--border-light)' }}
                 >
-                  <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                  <div className="text-[0.85rem]" style={{ color: 'var(--text-secondary)' }}>
                     Armored Tracking: <strong style={{ color: 'var(--text-primary)' }}>{order.trackingNumber}</strong>
                   </div>
 
-                  <div style={{ display: 'flex', gap: '10px' }}>
+                  <div className="flex gap-2.5">
                     <Link
                       to={`/track-order/${order.orderId}`}
-                      className="btn-gold"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        padding: '0.55rem 1.15rem',
-                        borderRadius: '6px',
-                        fontSize: '0.85rem',
-                        textDecoration: 'none',
-                        fontWeight: '600',
-                      }}
+                      className="btn-gold inline-flex items-center gap-1.5 py-2 px-4.5 rounded-md text-[0.85rem] no-underline font-semibold"
                     >
                       <Truck size={14} /> Track Parcel
                     </Link>
 
                     <Link
                       to={`/order/${order.orderId}`}
-                      className="btn-slate"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        padding: '0.55rem 1.15rem',
-                        borderRadius: '6px',
-                        fontSize: '0.85rem',
-                        textDecoration: 'none',
-                        fontWeight: '600',
-                      }}
+                      className="btn-slate inline-flex items-center gap-1.5 py-2 px-4.5 rounded-md text-[0.85rem] no-underline font-semibold"
                     >
                       View Order Details <ChevronRight size={14} />
                     </Link>

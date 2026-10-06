@@ -13,20 +13,14 @@ const Login = () => {
 
   return (
     <div
+      className="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-6"
       style={{
-        minHeight: 'calc(100vh - 200px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '3rem 1.5rem',
         backgroundColor: 'var(--bg-secondary)',
       }}
     >
       <div
-        className="bg-theme-card"
+        className="bg-theme-card p-10 rounded-lg"
         style={{
-          padding: '2.5rem',
-          borderRadius: '8px',
           border: '1px solid var(--border-light)',
           boxShadow: 'var(--shadow-md)',
         }}

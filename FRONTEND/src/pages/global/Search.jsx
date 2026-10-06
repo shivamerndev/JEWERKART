@@ -27,77 +27,52 @@ const Search = () => {
 
   return (
     <main
+      className="px-6 py-8"
       style={{
         minHeight: 'calc(100vh - 300px)',
         backgroundColor: 'var(--bg-secondary)',
-        padding: '2rem 1.5rem',
       }}
     >
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-        }}
-      >
+      <div className="max-w-[1280px] mx-auto">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div className="divider-ornament" style={{ marginBottom: '0.75rem' }}>
-            <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>FIND PRODUCTS</span>
+        <div className="text-center mb-10">
+          <div className="divider-ornament mb-3">
+            <span className="badge-925 text-[9px] tracking-[2px]">FIND PRODUCTS</span>
           </div>
           <h1
-            className="font-serif"
+            className="font-serif font-semibold m-0 mb-[0.35rem] tracking-[1px]"
             style={{
               fontSize: 'clamp(1.85rem, 3.5vw, 2.35rem)',
-              fontWeight: '600',
               color: 'var(--text-primary)',
-              margin: '0 0 0.35rem',
-              letterSpacing: '1px',
             }}
           >
             Search Our Collection
           </h1>
           <p
-            className="font-garamond"
-            style={{
-              color: 'var(--text-secondary)',
-              fontSize: '1.05rem',
-              margin: 0,
-            }}
+            className="font-garamond text-[1.05rem] m-0"
+            style={{ color: 'var(--text-secondary)' }}
           >
             Discover handcrafted jewelry pieces
           </p>
         </div>
 
         {/* Search Input */}
-        <div
-          style={{
-            maxWidth: '600px',
-            margin: '0 auto 2.5rem',
-          }}
-        >
+        <div className="max-w-[600px] mx-auto mb-10">
           <div
-            className="bg-theme-card"
+            className="bg-theme-card flex items-center px-5 py-3 rounded-[6px]"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0.75rem 1.25rem',
-              borderRadius: '6px',
               border: '1px solid var(--border-light)',
               boxShadow: 'var(--shadow-sm)',
             }}
           >
-            <SearchIcon size={20} style={{ color: 'var(--text-secondary)', marginRight: '0.75rem' }} />
+            <SearchIcon size={20} className="mr-3 shrink-0" style={{ color: 'var(--text-secondary)' }} />
             <input
               type="text"
               placeholder="Search for earrings, necklaces, rings, bracelets..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              className="flex-1 border-none outline-none text-base bg-transparent"
               style={{
-                flex: 1,
-                border: 'none',
-                outline: 'none',
-                fontSize: '1rem',
-                backgroundColor: 'transparent',
                 color: 'var(--text-primary)',
                 fontFamily: 'var(--font-sans)',
               }}
@@ -108,32 +83,22 @@ const Search = () => {
         {/* Results */}
         {searchQuery.trim() === '' ? (
           <div
+            className="text-center px-8 py-16 rounded-lg"
             style={{
-              textAlign: 'center',
-              padding: '4rem 2rem',
               backgroundColor: 'var(--bg-card)',
-              borderRadius: '8px',
               border: '1px solid var(--border-light)',
             }}
           >
-            <SearchIcon size={48} style={{ color: 'var(--border-light)', margin: '0 auto 1rem', display: 'block' }} />
+            <SearchIcon size={48} className="mx-auto mb-4 block" style={{ color: 'var(--border-light)' }} />
             <h2
-              className="font-serif"
-              style={{
-                fontSize: '1.5rem',
-                color: 'var(--text-primary)',
-                margin: '0 0 0.5rem',
-              }}
+              className="font-serif text-2xl m-0 mb-2"
+              style={{ color: 'var(--text-primary)' }}
             >
               Start Your Search
             </h2>
             <p
-              className="font-garamond"
-              style={{
-                color: 'var(--text-secondary)',
-                fontSize: '1rem',
-                margin: 0,
-              }}
+              className="font-garamond text-base m-0"
+              style={{ color: 'var(--text-secondary)' }}
             >
               Type in the search box above to find your favorite jewelry
             </p>
@@ -141,32 +106,22 @@ const Search = () => {
         ) : filteredProducts.length > 0 ? (
           <>
             <p
-              style={{
-                fontSize: '0.95rem',
-                color: 'var(--text-secondary)',
-                marginBottom: '1.5rem',
-                textAlign: 'center',
-              }}
+              className="text-[0.95rem] text-center mb-6"
+              style={{ color: 'var(--text-secondary)' }}
             >
-              Found {filteredProducts.length} result{filteredProducts.length !== 1 ? 's' : ''} for "{searchQuery}"
+              Found {filteredProducts.length} result{filteredProducts.length !== 1 ? 's' : ''} for &quot;{searchQuery}&quot;
             </p>
             <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                gap: '1.5rem',
-              }}
+              className="grid gap-6"
+              style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))' }}
             >
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
+                  className="rounded-[6px] overflow-hidden cursor-pointer transition-[box-shadow,transform] duration-300"
                   style={{
-                    borderRadius: '6px',
-                    overflow: 'hidden',
                     border: '1px solid var(--border-light)',
                     boxShadow: 'var(--shadow-sm)',
-                    transition: 'box-shadow 0.3s ease, transform 0.3s ease',
-                    cursor: 'pointer',
                     backgroundColor: 'var(--bg-card)',
                   }}
                   onMouseEnter={(e) => {
@@ -180,83 +135,47 @@ const Search = () => {
                 >
                   {/* Image Area */}
                   <div
-                    style={{
-                      width: '100%',
-                      height: '200px',
-                      backgroundColor: 'var(--bg-circle-item)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      position: 'relative',
-                      overflow: 'hidden',
-                      background: 'linear-gradient(135deg, #FFF9F2 0%, #F7E5D0 100%)',
-                    }}
+                    className="w-full h-[200px] flex items-center justify-center relative overflow-hidden"
+                    style={{ background: 'linear-gradient(135deg, #FFF9F2 0%, #F7E5D0 100%)' }}
                   >
                     {product.image && (
                       <img
                         src={product.image}
                         alt={product.name}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          display: 'block',
-                          transition: 'transform 0.4s ease',
-                        }}
+                        className="w-full h-full object-cover block transition-transform duration-[400ms]"
                       />
                     )}
 
                     {product.badge && (
-                      <span
-                        className="badge-925"
-                        style={{
-                          position: 'absolute',
-                          top: '10px',
-                          left: '10px',
-                          fontSize: '9px',
-                          padding: '3px 8px',
-                        }}
-                      >
+                      <span className="badge-925 absolute top-[10px] left-[10px] text-[9px] px-2 py-[3px]">
                         {product.badge}
                       </span>
                     )}
                   </div>
 
                   {/* Info */}
-                  <div style={{ padding: '0.875rem 1rem' }}>
+                  <div className="p-[0.875rem_1rem]">
                     <h3
+                      className="text-[0.8rem] font-semibold m-0 mb-[0.4rem] overflow-hidden text-ellipsis whitespace-nowrap"
                       style={{
-                        fontSize: '0.8rem',
-                        fontWeight: '600',
                         fontFamily: 'var(--font-sans)',
-                        margin: '0 0 0.4rem',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
                         color: 'var(--text-primary)',
                       }}
                     >
                       {product.name}
                     </h3>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 0.4rem' }}>
+                    <div className="flex items-center gap-2 mb-[0.4rem]">
                       <span
-                        style={{
-                          fontSize: '1rem',
-                          fontWeight: '700',
-                          color: 'var(--text-primary)',
-                          fontFamily: 'var(--font-sans)',
-                        }}
+                        className="text-base font-bold"
+                        style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-sans)' }}
                       >
                         {product.price}
                       </span>
                       {product.originalPrice && (
                         <span
-                          style={{
-                            fontSize: '0.75rem',
-                            color: 'var(--text-secondary)',
-                            textDecoration: 'line-through',
-                          }}
+                          className="text-[0.75rem] line-through"
+                          style={{ color: 'var(--text-secondary)' }}
                         >
                           {product.originalPrice}
                         </span>
@@ -264,8 +183,8 @@ const Search = () => {
                     </div>
 
                     {/* Rating */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.7rem' }}>
-                      <div style={{ display: 'flex', gap: '1px' }}>
+                    <div className="flex items-center gap-[0.35rem] mb-[0.7rem]">
+                      <div className="flex gap-px">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
@@ -275,23 +194,13 @@ const Search = () => {
                           />
                         ))}
                       </div>
-                      <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>
+                      <span className="text-[0.7rem]" style={{ color: 'var(--text-secondary)' }}>
                         ({product.reviews})
                       </span>
                     </div>
 
                     <button
-                      className="btn-slate"
-                      style={{
-                        width: '100%',
-                        padding: '0.55rem 0',
-                        borderRadius: '2px',
-                        fontSize: '0.7rem',
-                        letterSpacing: '1.2px',
-                        textTransform: 'uppercase',
-                        cursor: 'pointer',
-                        fontWeight: '600',
-                      }}
+                      className="btn-slate w-full py-[0.55rem] px-0 rounded-[2px] text-[0.7rem] tracking-[1.2px] uppercase cursor-pointer font-semibold"
                     >
                       Add to Cart
                     </button>
@@ -302,48 +211,28 @@ const Search = () => {
           </>
         ) : (
           <div
+            className="text-center px-8 py-16 rounded-lg"
             style={{
-              textAlign: 'center',
-              padding: '4rem 2rem',
               backgroundColor: 'var(--bg-card)',
-              borderRadius: '8px',
               border: '1px solid var(--border-light)',
             }}
           >
-            <SearchIcon size={48} style={{ color: 'var(--border-light)', margin: '0 auto 1rem', display: 'block' }} />
+            <SearchIcon size={48} className="mx-auto mb-4 block" style={{ color: 'var(--border-light)' }} />
             <h2
-              className="font-serif"
-              style={{
-                fontSize: '1.5rem',
-                color: 'var(--text-primary)',
-                margin: '0 0 0.5rem',
-              }}
+              className="font-serif text-2xl m-0 mb-2"
+              style={{ color: 'var(--text-primary)' }}
             >
               No Results Found
             </h2>
             <p
-              className="font-garamond"
-              style={{
-                color: 'var(--text-secondary)',
-                fontSize: '1rem',
-                margin: '0 0 1.5rem',
-              }}
+              className="font-garamond text-base m-0 mb-6"
+              style={{ color: 'var(--text-secondary)' }}
             >
               Try searching with different keywords
             </p>
             <Link
               to="/"
-              className="btn-outline-dark"
-              style={{
-                padding: '0.7rem 2.5rem',
-                borderRadius: '2px',
-                fontSize: '0.75rem',
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                textDecoration: 'none',
-                display: 'inline-block',
-                fontWeight: '600',
-              }}
+              className="btn-outline-dark inline-block no-underline px-10 py-[0.7rem] rounded-[2px] text-[0.75rem] tracking-[1.5px] uppercase font-semibold"
             >
               Back to Home
             </Link>
