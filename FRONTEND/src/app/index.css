@@ -1,5 +1,38 @@
 @import "tailwindcss";
 
+@theme {
+  --color-champagne: #FEF0E0;
+  --color-champagne-light: #FFF9F2;
+  --color-champagne-dark: #F5DEC3;
+  --color-gold: #C5914A;
+  --color-gold-hover: #B37F38;
+
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #FEF0E0;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-warm: #FFF9F2;
+  --color-bg-circle: #F7E5D0;
+  --color-bg-banner: #FFFDF9;
+
+  --color-text-primary: #1C140E;
+  --color-text-secondary: #7A6C60;
+  --color-text-gold: #C5914A;
+
+  --color-accent-slate: #1C140E;
+  --color-accent-slate-hover: #C5914A;
+  --color-accent-gold: #C5914A;
+  --color-accent-gold-hover: #B37F38;
+
+  --color-border-light: #EED8C3;
+  --color-border-dark: #EED8C3;
+  --color-border-gold: #C5914A;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-garamond: 'Cormorant Garamond', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 /* ----------------------------------------------------
    CENTRALIZED APPLICATION THEME & DESIGN SYSTEM
    Signature Warm Champagne (#FEF0E0) Luxury Jewellery Palette
@@ -243,4 +276,16 @@ body {
 
 .animate-marquee-infinite:hover {
   animation-play-state: paused;
+}
+
+/* Subtle Popover Animation */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

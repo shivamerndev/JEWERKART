@@ -32,66 +32,30 @@ const LoginForm = ({ onLogin, loading }) => {
   };
 
   return (
-    <div
-      style={{
-        width: '100%',
-        maxWidth: '420px',
-      }}
-    >
+    <div className="w-full max-w-[420px]">
       {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h2
-          className="font-serif"
-          style={{
-            fontSize: '1.75rem',
-            fontWeight: '600',
-            color: 'var(--text-primary)',
-            margin: '0 0 0.5rem',
-          }}
-        >
+      <div className="text-center mb-8">
+        <h2 className="font-serif text-[1.75rem] font-semibold text-text-primary mb-2">
           Welcome Back
         </h2>
-        <p
-          className="text-theme-secondary"
-          style={{ fontSize: '0.875rem' }}
-        >
+        <p className="text-text-secondary text-sm">
           Sign in to your Jewerkart account
         </p>
       </div>
 
       {/* Error Message */}
       {error && (
-        <div
-          style={{
-            background: 'rgba(239, 68, 68, 0.08)',
-            border: '1px solid rgba(239, 68, 68, 0.2)',
-            borderRadius: '4px',
-            padding: '0.75rem 1rem',
-            marginBottom: '1.25rem',
-            color: '#DC2626',
-            fontSize: '0.825rem',
-            fontFamily: 'var(--font-sans)',
-          }}
-        >
+        <div className="bg-red-500/10 border border-red-500/20 rounded p-3 mb-5 text-red-600 text-xs font-sans">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit}>
         {/* Email */}
-        <div style={{ marginBottom: '1.25rem' }}>
+        <div className="mb-5">
           <label
             htmlFor="login-email"
-            style={{
-              display: 'block',
-              fontSize: '0.775rem',
-              fontWeight: '600',
-              color: 'var(--text-primary)',
-              marginBottom: '0.5rem',
-              letterSpacing: '0.5px',
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-sans)',
-            }}
+            className="block text-xs font-semibold text-text-primary mb-2 tracking-[0.5px] uppercase font-sans"
           >
             Email Address
           </label>
@@ -102,48 +66,19 @@ const LoginForm = ({ onLogin, loading }) => {
             value={formData.email}
             onChange={handleChange}
             placeholder="you@example.com"
-            style={{
-              width: '100%',
-              padding: '0.75rem 1rem',
-              border: '1px solid var(--border-light)',
-              borderRadius: '4px',
-              fontSize: '0.875rem',
-              fontFamily: 'var(--font-sans)',
-              color: 'var(--text-primary)',
-              backgroundColor: 'var(--bg-card)',
-              outline: 'none',
-              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-              boxSizing: 'border-box',
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--text-primary)';
-              e.target.style.boxShadow = '0 0 0 3px rgba(197, 145, 74, 0.2)';
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--border-light)';
-              e.target.style.boxShadow = 'none';
-            }}
+            className="w-full px-4 py-3 border border-border-light rounded text-sm font-sans text-text-primary bg-bg-card outline-none transition focus:border-text-primary focus:ring-2 focus:ring-gold/20 box-border"
           />
         </div>
 
         {/* Password */}
-        <div style={{ marginBottom: '1.5rem' }}>
+        <div className="mb-6">
           <label
             htmlFor="login-password"
-            style={{
-              display: 'block',
-              fontSize: '0.775rem',
-              fontWeight: '600',
-              color: 'var(--text-primary)',
-              marginBottom: '0.5rem',
-              letterSpacing: '0.5px',
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-sans)',
-            }}
+            className="block text-xs font-semibold text-text-primary mb-2 tracking-[0.5px] uppercase font-sans"
           >
             Password
           </label>
-          <div style={{ position: 'relative' }}>
+          <div className="relative">
             <input
               id="login-password"
               type={showPassword ? 'text' : 'password'}
@@ -151,44 +86,13 @@ const LoginForm = ({ onLogin, loading }) => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              style={{
-                width: '100%',
-                padding: '0.75rem 2.75rem 0.75rem 1rem',
-                border: '1px solid var(--border-light)',
-                borderRadius: '4px',
-                fontSize: '0.875rem',
-                fontFamily: 'var(--font-sans)',
-                color: 'var(--text-primary)',
-                backgroundColor: 'var(--bg-card)',
-                outline: 'none',
-                transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                boxSizing: 'border-box',
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = 'var(--text-primary)';
-                e.target.style.boxShadow = '0 0 0 3px rgba(197, 145, 74, 0.2)';
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = 'var(--border-light)';
-                e.target.style.boxShadow = 'none';
-              }}
+              className="w-full pl-4 pr-11 py-3 border border-border-light rounded text-sm font-sans text-text-primary bg-bg-card outline-none transition focus:border-text-primary focus:ring-2 focus:ring-gold/20 box-border"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               aria-label="Toggle password visibility"
-              style={{
-                position: 'absolute',
-                right: '12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--text-secondary)',
-                display: 'flex',
-                padding: '2px',
-              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-text-secondary flex p-0.5 hover:text-text-primary transition"
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
@@ -199,42 +103,18 @@ const LoginForm = ({ onLogin, loading }) => {
         <button
           type="submit"
           disabled={loading}
-          className="btn-slate"
-          style={{
-            width: '100%',
-            padding: '0.85rem',
-            borderRadius: '4px',
-            fontSize: '0.8rem',
-            letterSpacing: '1.5px',
-            textTransform: 'uppercase',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.7 : 1,
-            marginBottom: '1.5rem',
-          }}
+          className="btn-slate w-full py-3.5 rounded text-xs tracking-[1.5px] uppercase cursor-pointer disabled:cursor-not-allowed disabled:opacity-70 mb-6 transition"
         >
           {loading ? 'Signing In...' : 'Sign In'}
         </button>
       </form>
 
       {/* Register Link */}
-      <p
-        className="text-theme-secondary"
-        style={{
-          textAlign: 'center',
-          fontSize: '0.85rem',
-          margin: 0,
-        }}
-      >
+      <p className="text-center text-text-secondary text-sm m-0">
         Don't have an account?{' '}
         <Link
           to="/register"
-          style={{
-            color: 'var(--text-primary)',
-            fontWeight: '600',
-            textDecoration: 'none',
-            borderBottom: '1px solid var(--text-primary)',
-            transition: 'opacity 0.2s ease',
-          }}
+          className="text-text-primary font-semibold no-underline border-b border-text-primary hover:opacity-80 transition-opacity"
         >
           Create Account
         </Link>

@@ -1,24 +1,198 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   Heart, 
-  Share2, 
   Truck, 
-  ShieldCheck, 
   RotateCcw, 
   Sparkles, 
   Star, 
-  Check, 
-  ArrowRight,
-  Info,
   Ruler
 } from 'lucide-react';
 import { MOCK_PRODUCTS } from '../../utils/mockData';
 
+/**
+ * ZoomedImage: Floating zoom portal for desktop view
+ */
+export const ZoomedImage = ({ position, img }) => {
+  if (!img) return null;
+  const x = position?.x ?? 50;
+  const y = position?.y ?? 50;
+  return (
+    <div className="fixed h-[70vmin] w-[45vw] z-50 top-20 right-6 bg-white dark:bg-neutral-900 hidden md:block rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-neutral-800 pointer-events-none">
+      <img
+        src={img}
+        alt="zoomed product"
+        className="w-full h-full object-cover transition-transform duration-75 ease-out"
+        style={{
+          transform: "scale(2.5)",
+          transformOrigin: `${x}% ${y}%`,
+        }}
+      />
+    </div>
+  );
+};
+
+/**
+ * ProductGallery: Carousel, Touch Gestures, Glass Dock, and Magnifier Lens
+ */
+export const ProductGallery = ({ images = [], badge, onZoomChange }) => {
+  const containerRef = useRef(null);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  const [current, setCurrent] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+
+  const safeImages = images && images.length > 0 ? images : ['/placeholder.jpg'];
+
+  // Mobile swipe handlers
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const deltaX = touchStartX.current - touchEndX.current;
+    if (deltaX > 50) {
+      // Swipe left -> next
+      const nextIdx = (current + 1) % safeImages.length;
+      setCurrent(nextIdx);
+      if (onZoomChange && isHovered) {
+        onZoomChange({ isZoomed: true, position, image: safeImages[nextIdx] });
+      }
+    } else if (deltaX < -50) {
+      // Swipe right -> previous
+      const prevIdx = current === 0 ? safeImages.length - 1 : current - 1;
+      setCurrent(prevIdx);
+      if (onZoomChange && isHovered) {
+        onZoomChange({ isZoomed: true, position, image: safeImages[prevIdx] });
+      }
+    }
+  };
+
+  // Mouse tracking for magnifying lens
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((e.clientX - left) / width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - top) / height) * 100));
+    setPosition({ x, y });
+    if (onZoomChange) {
+      onZoomChange({ isZoomed: true, position: { x, y }, image: safeImages[current] });
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (onZoomChange) {
+      onZoomChange({ isZoomed: true, position, image: safeImages[current] });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (onZoomChange) {
+      onZoomChange({ isZoomed: false, position, image: null });
+    }
+  };
+
+  const handleThumbnailClick = (idx) => {
+    setCurrent(idx);
+    if (onZoomChange && isHovered) {
+      onZoomChange({ isZoomed: true, position, image: safeImages[idx] });
+    }
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="relative w-full h-[460px] md:h-[540px] rounded-2xl overflow-hidden shadow-lg bg-neutral-100 dark:bg-neutral-800 select-none cursor-crosshair md:cursor-none border border-black/5 dark:border-white/10"
+    >
+      {/* 1. Magnifier Lens Box (Desktop only) */}
+      {isHovered && (
+        <span
+          className="bg-white/35 border border-white/50 hidden md:block w-1/4 h-1/4 rounded-xl absolute z-20 pointer-events-none shadow-md backdrop-blur-[1px]"
+          style={{
+            left: `calc(${position.x}% - 12.5%)`,
+            top: `calc(${position.y}% - 12.5%)`,
+          }}
+        />
+      )}
+
+      {/* 2. Horizontal Image Strip with CSS Transition */}
+      <div
+        style={{ transform: `translateX(-${current * 100}%)` }}
+        className="flex w-full h-full transition-transform duration-700 ease-in-out"
+      >
+        {safeImages.map((img, idx) => (
+          <div key={idx} className="w-full shrink-0 h-full">
+            <img
+              src={img}
+              alt={`Slide ${idx + 1}`}
+              className="h-full w-full object-cover object-center pointer-events-none"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* 3. Floating Glassmorphism Thumbnail Dock */}
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 h-16 max-w-[90%] px-2 gap-2 bg-white/20 backdrop-blur-xl border border-white/30 rounded-xl hidden sm:flex items-center overflow-x-auto shadow-2xl transition-all duration-300 z-20 ${
+          isHovered ? "bottom-6 opacity-100" : "bottom-2 opacity-0 pointer-events-none"
+        }`}
+      >
+        {safeImages.map((img, idx) => (
+          <button
+            key={idx}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleThumbnailClick(idx);
+            }}
+            className={`h-12 w-12 shrink-0 rounded-lg overflow-hidden transition-all duration-200 cursor-pointer ${
+              current === idx
+                ? "ring-2 ring-amber-600 scale-105 shadow-md"
+                : "opacity-60 hover:opacity-100"
+            }`}
+          >
+            <img src={img} alt={`Thumb ${idx + 1}`} className="h-full w-full object-cover" />
+          </button>
+        ))}
+      </div>
+
+      {/* 4. Slide Counter Pill */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none bg-black/60 text-white px-3 py-0.5 rounded-full text-xs font-medium tracking-wider backdrop-blur-sm z-10">
+        {current + 1} / {safeImages.length}
+      </div>
+
+      {/* Optional Badge */}
+      {badge && (
+        <div className="absolute top-4 left-4 z-20 pointer-events-none">
+          <span className="badge-925 text-[10px]">
+            {badge}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ProductDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [zoomState, setZoomState] = useState({ isZoomed: false, position: { x: 50, y: 50 }, image: null });
+  const [isDescExpanded, setIsDescExpanded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState('14');
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -50,206 +224,121 @@ const ProductDetail = () => {
   };
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        backgroundColor: 'var(--bg-secondary)',
-        padding: '2rem 1.5rem 5rem',
-      }}
-    >
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+    <main className="relative min-h-screen bg-bg-secondary px-6 pt-8 pb-20">
+      {/* Fixed Desktop Zoom Preview Portal */}
+      {zoomState.isZoomed && (
+        <ZoomedImage position={zoomState.position} img={zoomState.image} />
+      )}
+
+      <div className="max-w-[1280px] mx-auto">
         
         {/* Breadcrumb */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', fontSize: '0.85rem' }}>
-          <Link to="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Home</Link>
-          <span style={{ color: 'var(--border-light)' }}>/</span>
-          <Link to="/shop" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Shop</Link>
-          <span style={{ color: 'var(--border-light)' }}>/</span>
-          <Link to={`/category/${product.category}`} style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>
+        <div className="flex items-center gap-2 mb-8 text-sm">
+          <Link to="/" className="text-text-secondary no-underline hover:text-text-primary transition">Home</Link>
+          <span className="text-border-light">/</span>
+          <Link to="/shop" className="text-text-secondary no-underline hover:text-text-primary transition">Shop</Link>
+          <span className="text-border-light">/</span>
+          <Link to={`/category/${product.category}`} className="text-text-secondary no-underline hover:text-text-primary transition">
             {product.categoryName}
           </Link>
-          <span style={{ color: 'var(--border-light)' }}>/</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{product.name}</span>
+          <span className="text-border-light">/</span>
+          <span className="text-text-primary font-semibold">{product.name}</span>
         </div>
 
         {/* Main Product Showcase Card */}
-        <div
-          className="bg-theme-card"
-          style={{
-            borderRadius: '16px',
-            border: '1px solid var(--border-light)',
-            padding: '2.5rem',
-            boxShadow: 'var(--shadow-sm)',
-            marginBottom: '4rem',
-          }}
-        >
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '3rem' }}>
+        <div className="bg-bg-card rounded-2xl border border-border-light p-6 md:p-10 shadow-sm mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
             
             {/* Left: Gallery Showcase */}
-            <div style={{ gridColumn: 'span 12' }} className="md:col-span-6">
-              <div
-                style={{
-                  height: '480px',
-                  borderRadius: '12px',
-                  backgroundColor: 'var(--bg-circle-item)',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  border: '1px solid var(--border-light)',
-                  marginBottom: '1rem',
-                }}
-              >
-                <img
-                  src={galleryImages[selectedImage] || product.image}
-                  alt={product.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.4s ease',
-                  }}
-                />
-                <div style={{ position: 'absolute', top: '16px', left: '16px' }}>
-                  <span className="badge-925" style={{ fontSize: '10px' }}>
-                    {product.badge || '925 CERTIFIED'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Thumbnails */}
-              <div style={{ display: 'flex', gap: '12px' }}>
-                {galleryImages.map((img, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedImage(idx)}
-                    style={{
-                      width: '80px',
-                      height: '80px',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      border: selectedImage === idx ? '2px solid var(--theme-gold)' : '1px solid var(--border-light)',
-                      backgroundColor: 'var(--bg-circle-item)',
-                      padding: 0,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                    }}
-                  >
-                    <img src={img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </button>
-                ))}
-              </div>
+            <div className="md:col-span-6">
+              <ProductGallery
+                images={galleryImages}
+                badge={product.badge || '925 CERTIFIED'}
+                onZoomChange={setZoomState}
+              />
             </div>
 
             {/* Right: Product Details & Purchase Form */}
-            <div style={{ gridColumn: 'span 12' }} className="md:col-span-6">
+            <div className="md:col-span-6">
               
               {/* Category & Rating */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '0.8rem', letterSpacing: '2px', color: 'var(--theme-gold)', textTransform: 'uppercase', fontWeight: '600' }}>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[0.8rem] tracking-[2px] text-gold uppercase font-semibold">
                   {product.categoryName} • {product.metalName}
                 </span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <Star size={14} style={{ color: 'var(--theme-gold)', fill: 'var(--theme-gold)' }} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                <div className="flex items-center gap-1">
+                  <Star size={14} className="text-gold fill-gold" />
+                  <span className="text-sm font-semibold text-text-primary">
                     {product.rating} ({product.reviews} verified reviews)
                   </span>
                 </div>
               </div>
 
               {/* Title */}
-              <h1
-                className="font-serif"
-                style={{
-                  fontSize: 'clamp(1.8rem, 3vw, 2.4rem)',
-                  fontWeight: '600',
-                  color: 'var(--text-primary)',
-                  margin: '0 0 1rem',
-                  lineHeight: '1.25',
-                }}
-              >
+              <h1 className="font-serif text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
                 {product.name}
               </h1>
 
               {/* Pricing Block */}
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '1.25rem' }}>
-                <span style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+              <div className="flex items-baseline gap-3 mb-5">
+                <span className="text-2xl md:text-3xl font-bold text-text-primary">
                   ₹{product.price.toLocaleString('en-IN')}
                 </span>
                 {product.originalPrice && (
-                  <span style={{ fontSize: '1.15rem', color: '#9CA3AF', textDecoration: 'line-through' }}>
+                  <span className="text-lg text-gray-400 line-through">
                     ₹{product.originalPrice.toLocaleString('en-IN')}
                   </span>
                 )}
-                <span
-                  style={{
-                    backgroundColor: '#ECFDF5',
-                    color: '#065F46',
-                    border: '1px solid #A7F3D0',
-                    fontSize: '0.78rem',
-                    fontWeight: '600',
-                    padding: '2px 8px',
-                    borderRadius: '4px',
-                  }}
-                >
+                <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-2 py-0.5 rounded">
                   SAVE {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
                 </span>
               </div>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+              <p className="text-text-secondary text-sm mb-6">
                 Inclusive of all taxes. Free insured armored delivery across India.
               </p>
 
-              {/* Description */}
-              <p
-                style={{
-                  color: 'var(--text-secondary)',
-                  fontSize: '0.95rem',
-                  lineHeight: '1.7',
-                  marginBottom: '2rem',
-                  borderTop: '1px solid var(--border-light)',
-                  borderBottom: '1px solid var(--border-light)',
-                  padding: '1.25rem 0',
-                }}
-              >
-                {product.description}
-              </p>
+              {/* Expandable / Collapsible Description */}
+              <div className="mb-8 border-y border-border-light py-5">
+                <p className={`text-text-secondary text-[0.95rem] leading-relaxed m-0 ${!isDescExpanded ? 'line-clamp-3' : ''}`}>
+                  {product.description}
+                </p>
+                {product.description && product.description.length > 100 && (
+                  <button
+                    type="button"
+                    onClick={() => setIsDescExpanded(!isDescExpanded)}
+                    className="mt-2 bg-transparent border-none p-0 text-gold font-semibold text-sm cursor-pointer inline-flex items-center gap-1 hover:underline"
+                  >
+                    {isDescExpanded ? 'Show less' : 'Show more'}
+                  </button>
+                )}
+              </div>
 
               {/* Size Selector if Ring or Bracelet */}
               {(product.category === 'rings' || product.category === 'bracelets') && (
-                <div style={{ marginBottom: '1.75rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                    <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                <div className="mb-7">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-semibold text-text-primary">
                       Select Size (Indian Standard)
                     </span>
                     <Link
                       to="/size-guide"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        fontSize: '0.8rem',
-                        color: 'var(--theme-gold)',
-                        textDecoration: 'none',
-                        fontWeight: '500',
-                      }}
+                      className="flex items-center gap-1 text-[0.8rem] text-gold no-underline font-medium hover:underline"
                     >
                       <Ruler size={13} /> Size Guide
                     </Link>
                   </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div className="flex gap-2">
                     {['12', '14', '16', '18', '20'].map(sz => (
                       <button
                         key={sz}
+                        type="button"
                         onClick={() => setSelectedSize(sz)}
-                        style={{
-                          width: '42px',
-                          height: '42px',
-                          borderRadius: '6px',
-                          border: selectedSize === sz ? '2px solid var(--text-primary)' : '1px solid var(--border-light)',
-                          backgroundColor: selectedSize === sz ? 'var(--theme-champagne)' : 'var(--bg-card-warm)',
-                          fontWeight: selectedSize === sz ? '700' : '400',
-                          color: 'var(--text-primary)',
-                          cursor: 'pointer',
-                        }}
+                        className={`w-[42px] h-[42px] rounded-md cursor-pointer transition flex items-center justify-center ${
+                          selectedSize === sz 
+                            ? 'border-2 border-text-primary bg-champagne font-bold text-text-primary' 
+                            : 'border border-border-light bg-bg-card-warm font-normal text-text-primary hover:border-text-primary'
+                        }`}
                       >
                         {sz}
                       </button>
@@ -259,173 +348,104 @@ const ProductDetail = () => {
               )}
 
               {/* Quantity Stepper & CTAs */}
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    border: '1px solid var(--border-light)',
-                    borderRadius: '6px',
-                    backgroundColor: 'var(--bg-card-warm)',
-                  }}
-                >
+              <div className="flex gap-4 items-center mb-6 flex-wrap">
+                <div className="flex items-center border border-border-light rounded-md bg-bg-card-warm">
                   <button
+                    type="button"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    style={{
-                      padding: '0.75rem 1rem',
-                      background: 'none',
-                      border: 'none',
-                      fontSize: '1rem',
-                      cursor: 'pointer',
-                      color: 'var(--text-primary)',
-                    }}
+                    className="px-4 py-3 bg-transparent border-none text-base cursor-pointer text-text-primary hover:text-gold transition"
                   >
                     −
                   </button>
-                  <span style={{ padding: '0 0.5rem', fontWeight: '600', fontSize: '0.95rem' }}>{quantity}</span>
+                  <span className="px-2 font-semibold text-[0.95rem] text-text-primary">{quantity}</span>
                   <button
+                    type="button"
                     onClick={() => setQuantity(quantity + 1)}
-                    style={{
-                      padding: '0.75rem 1rem',
-                      background: 'none',
-                      border: 'none',
-                      fontSize: '1rem',
-                      cursor: 'pointer',
-                      color: 'var(--text-primary)',
-                    }}
+                    className="px-4 py-3 bg-transparent border-none text-base cursor-pointer text-text-primary hover:text-gold transition"
                   >
                     +
                   </button>
                 </div>
 
                 <button
+                  type="button"
                   onClick={handleAddToCart}
-                  className="btn-gold"
-                  style={{
-                    flex: '1',
-                    minWidth: '160px',
-                    padding: '0.85rem 1.5rem',
-                    borderRadius: '6px',
-                    fontWeight: '600',
-                    fontSize: '0.95rem',
-                    cursor: 'pointer',
-                  }}
+                  className="btn-gold flex-1 min-w-[160px] py-3.5 px-6 rounded-md font-semibold text-[0.95rem] cursor-pointer text-center"
                 >
                   Add to Cart
                 </button>
 
                 <button
+                  type="button"
                   onClick={handleBuyNow}
-                  className="btn-slate"
-                  style={{
-                    flex: '1',
-                    minWidth: '160px',
-                    padding: '0.85rem 1.5rem',
-                    borderRadius: '6px',
-                    fontWeight: '600',
-                    fontSize: '0.95rem',
-                    cursor: 'pointer',
-                  }}
+                  className="btn-slate flex-1 min-w-[160px] py-3.5 px-6 rounded-md font-semibold text-[0.95rem] cursor-pointer text-center"
                 >
                   Buy Now Instantly
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => setIsWishlisted(!isWishlisted)}
                   aria-label="Wishlist"
-                  style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '6px',
-                    border: '1px solid var(--border-light)',
-                    backgroundColor: 'var(--bg-card-warm)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                  }}
+                  className="w-12 h-12 rounded-md border border-border-light bg-bg-card-warm flex items-center justify-center cursor-pointer hover:border-text-primary transition"
                 >
                   <Heart
                     size={20}
-                    style={{
-                      color: isWishlisted ? '#EF4444' : 'var(--text-primary)',
-                      fill: isWishlisted ? '#EF4444' : 'none',
-                    }}
+                    className={`transition-colors ${isWishlisted ? 'text-red-500 fill-red-500' : 'text-text-primary fill-none'}`}
                   />
                 </button>
               </div>
 
               {addedNotice && (
-                <div
-                  style={{
-                    backgroundColor: 'var(--theme-champagne)',
-                    border: '1px solid var(--border-light)',
-                    padding: '0.75rem 1rem',
-                    borderRadius: '6px',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.85rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '1.5rem',
-                  }}
-                >
+                <div className="bg-champagne border border-border-light px-4 py-3 rounded-md text-text-primary text-sm flex items-center justify-between mb-6">
                   <span>✓ Added to your jewellery bag successfully!</span>
-                  <Link to="/cart" style={{ color: 'var(--theme-gold)', fontWeight: '600', textDecoration: 'none' }}>
+                  <Link to="/cart" className="text-gold font-semibold no-underline hover:underline">
                     View Bag & Checkout →
                   </Link>
                 </div>
               )}
 
               {/* Purity & Specifications Table */}
-              <div
-                style={{
-                  backgroundColor: 'var(--bg-card-warm)',
-                  borderRadius: '8px',
-                  padding: '1.25rem',
-                  border: '1px solid var(--border-light)',
-                  marginBottom: '2rem',
-                }}
-              >
-                <h4 className="font-serif" style={{ fontSize: '1rem', margin: '0 0 0.75rem', color: 'var(--text-primary)' }}>
+              <div className="bg-bg-card-warm rounded-lg p-5 border border-border-light mb-8">
+                <h4 className="font-serif text-base mb-3 text-text-primary font-semibold">
                   Patron Guarantee & Specifications
                 </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', fontSize: '0.82rem' }}>
+                <div className="grid grid-cols-2 gap-3 text-[0.82rem]">
                   <div>
-                    <span style={{ color: 'var(--text-secondary)' }}>Precious Metal: </span>
-                    <strong style={{ color: 'var(--text-primary)' }}>{product.metalName}</strong>
+                    <span className="text-text-secondary">Precious Metal: </span>
+                    <strong className="text-text-primary">{product.metalName}</strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--text-secondary)' }}>Hallmark Stamp: </span>
-                    <strong style={{ color: 'var(--text-primary)' }}>BIS 925 Hallmark</strong>
+                    <span className="text-text-secondary">Hallmark Stamp: </span>
+                    <strong className="text-text-primary">BIS 925 Hallmark</strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--text-secondary)' }}>Gemstone: </span>
-                    <strong style={{ color: 'var(--text-primary)' }}>{product.stoneName || '5A Zircon'}</strong>
+                    <span className="text-text-secondary">Gemstone: </span>
+                    <strong className="text-text-primary">{product.stoneName || '5A Zircon'}</strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--text-secondary)' }}>Gross Weight: </span>
-                    <strong style={{ color: 'var(--text-primary)' }}>{product.weight || '12.4 gms'}</strong>
+                    <span className="text-text-secondary">Gross Weight: </span>
+                    <strong className="text-text-primary">{product.weight || '12.4 gms'}</strong>
                   </div>
                 </div>
               </div>
 
               {/* Trust Badges */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', textAlign: 'center' }}>
-                <div style={{ padding: '0.75rem', backgroundColor: 'var(--theme-champagne-light)', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
-                  <Truck size={20} style={{ color: 'var(--theme-gold)', margin: '0 auto 6px' }} />
-                  <div style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>Armored Logistics</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>100% Insured Delivery</div>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="p-3 bg-champagne-light rounded-md border border-border-light">
+                  <Truck size={20} className="text-gold mx-auto mb-1.5" />
+                  <div className="text-xs font-semibold text-text-primary">Armored Logistics</div>
+                  <div className="text-[0.7rem] text-text-secondary">100% Insured Delivery</div>
                 </div>
-                <div style={{ padding: '0.75rem', backgroundColor: 'var(--theme-champagne-light)', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
-                  <RotateCcw size={20} style={{ color: 'var(--theme-gold)', margin: '0 auto 6px' }} />
-                  <div style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>15-Day Returns</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Doorstep Pickup</div>
+                <div className="p-3 bg-champagne-light rounded-md border border-border-light">
+                  <RotateCcw size={20} className="text-gold mx-auto mb-1.5" />
+                  <div className="text-xs font-semibold text-text-primary">15-Day Returns</div>
+                  <div className="text-[0.7rem] text-text-secondary">Doorstep Pickup</div>
                 </div>
-                <div style={{ padding: '0.75rem', backgroundColor: 'var(--theme-champagne-light)', borderRadius: '6px', border: '1px solid var(--border-light)' }}>
-                  <Sparkles size={20} style={{ color: 'var(--theme-gold)', margin: '0 auto 6px' }} />
-                  <div style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-primary)' }}>Lifetime Spa</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Complimentary Polish</div>
+                <div className="p-3 bg-champagne-light rounded-md border border-border-light">
+                  <Sparkles size={20} className="text-gold mx-auto mb-1.5" />
+                  <div className="text-xs font-semibold text-text-primary">Lifetime Spa</div>
+                  <div className="text-[0.7rem] text-text-secondary">Complimentary Polish</div>
                 </div>
               </div>
 
@@ -434,55 +454,36 @@ const ProductDetail = () => {
         </div>
 
         {/* You May Also Admire */}
-        <div>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <div className="divider-ornament" style={{ marginBottom: '0.5rem' }}>
-              <span className="badge-925" style={{ fontSize: '9px', letterSpacing: '2px' }}>
+        <div className="mt-12">
+          <div className="text-center mb-10">
+            <div className="divider-ornament mb-2">
+              <span className="badge-925 text-[9px] tracking-[2px]">
                 MATCHING CREATIONS
               </span>
             </div>
-            <h2 className="font-serif" style={{ fontSize: '2rem', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
+            <h2 className="font-serif text-3xl font-semibold text-text-primary m-0">
               You May Also Admire
             </h2>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-              gap: '1.75rem',
-            }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
             {relatedProducts.map((rel) => (
               <Link
                 key={rel.id}
                 to={`/product/${rel.slug}`}
-                style={{ textDecoration: 'none', color: 'inherit' }}
+                className="bg-bg-card rounded-lg overflow-hidden border border-border-light shadow-sm hover:-translate-y-1 transition-transform duration-300 no-underline text-inherit block"
               >
-                <div
-                  className="bg-theme-card"
-                  style={{
-                    borderRadius: '8px',
-                    overflow: 'hidden',
-                    border: '1px solid var(--border-light)',
-                    boxShadow: 'var(--shadow-sm)',
-                    transition: 'transform 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-4px)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
-                >
-                  <div style={{ height: '220px', backgroundColor: 'var(--bg-circle-item)' }}>
-                    <img src={rel.image} alt={rel.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
-                  <div style={{ padding: '1rem' }}>
-                    <h3 className="font-serif" style={{ fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-primary)', margin: '0 0 0.35rem' }}>
-                      {rel.name}
-                    </h3>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                      <span style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-primary)' }}>
-                        ₹{rel.price.toLocaleString('en-IN')}
-                      </span>
-                    </div>
+                <div className="h-[220px] bg-bg-circle overflow-hidden">
+                  <img src={rel.image} alt={rel.name} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-serif text-[0.95rem] font-semibold text-text-primary mb-1.5 truncate">
+                    {rel.name}
+                  </h3>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-base font-bold text-text-primary">
+                      ₹{rel.price.toLocaleString('en-IN')}
+                    </span>
                   </div>
                 </div>
               </Link>

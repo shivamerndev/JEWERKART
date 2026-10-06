@@ -1,23 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { 
-  Search, 
-  Heart, 
-  ShoppingCart, 
-  User, 
-  Menu, 
-  X, 
-  ChevronDown, 
-  Sparkles, 
-  Truck, 
-  Package, 
-  LogOut, 
-  Tag, 
-  Gift 
-} from 'lucide-react';
+import { Search, Heart, ShoppingCart, User, Menu, X, ChevronDown, Sparkles, Truck, Package, LogOut } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
+import Location from './Location';
+
 
 const Navbar = () => {
+
   const { isAuthenticated, user, handleLogout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,12 +40,10 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Shop All', path: '/shop' },
-    { name: 'New Arrivals', path: '/new-arrivals' },
-    { name: 'Best Sellers', path: '/best-sellers' },
+    { name: 'Home', path: '/' },
     { name: 'Collections', path: '/collections' },
-    { 
-      name: 'Categories', 
+    {
+      name: 'Categories',
       path: '/category/earrings',
       hasDropdown: true,
       subcategories: [
@@ -70,6 +57,7 @@ const Navbar = () => {
     },
     { name: 'Offers', path: '/offers', badge: 'Sale' },
     { name: 'Gifts', path: '/gifts' },
+    { name: 'FAQs', path: '/faqs' },
   ];
 
   const isCurrentActive = (path) => {
@@ -108,14 +96,13 @@ const Navbar = () => {
             <button
               onClick={() => setMobileMenuOpen(prev => !prev)}
               aria-label="Toggle Navigation Menu"
-              className="lg:hidden"
+              className="md:hidden flex"
               style={{
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
                 color: 'var(--text-primary)',
                 padding: '6px',
-                display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -152,6 +139,19 @@ const Navbar = () => {
                 </span>
               </div>
             </Link>
+
+            {/* Subtle Divider between Brand and Delivery Location */}
+            <div
+              className="hidden sm:block"
+              style={{
+                width: '1px',
+                height: '24px',
+                backgroundColor: 'var(--border-light)',
+                margin: '0 0.25rem',
+              }}
+            />
+
+            <Location />
           </div>
 
           {/* Desktop Navigation Links */}
@@ -166,8 +166,8 @@ const Navbar = () => {
               if (item.hasDropdown) {
                 const isCatActive = location.pathname.startsWith('/category');
                 return (
-                  <div 
-                    key={item.name} 
+                  <div
+                    key={item.name}
                     ref={categoryMenuRef}
                     style={{ position: 'relative' }}
                     onMouseEnter={() => setCategoriesDropdownOpen(true)}
@@ -195,8 +195,8 @@ const Navbar = () => {
                       onMouseLeave={(e) => (e.currentTarget.style.color = isCatActive ? 'var(--text-gold)' : 'var(--text-secondary)')}
                     >
                       <span>{item.name}</span>
-                      <ChevronDown 
-                        size={14} 
+                      <ChevronDown
+                        size={14}
                         style={{
                           transform: categoriesDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                           transition: 'transform 0.2s ease'
@@ -341,38 +341,6 @@ const Navbar = () => {
               gap: '0.85rem',
             }}
           >
-            {/* Track Order Direct Link (Desktop) */}
-            <Link
-              to="/track-order"
-              className="hidden xl:flex"
-              style={{
-                alignItems: 'center',
-                gap: '0.4rem',
-                textDecoration: 'none',
-                fontSize: '0.75rem',
-                fontWeight: '600',
-                letterSpacing: '0.8px',
-                textTransform: 'uppercase',
-                color: isCurrentActive('/track-order') ? 'var(--text-gold)' : 'var(--text-secondary)',
-                padding: '4px 8px',
-                borderRadius: '4px',
-                border: '1px solid var(--border-light)',
-                transition: 'all 0.2s ease',
-                backgroundColor: 'var(--theme-champagne-light)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--text-gold)';
-                e.currentTarget.style.borderColor = 'var(--text-gold)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = isCurrentActive('/track-order') ? 'var(--text-gold)' : 'var(--text-secondary)';
-                e.currentTarget.style.borderColor = 'var(--border-light)';
-              }}
-            >
-              <Truck size={14} />
-              <span>Track Order</span>
-            </Link>
-
             {/* Search Button */}
             <button
               onClick={() => navigate('/search')}
