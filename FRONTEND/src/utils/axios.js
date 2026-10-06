@@ -2,7 +2,7 @@ import axios from "axios"
 import { store } from "../app/store.js"
 import { logout, setAccessToken, setUser } from "../features/auth.slice.js"
 
-export const baseURL = import.meta.env.VITE_API_BASE_URL || "https://skerp2.onrender.com/api/v1";
+export const baseURL = import.meta.env.VITE_API_BASE_URL || "https://jewerkart.onrender.com/api/v1";
 
 export const api = axios.create({
     baseURL,
