@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch server.js",
+    "build": "npm install && npm --prefix ../FRONTEND install && npm --prefix ../FRONTEND run build",
     "start": "node server.js"
   },
   "keywords": [],
