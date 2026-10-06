@@ -36,7 +36,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/v1/products", productRoutes);
 
-const frontendPath = path.join(path.resolve(), "../client/dist");
+const frontendPath = path.join(path.resolve(), "../FRONTEND/dist");
 app.use(express.static(frontendPath));
 
 app.get("*client", (req, res) => {
